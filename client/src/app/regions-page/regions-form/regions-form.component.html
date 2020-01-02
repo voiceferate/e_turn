@@ -1,0 +1,55 @@
+
+    <form 
+      class="card"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      >
+      <div class="card-content">
+      <span class="card-title">{{isNew ? 'Додавання': 'Редагування'}} даних про область</span>
+
+        <div class="input-field">
+          <input 
+            id="name"
+            type="text"
+            formControlName="name"
+            [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+          >
+          <label for="name">Назва області</label>
+          <span 
+            class="helper-text red-text"
+            *ngIf="form.get('name').invalid && form.get('name').touched"  
+          >
+            <span *ngIf="form.get('name').errors['required']">Поле name не може бути порожнім</span>
+          </span>
+        </div>
+        <p>Статус області</p>
+        <div class="switch">
+          <label>
+            Off
+            <input 
+              type="checkbox"
+              formControlName="active"
+              [ngClass]="{'invalid': form.get('active').invalid && form.get('active').touched}"
+            >
+            <span class="lever"></span>
+            On
+          </label>
+        </div>
+      </div>
+      <div class="card-action">
+        <button 
+          type="submit"
+          [disabled]="form.invalid || form.disabled"
+          class="modal-action btn light-blue darken-4 waves-effect"
+        >Зберегти</button>
+        
+        <button 
+          class="btn btn-small red"
+          (click)="onDelete($event)"
+          *ngIf="!isNew"
+        >
+          Видалити
+        </button>
+
+      </div>
+    </form>

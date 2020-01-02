@@ -1,0 +1,43 @@
+<!--SIDEBAR-->
+<ul class="sidenav sidenav-fixed a-sidenav light-blue lighten-5">
+  <h4>КНЕДП АЦСК ІДД <br> Адміністрування</h4>
+
+
+
+  <li 
+    class="bold"
+    routerLinkActive="active"  
+  >
+    <a
+      [routerLink]="'/dashboard'"
+    >
+      Огляд журналу клієнтів
+    </a
+    >
+  </li>
+
+  <li 
+    class="bold" 
+    *ngFor="let link of links"
+    routerLinkActive="active"
+  >
+    <a 
+      *ngIf="role"
+      [routerLink]="[link.url]"
+      class="waves-effect waves-blue"
+    >
+      {{link.name}}
+    </a>
+  </li>
+
+
+  <li class="bold last"><a href="#" class="waves-effect waves-orange" (click)="logout($event)">Вийти із системи</a></li>
+</ul>
+
+<main class="content">
+  <div class="row">
+    <div class="content col s12 m8 l8 xl8 offset-m2 offset-l2 offset-xl2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</main>

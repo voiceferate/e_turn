@@ -1,0 +1,53 @@
+<div class="page-title">
+  <button
+    class="waves-effect waves-light blue accent-2 btn"
+    [routerLink]="'/vprs-regions'"
+  >
+  До списку областей
+  </button>
+
+  <button
+    class="waves-effect waves-light light-blue darken-4 btn"
+    [routerLink]="['new']"
+  >
+  Додати ВПР
+  </button>
+</div>
+
+<div 
+  class="row"
+  *ngIf="vprs$ | async as vprs; else loader"
+  >
+  <div class="col s12">
+    <div class="collection" *ngIf="vprs.length !== 0; else empty">
+      <a 
+        class="collection-item blue-text text-darken-2"
+        *ngFor="let vpr of vprs"  
+        [routerLink]="[vpr._id]"
+      >
+        {{vpr.name}}
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- (click)="onSelectRegion(region, $event)" -->
+
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<ng-template #empty>
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>
+
+<!-- <div class="modal" #modal>
+  <app-regions-form [outputRegion]="outputRegion"></app-regions-form>
+</div> -->
+
+
