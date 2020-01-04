@@ -25,6 +25,8 @@
 
       <div class="input-field">
         <input 
+          #datepicker
+          class="datepicker" 
           id="holiday"
           type="text"
           formControlName="holiday"
@@ -38,8 +40,6 @@
           <span *ngIf="form.get('holiday').errors['required']">Поле holiday не може бути порожнім</span>
         </span>
       </div>
-
-      <input type="text" class="datepicker">
 
     </div>
 

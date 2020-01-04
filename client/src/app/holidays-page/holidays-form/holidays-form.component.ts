@@ -1,26 +1,110 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnChanges } from '@angular/core';
 import { Holiday } from 'src/app/shared/interfaces';
 import { HolidaysServise } from 'src/app/shared/servises/holidays.servise';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { MaterialServise } from 'src/app/shared/classes/material.servise';
+import { MaterialServise, MaterialInstance } from 'src/app/shared/classes/material.servise';
 
 @Component({
   selector: 'app-holidays-form',
   templateUrl: './holidays-form.component.html',
   styleUrls: ['./holidays-form.component.css']
 })
-export class HolidaysFormComponent implements OnInit {
+export class HolidaysFormComponent implements OnInit, AfterViewInit {
+  
+  
+
+
+  @ViewChild("datepicker", {static: false}) datepickerRef: ElementRef
 
   form: FormGroup
   isNew = true
   holiday: Holiday
+  datepicker: MaterialInstance
+  input: Event
+
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private holidaysServise: HolidaysServise) { }
+    private router: Router,
+    private holidaysServise: HolidaysServise
+) { }
+
+
+  // ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
+  //   console.log('change', changes)
+
+  //   // this.datepickerRef.nativeElement.trigger('input')
+  //   // MaterialServise.updateTextInputs()
+  // }
+
+  ngAfterViewInit() {
+    this.datepicker = MaterialServise.initDatePicker(this.datepickerRef, {
+      // autoClose: true,
+      disableWeekends: true,
+      firstDay: 1,
+      format: 'dd mmmm yyyy',
+      onSelect: (date) => {
+        this.form.controls.holiday.setValue(date)
+      },
+      i18n: {
+        cancel:	'Відмінити',
+        clear:	'Очистити',
+        done:	'Ok',
+        previousMonth:	'‹',
+        nextMonth:	'›',
+        months: [
+          'Січень',
+          'Лютий',
+          'Березень',
+          'Квітень',
+          'Травень',
+          'Червень',
+          'Липень',
+          'Серпень',
+          'Вересень',
+          'Жовтень',
+          'Листопад',
+          'Грудень'
+        ],
+        monthsShort: [
+          'Січ',
+          'Лют',
+          'Бер',
+          'Кві',
+          'Тра',
+          'Чер',
+          'Лип',
+          'Сер',
+          'Вер',
+          'Жов',
+          'Лис',
+          'Гру'
+        ],
+        weekdays: [
+          'Неділя',
+          'Понеділок',
+          'Вівторок',
+          'Середа',
+          'Четвер',
+          'П\'ятниця',
+          'Субота'
+        ],
+        weekdaysShort: [
+          'Нед',
+          'Пон',
+          'Вів',
+          'Сер',
+          'Чет',
+          'Пт',
+          'Суб'
+        ],
+        weekdaysAbbrev:	['Нд','Пн','Вт','Ср','Чт','Пт','Сб']
+      }
+
+    })
+  }
 
   ngOnInit() {
 
@@ -58,8 +142,6 @@ export class HolidaysFormComponent implements OnInit {
           MaterialServise.toast(error.error.message)
         }
       )
-
-
   }
   
   onDelete(event: Event) {
@@ -90,6 +172,7 @@ export class HolidaysFormComponent implements OnInit {
         })
     } else {
       console.log('updated')
+      console.log(this.holiday._id, this.form.value.holiday, this.form.value.holiday_name)
       this.holidaysServise.update(this.holiday._id, this.form.value.holiday, this.form.value.holiday_name)
       .subscribe((holiday) => {
         MaterialServise.toast(`Дату ${holiday.holiday}: змінено успішно`)
@@ -97,4 +180,9 @@ export class HolidaysFormComponent implements OnInit {
       })
     }
   }
+
+  // onFocus() {
+  //   console.log()
+  //   // this.datepicker.open()
+  // }
 }
