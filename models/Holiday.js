@@ -5,6 +5,10 @@ const holidaySchema = new Schema({
   holiday: {
     type: Date,
     required: true
+  },
+  holiday_name: {
+    required: true,
+    type: String
   }
 })
 

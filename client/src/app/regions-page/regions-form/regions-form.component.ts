@@ -15,7 +15,7 @@ import { MaterialServise } from 'src/app/shared/classes/material.servise';
   styleUrls: ['./regions-form.component.css']
 })
 
-export class RegionsFormComponent implements OnInit, AfterViewInit {
+export class RegionsFormComponent implements OnInit {
 
   @ViewChild("id", {static: true}) idRef: ElementRef
 
@@ -69,10 +69,6 @@ export class RegionsFormComponent implements OnInit, AfterViewInit {
 
   }
   
-  ngAfterViewInit() {
-
-  }
-
   onDelete(event: Event) {
     event.preventDefault()
     this.regionsServise.delete(this.region._id)

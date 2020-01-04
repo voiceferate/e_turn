@@ -6,7 +6,20 @@ module.exports.getAll = async function(req, res) {
   try {
     const orders = await Order
       .find({})
-      .sort({date: -1})
+      .sort({date: 1})
+
+    res.status(200).json(orders)
+
+  } catch (e) {
+    errorHandler(res, e)
+  }
+}
+
+module.exports.getAllByVprId = async function(req, res) {
+  try {
+    const orders = await Order
+      .find({vpr: req.params.vprId})
+      .sort({date: 1})
 
     res.status(200).json(orders)
 

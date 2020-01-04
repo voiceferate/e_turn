@@ -1,0 +1,45 @@
+<h5>Список записів у пункт у м. %%%%%</h5>
+<div 
+  class="row"
+  *ngIf="orders$ | async as orders; else loader"
+  >
+  <div class="col s12">
+    <div class="collection" *ngIf="orders.length !== 0; else empty">
+      <table class="striped">
+        <thead>
+          <tr>
+              <th>Дата</th>
+              <th>Назва</th>
+              <th>Код ЄДРПОУ</th>
+              <th>Час</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="let order of orders"  
+          >
+            <td>{{order.date | date:'mediumDate'}}</td>
+            <td>Назва риба</td>
+            <td>{{order.customer_id_code}}</td>
+            <td>{{order.time_period_number}}</td>
+          </tr>
+        </tbody
+        >
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<ng-template #empty>
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>

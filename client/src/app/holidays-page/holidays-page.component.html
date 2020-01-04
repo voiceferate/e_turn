@@ -1,1 +1,42 @@
-<p>holidays-page works!</p>
+<div class="page-title">
+  <h4>Вихідні</h4>
+  <button
+    class="waves-effect waves-light light-blue darken-4 btn z-depth-3"
+    routerLink="/holidays/new"
+  >
+  Додати дату вихідного дня
+  </button>
+</div>
+
+<div 
+  class="row"
+  *ngIf="holidays$ | async as holidays; else loader"
+  >
+  <div class="col s12">
+    <div class="collection" *ngIf="holidays.length !== 0; else empty">
+      <p 
+        class="collection-item blue-text text-darken-2"
+        *ngFor="let day of holidays"
+        [routerLink]="['/holidays', day._id]"
+      >
+        {{day.holiday | date: 'dd.MM.yyyy'}} 
+        <span class="indigo-text text-darken-4">| {{day.holiday_name}}</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<ng-template #empty>
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>
+
+
+

@@ -1,1 +1,49 @@
-<p>dashboard-page works!</p>
+<div class="page-title">
+  <h5>Список областей</h5>
+</div>
+
+<div 
+  class="row"
+  *ngIf="regions$ | async as regions; else loader"
+  >
+  <div class="col s6">
+    <div class="collection" *ngIf="regions.length !== 0; else empty">
+      <div 
+        class="wrap"
+        *ngFor="let region of regions"  
+      >
+        <p 
+          class="collection-item blue-text text-darken-2"
+          (click)="selectRegion(region._id)"
+        >
+          {{region.name}}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col s6">
+    <app-dashboard-vpr-list 
+      *ngIf="selectedRegion"
+      [regionId]="selectedRegion"
+    ></app-dashboard-vpr-list>
+  </div>
+  
+</div>
+
+<!-- (click)="onSelectRegion(region, $event)" -->
+
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<ng-template #empty>
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>
+
+

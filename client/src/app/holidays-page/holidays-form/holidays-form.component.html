@@ -1,0 +1,62 @@
+
+    <form 
+    class="card"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    >
+    <div class="card-content">
+    <span class="card-title">{{isNew ? 'Додавання': 'Редагування'}} вихідного дгя</span>
+
+      <div class="input-field">
+        <input 
+          id="holiday_name"
+          type="text"
+          formControlName="holiday_name"
+          [ngClass]="{'invalid': form.get('holiday_name').invalid && form.get('holiday_name').touched}"
+        >
+        <label for="holiday_name">Назва свята</label>
+        <span 
+          class="helper-text red-text"
+          *ngIf="form.get('holiday_name').invalid && form.get('holiday_name').touched"  
+        >
+          <span *ngIf="form.get('holiday_name').errors['required']">Поле holiday_name не може бути порожнім</span>
+        </span>
+      </div>
+
+      <div class="input-field">
+        <input 
+          id="holiday"
+          type="text"
+          formControlName="holiday"
+          [ngClass]="{'invalid': form.get('holiday').invalid && form.get('holiday').touched}"
+        >
+        <label for="holiday">Дата</label>
+        <span 
+          class="helper-text red-text"
+          *ngIf="form.get('holiday').invalid && form.get('holiday').touched"  
+        >
+          <span *ngIf="form.get('holiday').errors['required']">Поле holiday не може бути порожнім</span>
+        </span>
+      </div>
+
+      <input type="text" class="datepicker">
+
+    </div>
+
+    <div class="card-action">
+      <button 
+        type="submit"
+        [disabled]="form.invalid || form.disabled"
+        class="modal-action btn light-blue darken-4 waves-effect"
+      >Зберегти</button>
+      
+      <button 
+        class="btn btn-small red"
+        (click)="onDelete($event)"
+        *ngIf="!isNew"
+      >
+        Видалити
+      </button>
+
+    </div>
+  </form>

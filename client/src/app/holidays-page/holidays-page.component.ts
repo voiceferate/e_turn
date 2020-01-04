@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HolidaysServise } from '../shared/servises/holidays.servise';
+import { Observable } from 'rxjs';
+import { Holiday } from '../shared/interfaces';
 
 @Component({
   selector: 'app-holidays-page',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HolidaysPageComponent implements OnInit {
 
-  constructor() { }
+  holidays$: Observable<Holiday[]>
+  
+  constructor(private holidaysServise: HolidaysServise) { }
 
   ngOnInit() {
+    this.holidays$ = this.holidaysServise.fetch()
+
+    this.holidays$.subscribe( (holidays) => {
+      console.log(holidays)
+    })
   }
+
+
 
 }

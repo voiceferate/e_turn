@@ -17,7 +17,7 @@ module.exports.getAll = async function(req, res) {
 module.exports.getById = async function(req, res) {
   try {
     roleChecker.checkRole(req, res)
-    const holiday = await Holiday.find({
+    const holiday = await Holiday.findById({
       _id: req.params.id,
     })
     res.status(200).json(holiday)
@@ -31,6 +31,7 @@ module.exports.create = async function(req, res) {
     roleChecker.checkRole(req, res)
     const holiday = await new Holiday({
       holiday: req.body.holiday,
+      holiday_name: req.body.holiday_name,
     }).save()
     res.status(201).json(holiday)
   } catch (e) {

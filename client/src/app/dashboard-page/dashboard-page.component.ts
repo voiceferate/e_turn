@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { RegionsServise } from '../shared/servises/regions.servise';
+import { Observable } from 'rxjs';
+import { Region } from '../shared/interfaces';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -7,9 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPageComponent implements OnInit {
 
-  constructor() { }
+  regions$: Observable<Region[]>
+  selectedRegion: string
+
+  constructor(private regionServise: RegionsServise ) { }
 
   ngOnInit() {
+    this.regions$ = this.regionServise.fetch()
+  }
+
+  selectRegion(regionId) {
+    console.log('select', regionId)
+    this.selectedRegion = regionId
   }
 
 }

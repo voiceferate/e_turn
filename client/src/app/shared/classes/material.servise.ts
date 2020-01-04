@@ -17,6 +17,10 @@ export class MaterialServise {
     return M.Modal.init(ref.nativeElement)
   }
 
+  static datePicker(ref: ElementRef): MaterialInstance {
+    return M.Datepicker.init(ref.nativeElement)
+  }
+
   static updateTextInputs(): MaterialInstance {
     return M.updateTextFields()
   }

@@ -16,3 +16,18 @@ export interface Vpr {
   region: string,
   _id?: string
 }
+
+export interface Holiday {
+  holiday: Date,
+  holiday_name: string,
+  _id?: string
+}
+
+export interface Order {
+  region: string,
+  vpr: string,
+  date: Date,
+  customer_id_code: number,
+  time_period_number: number,
+  _id?: string
+}

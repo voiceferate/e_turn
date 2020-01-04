@@ -5,6 +5,7 @@ const router = express.Router()
 
 
 router.get('/', controller.getAll)
+router.get('/:vprId', controller.getAllByVprId)
 router.get('/vpr/date/:id', controller.getBusyDaysByVprId)
 router.get('/vpr/time', controller.getBusyPeriodsByVprId)
 
