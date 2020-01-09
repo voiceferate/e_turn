@@ -1,0 +1,178 @@
+  <form 
+  class="card"
+  [formGroup]="form"
+  >
+  <div class="card-content">
+    <span class="card-title">Реєстрація в електронній черзі</span>
+    
+    <div class="input-field">
+      <p
+        class="card-panel hoverable center-align"
+        [ngClass]="{hidden: !regionRefVisible}"
+        (click)=(onSelectRegion())
+      >
+        Обрати область
+      </p>
+      <div *ngIf="!regionLoading; else loader">
+        <label [ngClass]="{hidden: regionRefVisible}">Оберіть область зі списку</label>
+        <select 
+          [ngClass]="{hidden: regionRefVisible}"
+          #regionRef
+          formControlName="region"
+          *ngIf="regions.length !== 0 || regionRefVisible === true; else empty"
+        >
+          <option 
+            class="blue-text text-darken-2" 
+            *ngFor="let region of regions"
+            [value]="region._id"
+          >
+            {{region.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="input-field">
+      <p
+        class="card-panel hoverable center-align"
+        [ngClass]="{hidden: !vprRefVisible}"
+        (click)=(onSelectVpr())
+      >
+        Обрати доступний пункт реєстрації
+      </p>
+      <div *ngIf="!vprLoading; else loader">
+        <label [ngClass]="{hidden: vprRefVisible}">Оберіть ВПР зі списку</label>
+        <select 
+          [ngClass]="{hidden: vprRefVisible}"
+          #vprRef
+          formControlName="vpr"
+          *ngIf="vprs.length !== 0 || vprRefVisible === true; else empty"
+        >
+          <option 
+            class="blue-text text-darken-2" 
+            *ngFor="let vpr of vprs"
+            [value]="vpr._id"
+          >
+            {{vpr.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div 
+      class="clientInfo"
+      [ngClass]="{hidden: clientInfoRefVisible}"
+    >
+      <div class="input-field">
+        <input 
+          id="name"
+          type="text"
+          formControlName="name"
+          [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+        >
+        <label for="name">Назва установи чи ПІБ ФОП:</label>
+        <span 
+          class="helper-text red-text"
+          *ngIf="form.get('name').invalid && form.get('name').touched"  
+        >
+          <span *ngIf="form.get('name').errors['required']">Поле name не може бути порожнім</span>
+        </span>
+      </div>
+
+      <div class="input-field">
+        <input 
+          ng-model
+          id="idCode"
+          type="text"
+          formControlName="idCode"
+          maxlength="10"
+          minlength="8"
+          [ngClass]="{'invalid': form.get('idCode').invalid && form.get('idCode').touched}"
+        >
+        <label for="idCode">Код ЄДРПОУ або РКНОКПП:</label>
+        <span 
+          class="helper-text red-text"
+          *ngIf="form.get('idCode').invalid && form.get('idCode').touched"  
+        >
+          <span *ngIf="form.get('idCode').errors['required']">Поле idCode не може бути порожнім</span>
+          <span *ngIf="form.get('idCode').errors['minlength']">Поле idCode повинно містити від 8 до 10 цифр</span>
+        </span>
+      </div>
+    </div>
+
+    <p
+      class="card-panel hoverable center-align"
+      [ngClass]="{'hide': dateRefVisible}"
+      (click)=(onSelectDate())
+    >
+      Обрати дату візиту
+    </p>
+
+    <div 
+      class="input-field" 
+      [ngClass]="{'hide': !dateRefVisible}"
+    >
+      <input
+        #datepicker
+        class="datepicker" 
+        id="date"
+        type="text"
+        formControlName="date"
+        [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
+      >
+      <label for="date">Дата</label>
+      <span 
+        class="helper-text red-text"
+        *ngIf="form.get('date').invalid && form.get('date').touched"  
+      >
+        <span *ngIf="form.get('date').errors['required']">Поле date не може бути порожнім</span>
+      </span>
+    </div>
+
+    <p
+      class="card-panel hoverable center-align"
+      (click)=(onRunCustom())
+    >
+      Запустити
+    </p>
+
+    <!-- <div class="input-field">
+      <input 
+        id="password"
+        type="password"
+        formControlName="password"
+        [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}"
+      >
+      <label for="password">Пароль:</label>
+      <span 
+        class="helper-text red-text"
+        *ngIf="form.get('password').invalid && form.get('password').touched"  
+      >
+        <span *ngIf="form.get('password').errors['required']">Пароль не може бути порожнім</span>
+        <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
+          Пароль повинен бути довше {{form.get('password').errors['minlength']['requiredLength']}} символів.
+          Зараз {{form.get('password').errors['minlength']['actualLength']}}
+        </span>
+      </span>
+    </div> -->
+  </div>
+  <div class="card-action">
+    <button 
+      type="submit"
+      [disabled]="form.invalid || form.disabled"
+      class="modal-action btn light-blue darken-4 waves-effect"
+    >Ввійти</button>
+  </div>
+</form>
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<ng-template #empty> 
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>

@@ -1,0 +1,27 @@
+<div *ngIf="!loading; else loader">
+  <select 
+    *ngIf="regions.length !== 0; else empty"
+  >
+      <option value="" disabled selected>Choose your option</option>
+      <option 
+        class="blue-text text-darken-2" 
+        *ngFor="let region of regions"
+        [value]="region._id"
+        formControlName="region"
+      >
+        {{region.name}}
+      </option>
+  </select>
+</div>
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<ng-template #empty>
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>
