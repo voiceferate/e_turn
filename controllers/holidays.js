@@ -5,8 +5,6 @@ const roleChecker = require('../utils/roleChecker')
 
 module.exports.getAll = async function(req, res) {
   try {
-    roleChecker.checkRole(req, res)
-
     const holidays = await Holiday.find({})
     res.status(200).json(holidays)
   } catch (e) {

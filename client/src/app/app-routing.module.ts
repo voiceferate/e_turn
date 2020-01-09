@@ -16,13 +16,19 @@ import { VprsFormComponent } from './vprs-component/vprs-regions-page/vprs-form/
 import { VprsComponentComponent } from './vprs-component/vprs-component.component';
 import { DashboardOrdersPageComponent } from './dashboard-page/dashboard-orders-page/dashboard-orders-page.component';
 import { HolidaysFormComponent } from './holidays-page/holidays-form/holidays-form.component';
+import { OrderPageComponent } from './order-page/order-page.component';
 
 const routes: Routes = [
+  {
+    path: '', component: ClientLayoutComponent, children: [
+      {path: 'order', component: OrderPageComponent},
+      {path: '', redirectTo: 'order', pathMatch: 'full'}
+    ]
+  },
   {
     path: '', component: AuthLayoutComponent, children: [
       {path: 'login', component: LoginPageComponent},
       {path: 'register', component: RegisterPageComponent},
-      {path: '', redirectTo: '/login', pathMatch: 'full'}
     ]
   },
   {
@@ -47,11 +53,7 @@ const routes: Routes = [
       {path: 'administrators', component: AdministratorsPageComponent},
     ]
   },
-  {
-    path: '', component: ClientLayoutComponent, children: [
 
-    ]
-  },
 ]
 
 @NgModule({

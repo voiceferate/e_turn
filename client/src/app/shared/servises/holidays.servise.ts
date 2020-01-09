@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Order, Holiday } from '../interfaces';
+import { Holiday } from '../interfaces';
 import { Observable } from 'rxjs';
 
 @Injectable({

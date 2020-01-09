@@ -16,6 +16,10 @@ export class RegionsServise {
     return this.http.get<Region[]>('/api/region/')
   }
 
+  getAllActive(): Observable<Region[]> {
+    return this.http.get<Region[]>('/api/region/active')
+  }
+
   getById(id: string): Observable<Region> {
     return this.http.get<Region>(`/api/region/${id}`)
   }

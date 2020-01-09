@@ -3,7 +3,7 @@ const passport = require('passport')
 const controller = require('../controllers/holidays')
 const router = express.Router()
 
-router.get('/', passport.authenticate('jwt', {session: false}), controller.getAll)
+router.get('/', controller.getAll)
 router.get('/:id', passport.authenticate('jwt', {session: false}), controller.getById)
 router.post('/', passport.authenticate('jwt', {session: false}), controller.create)
 router.patch('/:id', passport.authenticate('jwt', {session: false}), controller.update)

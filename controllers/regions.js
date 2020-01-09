@@ -7,11 +7,19 @@ const roleChecker = require('../utils/roleChecker')
 
 module.exports.getAll = async function(req, res) {
   try {
-    // перевірка права доступу
-    roleChecker.checkRole(req, res)
-
     const regions = await Region
       .find({})
+      .sort({ name: 1 })
+    res.status(200).json(regions)
+  } catch (e) {
+    errorHandler(res, e)
+  }
+}
+
+module.exports.getAllActive = async function(req, res) {
+  try {
+    const regions = await Region
+      .find({active: true})
       .sort({ name: 1 })
     res.status(200).json(regions)
   } catch (e) {

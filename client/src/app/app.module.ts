@@ -23,7 +23,9 @@ import { VprsFormComponent } from './vprs-component/vprs-regions-page/vprs-form/
 import { VprsPageComponent } from './vprs-component/vprs-regions-page/vprs-page/vprs-page.component';
 import { DashboardVprListComponent } from './dashboard-page/dashboard-vpr-list/dashboard-vpr-list.component';
 import { DashboardOrdersPageComponent } from './dashboard-page/dashboard-orders-page/dashboard-orders-page.component';
-
+import { HolidaysFormComponent } from './holidays-page/holidays-form/holidays-form.component';
+import { OrderPageComponent } from './order-page/order-page.component';
+import { RegionComponent } from './order-page/region/region.component';
 
 
 
@@ -47,7 +49,9 @@ import { DashboardOrdersPageComponent } from './dashboard-page/dashboard-orders-
     VprsPageComponent,
     DashboardVprListComponent,
     DashboardOrdersPageComponent,
-    HolidaysFormComponent
+    HolidaysFormComponent,
+    OrderPageComponent,
+    RegionComponent
   ],
   imports: [
     BrowserModule,
@@ -68,10 +72,3 @@ export class AppModule {
   // registerLocaleData(localeFr, 'fr')
 }
 
-
-import { registerLocaleData } from '@angular/common';
-import localeUk from '@angular/common/locales/uk';
-import { HolidaysFormComponent } from './holidays-page/holidays-form/holidays-form.component';
-
-// the second parameter 'fr' is optional
-registerLocaleData(localeUk, 'uk');

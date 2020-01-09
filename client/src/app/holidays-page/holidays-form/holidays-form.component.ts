@@ -46,16 +46,10 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
       firstDay: 1,
       format: 'dd mmmm yyyy',
       onSelect: (date) => {
-        this.form.controls.holiday.setValue(date)
-      },
-      disableDayFn: function (date) {
+        let offset = date.getTimezoneOffset()
+        date = date.setMinutes(date.getMinutes() - offset)
 
-        let disableListDate = [new Date('2020,1,8').toDateString(),new Date('2020,1,10').toDateString()];
-            if(disableListDate.includes(date.toDateString())) {
-                return true
-            }else{
-                return false
-            }
+        this.form.controls.holiday.setValue(date)
       },
       i18n: {
         cancel:	'Відмінити',

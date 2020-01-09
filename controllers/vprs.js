@@ -6,7 +6,6 @@ const roleChecker = require('../utils/roleChecker')
 
 module.exports.getByRegionId = async function(req, res) {
   try {
-    roleChecker.checkRole(req, res)
     const vprs = await Vpr.find({
       region: req.params.regionId,
     })
