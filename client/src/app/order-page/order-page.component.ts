@@ -13,7 +13,7 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./order-page.component.css']
 })
 export class OrderPageComponent implements OnInit, OnChanges {
-  
+
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     console.log(changes)
   }
@@ -77,7 +77,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
       this.vprRefVisible = false
 
       this.vprLoading = true
-  
+
       this.vprServise.fetch(this.regionId).subscribe((vprs) => {
         this.vprs = vprs
         this.vprLoading = false
@@ -88,7 +88,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
   }
 
   onSelectDate() {
-    // if (this.vprId !== '') {
+    if (this.vprId !== '') {
       const busyDaysArr = []
 
 
@@ -98,6 +98,8 @@ export class OrderPageComponent implements OnInit, OnChanges {
         (holidays) => {
         holidays.forEach(function(el) {
           busyDaysArr.push(el.holiday)
+
+
         }),
         (error) => {
           console.error(error)
@@ -107,7 +109,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
       console.log(busyDaysArr)
 
       function disableDays (date) {
-              
+
         let offset = date.getTimezoneOffset()
 
         date = date.setMinutes(date.getMinutes() - offset)
@@ -115,11 +117,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
         date = new Date(date)
 
         let _date = date.toISOString()
-            // let _date = formatDate(date, 'dd MM yyyy', 'en-US', '+0200')
 
-      // let disableListDate = [new Date('2020,1,8').toDateString(),new Date('2020,1,10').toDateString()];
-        console.log(date)
-        
             if (busyDaysArr.includes(_date)) {
               console.log('true')
               return true
@@ -135,7 +133,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
         firstDay: 1,
         format: 'dd mmmm yyyy',
         onSelect: (date) => {
-          this.form.controls['date'].setValue(date)
+          this.form.controls['date'].setValue(formatDate(date, 'dd MMMM yyyy', 'en-US', '+0000'))
           MaterialServise.updateTextInputs()
         },
         disableDayFn: disableDays,
@@ -194,33 +192,25 @@ export class OrderPageComponent implements OnInit, OnChanges {
           weekdaysAbbrev:	['Нд','Пн','Вт','Ср','Чт','Пт','Сб']
         }
 
-  
+
       })
-      this.datepicker.open()
-      this.datepicker.setDate(new Date());
-      console.log('rendered')
+
+      setTimeout(() => {
+        this.datepicker.open()
+      }, 50)
+
       this.dateRefVisible = true
 
-
-    
-      // this.vprRefVisible = false
-
-      // this.vprLoading = true
-  
-      // this.vprServise.fetch(this.regionId).subscribe((vprs) => {
-      //   this.vprs = vprs
-      //   this.vprLoading = false
-      // })
-    // } else {
-    //   MaterialServise.toast('Оберіть пункт реєстрації')
-    // }
+    } else {
+      MaterialServise.toast('Оберіть пункт реєстрації')
+    }
   }
 
   onRunCustom() {
     let a = new Date
-    console.log(a.toISOString())
-    
-    
+    console.log(this.form.controls.date)
+
+
     console.log('formated', formatDate(a, 'dd MM yyyy', 'en-US', '+0200'))
   }
 }

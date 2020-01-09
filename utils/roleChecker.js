@@ -1,5 +1,5 @@
 const keys = require('../config/keys')
-const jwt = require('jsonwebtoken')
+const jwt = require('jws')
 
 
 module.exports.checkRole = function(req, res) {
@@ -12,5 +12,5 @@ module.exports.checkRole = function(req, res) {
     } else {
       res.status(409).json('acces_restricted')
     }
-  
+
 }
