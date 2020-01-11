@@ -74,13 +74,13 @@ module.exports.getBusyDaysByVprId = async function(req, res) {
     for (let el in freeDatesObj) {
       console.log(freeDatesObj[el])
       if (freeDatesObj[el] >= 4) {
-        freeDatesObj[el] = 'false'
+        freeDatesObj[el] = 'busy'
       }
     }
 
     console.log(freeDatesObj)
 
-    res.status(200).json(dates)
+    res.status(200).json(freeDatesObj)
 
 
   } catch (e) {

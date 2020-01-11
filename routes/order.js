@@ -6,7 +6,7 @@ const router = express.Router()
 
 router.get('/', controller.getAll)
 router.get('/:vprId', controller.getAllByVprId)
-router.get('/vpr/date/:id', controller.getBusyDaysByVprId)
+router.get('/vpr-free-date/:id', controller.getBusyDaysByVprId)
 router.get('/vpr/time', controller.getBusyPeriodsByVprId)
 
 router.post('/', passport.authenticate('jwt', {session: false}), controller.create)

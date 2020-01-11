@@ -128,33 +128,18 @@
         <span *ngIf="form.get('date').errors['required']">Поле date не може бути порожнім</span>
       </span>
     </div>
-
-    <p
-      class="card-panel hoverable center-align"
-      (click)=(onRunCustom())
-    >
-      Запустити
-    </p>
-
-    <!-- <div class="input-field">
-      <input 
-        id="password"
-        type="password"
-        formControlName="password"
-        [ngClass]="{'invalid': form.get('password').invalid && form.get('password').touched}"
+    
+    
+    <div 
+    class="input-field">
+      <p
+        class="card-panel hoverable center-align"
+        (click)=(onRunCustom())
       >
-      <label for="password">Пароль:</label>
-      <span 
-        class="helper-text red-text"
-        *ngIf="form.get('password').invalid && form.get('password').touched"  
-      >
-        <span *ngIf="form.get('password').errors['required']">Пароль не може бути порожнім</span>
-        <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']">
-          Пароль повинен бути довше {{form.get('password').errors['minlength']['requiredLength']}} символів.
-          Зараз {{form.get('password').errors['minlength']['actualLength']}}
-        </span>
-      </span>
-    </div> -->
+        Запустити
+      </p>
+    </div>
+
   </div>
   <div class="card-action">
     <button 

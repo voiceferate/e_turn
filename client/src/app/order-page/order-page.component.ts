@@ -1,3 +1,4 @@
+import { OrderServise } from 'src/app/shared/servises/order.servise';
 import { Component, OnInit, ViewChild, ElementRef, OnChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegionsServise } from '../shared/servises/regions.servise';
@@ -40,7 +41,8 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
   constructor(private regionServise: RegionsServise,
               private vprServise: VprsServise,
-              private holidaysServise: HolidaysServise
+              private holidaysServise: HolidaysServise,
+              private orderServise: OrderServise
               ) { }
 
   ngOnInit() {
@@ -58,6 +60,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
     this.form.controls.vpr.valueChanges.subscribe((value) => {
       this.vprId = value
+
       this.clientInfoRefVisible = false
     })
   }
@@ -89,6 +92,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
   onSelectDate() {
     if (this.vprId !== '') {
+
       const busyDaysArr = []
 
 
@@ -96,17 +100,39 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
       this.holidaysServise.fetch().subscribe(
         (holidays) => {
-        holidays.forEach(function(el) {
-          busyDaysArr.push(el.holiday)
+          console.log('holidays', holidays)
 
-
-        }),
+          holidays.forEach(function(el) {
+            busyDaysArr.push(el.holiday)
+          })
+        },
         (error) => {
           console.error(error)
         }
-      })
+      )
 
-      console.log(busyDaysArr)
+      this.orderServise.getBusyDaysByVprId(this.vprId).subscribe(
+        (order) => {
+
+          console.log('order', order)
+
+        for (let date in order) {
+          if (order[date] === 'busy') {
+            let _date = Date.parse(date)
+            let newDate = new Date(_date)
+            busyDaysArr.push(newDate.toISOString())
+          }
+        }
+      },
+        (error) => {
+          console.error(error)
+        },
+        () => {
+          console.log('busyDaysArr', busyDaysArr)
+          this.datepicker.open()
+        }
+      )
+
 
       function disableDays (date) {
 
@@ -133,6 +159,9 @@ export class OrderPageComponent implements OnInit, OnChanges {
         firstDay: 1,
         format: 'dd mmmm yyyy',
         onSelect: (date) => {
+          let offset = date.getTimezoneOffset()
+          date = date.setMinutes(date.getMinutes() - offset)
+  
           this.form.controls['date'].setValue(formatDate(date, 'dd MMMM yyyy', 'en-US', '+0000'))
           MaterialServise.updateTextInputs()
         },
@@ -195,10 +224,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
       })
 
-      setTimeout(() => {
-        this.datepicker.open()
-      }, 50)
-
       this.dateRefVisible = true
 
     } else {
@@ -207,10 +232,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
   }
 
   onRunCustom() {
-    let a = new Date
-    console.log(this.form.controls.date)
-
-
-    console.log('formated', formatDate(a, 'dd MM yyyy', 'en-US', '+0200'))
+    console.log(this.form.controls.date.value)
   }
 }

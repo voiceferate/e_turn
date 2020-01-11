@@ -1,5 +1,5 @@
 const keys = require('../config/keys')
-const jwt = require('jws')
+const jwt = require('jsonwebtoken')
 
 
 module.exports.checkRole = function(req, res) {

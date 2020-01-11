@@ -11,9 +11,14 @@ const holidayRoutes = require('./routes/holiday')
 const keys = require('./config/keys')
 const app = express()
 
-mongoose.connect(keys.mongoURI)
+mongoose.connect(keys.mongoURI, { 
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+})
   .then(() => console.log('MongoDB connected.'))
   .catch(error => console.log(error))
+
+mongoose.set('useCreateIndex', true);
 
 
 app.use(passport.initialize())

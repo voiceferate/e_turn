@@ -15,9 +15,9 @@ export class OrderServise {
     return this.http.get<Order[]>(`api/order/${vprId}`)
   }
 
-  // getById(id: string): Observable<Vpr> {
-  //   return this.http.get<Vpr>(`/api/vpr/${id}`)
-  // }
+  getBusyDaysByVprId(id: string): Observable<any> {
+    return this.http.get<any>(`/api/order/vpr-free-date/${id}`)
+  }
 
   // create(region: string, name: string, address: string): Observable<Vpr> {
   
