@@ -1,5 +1,5 @@
 import { OrderServise } from 'src/app/shared/servises/order.servise';
-import { Component, OnInit, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegionsServise } from '../shared/servises/regions.servise';
 import { Region, Vpr } from '../shared/interfaces';
@@ -19,9 +19,13 @@ export class OrderPageComponent implements OnInit, OnChanges {
     console.log(changes)
   }
 
+  @Input('onSelect') onSelect: string;
+
   @ViewChild('regionRef', {static: false} ) regionRef: ElementRef
   @ViewChild('vprRef', {static: false} ) vprRef: ElementRef
+  @ViewChild('vprCity', {static: false} ) vprCityRef: ElementRef
   @ViewChild('datepicker', {static: false} ) datepickerRef: ElementRef
+  @ViewChild('modal', {static: false} ) modalRef: ElementRef
 
   regionLoading = false
   vprLoading = false
@@ -30,13 +34,17 @@ export class OrderPageComponent implements OnInit, OnChanges {
   vprRefVisible = true
   clientInfoRefVisible = true
   dateRefVisible = false
+  orderTimeRefVisible = false
+  modalInstanse = false
 
   regions: Region[] = []
   vprs: Vpr[] = []
   datepicker: MaterialInstance
+  modal: MaterialInstance
   regionId: string = ''
   vprId: string = ''
-
+  vprCity: string
+  timePeriodNumber: number
 
 
   constructor(private regionServise: RegionsServise,
@@ -52,6 +60,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
       name: new FormControl('', [Validators.required]),
       idCode: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
+      time: new FormControl('', [Validators.required]),
     })
 
     this.form.controls.region.valueChanges.subscribe((value) => {
@@ -95,13 +104,10 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
       const busyDaysArr = []
 
-
       this.form.controls.vpr.disable()
 
       this.holidaysServise.fetch().subscribe(
         (holidays) => {
-          console.log('holidays', holidays)
-
           holidays.forEach(function(el) {
             busyDaysArr.push(el.holiday)
           })
@@ -113,23 +119,21 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
       this.orderServise.getBusyDaysByVprId(this.vprId).subscribe(
         (order) => {
-
-          console.log('order', order)
-
-        for (let date in order) {
-          if (order[date] === 'busy') {
-            let _date = Date.parse(date)
-            let newDate = new Date(_date)
-            busyDaysArr.push(newDate.toISOString())
+          for (let date in order) {
+            if (order[date] === 'busy') {
+              let _date = Date.parse(date)
+              let newDate = new Date(_date)
+              busyDaysArr.push(newDate.toISOString())
+            }
           }
-        }
-      },
+        },
         (error) => {
           console.error(error)
         },
         () => {
-          console.log('busyDaysArr', busyDaysArr)
-          this.datepicker.open()
+          setTimeout(() => {
+            this.datepicker.open()
+          }, 300)
         }
       )
 
@@ -145,12 +149,18 @@ export class OrderPageComponent implements OnInit, OnChanges {
         let _date = date.toISOString()
 
             if (busyDaysArr.includes(_date)) {
-              console.log('true')
               return true
             }else{
               return false
             }
       }
+
+      const minDate = new Date();
+      
+      //####################   доробити це гавно
+      
+      // let maxDate = new Date()
+      // let _maxDate = (maxDate.setMonth(maxDate.getMonth() + 1)).toString()
 
       this.datepicker = MaterialServise.initDatePicker(this.datepickerRef, {
         // autoClose: true,
@@ -158,6 +168,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
         disableWeekends: true,
         firstDay: 1,
         format: 'dd mmmm yyyy',
+        minDate: minDate,
         onSelect: (date) => {
           let offset = date.getTimezoneOffset()
           date = date.setMinutes(date.getMinutes() - offset)
@@ -231,7 +242,33 @@ export class OrderPageComponent implements OnInit, OnChanges {
     }
   }
 
+  onSelectTime() {
+
+    if (this.form.controls.date.valid) {
+      this.modal = MaterialServise.initModal(this.modalRef)
+      this.vprCity = this.vprCityRef.nativeElement.text
+      this.modalInstanse = true
+      this.modal.open()
+    } else {
+      MaterialServise.toast('Оберіть дату візиту')
+    }
+    // this.orderTimeRefVisible = true
+
+
+
+  }
+
   onRunCustom() {
-    console.log(this.form.controls.date.value)
+    console.log(this.onSelect)
+  }
+
+  onSelectTimePer(timeObj) {
+
+
+    this.timePeriodNumber = timeObj.periodNumber
+    this.form.controls.time.patchValue(timeObj.periodName)
+    MaterialServise.updateTextInputs()
+    this.modal.destroy()
+    this.orderTimeRefVisible = true
   }
 }

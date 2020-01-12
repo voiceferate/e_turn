@@ -1,0 +1,16 @@
+.card-action {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 360px;
+    flex-wrap: wrap;
+}
+
+.btn_cust{
+    margin: 4px;
+}
+
+.row {
+    margin-bottom: 0px;
+}

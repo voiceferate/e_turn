@@ -19,6 +19,13 @@ export class OrderServise {
     return this.http.get<any>(`/api/order/vpr-free-date/${id}`)
   }
 
+  getBusyPeriodsByVprId(vpr: string, date: Date): Observable<any> {
+    
+    const formData = {'vpr': vpr, 'date': date}
+
+    return this.http.post<any>(`/api/order//vpr/time`, formData)
+  }
+
   // create(region: string, name: string, address: string): Observable<Vpr> {
   
   //   const formData = {'region': region, 'name': name, 'address': address}

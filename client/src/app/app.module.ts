@@ -26,6 +26,7 @@ import { DashboardOrdersPageComponent } from './dashboard-page/dashboard-orders-
 import { HolidaysFormComponent } from './holidays-page/holidays-form/holidays-form.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { RegionComponent } from './order-page/region/region.component';
+import { TimeSelectPageComponent } from './order-page/time-select-page/time-select-page.component';
 
 
 
@@ -51,7 +52,8 @@ import { RegionComponent } from './order-page/region/region.component';
     DashboardOrdersPageComponent,
     HolidaysFormComponent,
     OrderPageComponent,
-    RegionComponent
+    RegionComponent,
+    TimeSelectPageComponent
   ],
   imports: [
     BrowserModule,

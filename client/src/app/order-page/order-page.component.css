@@ -5,6 +5,10 @@
 select{
   display: block;
 }
+
+.modal {
+  max-height: 85%;
+}
 /* label {
   display: block;
   height: 1em;

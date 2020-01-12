@@ -44,16 +44,17 @@
         <label [ngClass]="{hidden: vprRefVisible}">Оберіть ВПР зі списку</label>
         <select 
           [ngClass]="{hidden: vprRefVisible}"
-          #vprRef
           formControlName="vpr"
           *ngIf="vprs.length !== 0 || vprRefVisible === true; else empty"
+
         >
           <option 
             class="blue-text text-darken-2" 
             *ngFor="let vpr of vprs"
             [value]="vpr._id"
+            #vprCity
           >
-            {{vpr.name}}
+          {{vpr.name}}
           </option>
         </select>
       </div>
@@ -129,7 +130,50 @@
       </span>
     </div>
     
-    
+    <div 
+    class="input-field">
+      <p
+        class="card-panel hoverable center-align"
+        [ngClass]="{'hide': orderTimeRefVisible}"
+        (click)=(onSelectTime())
+      >
+        Обрати час візиту
+      </p>
+
+      <div 
+        class="input-field" 
+      >
+        <div #modal class="modal">
+          <div 
+            class="modal-content"
+            *ngIf="modalInstanse"
+            >
+            <!-- <app-time-select-page
+              [vpr]="vprCity"
+              [date]="form.controls.date.value" 
+            >    -->
+            <app-time-select-page
+              [vprId]="vprId"
+              [vpr]="vprCity"
+              [date]="form.controls.date.value" 
+              (onSelectTimePeriod)="onSelectTimePer($event)"
+            >
+            </app-time-select-page>
+            </div>
+        </div>
+
+        <input
+          (click)=(onSelectTime())
+          type="text"
+          [ngClass]="{'hide': !orderTimeRefVisible}"
+          formControlName="time"
+          [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
+        >
+        <label for="date">Час відвідування</label>
+      </div>
+    </div>
+
+
     <div 
     class="input-field">
       <p
@@ -139,6 +183,7 @@
         Запустити
       </p>
     </div>
+    
 
   </div>
   <div class="card-action">
