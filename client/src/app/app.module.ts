@@ -27,6 +27,7 @@ import { HolidaysFormComponent } from './holidays-page/holidays-form/holidays-fo
 import { OrderPageComponent } from './order-page/order-page.component';
 import { RegionComponent } from './order-page/region/region.component';
 import { TimeSelectPageComponent } from './order-page/time-select-page/time-select-page.component';
+import { SingleOrderPageComponent } from './order-page/single-order-page/single-order-page.component';
 
 
 
@@ -53,7 +54,8 @@ import { TimeSelectPageComponent } from './order-page/time-select-page/time-sele
     HolidaysFormComponent,
     OrderPageComponent,
     RegionComponent,
-    TimeSelectPageComponent
+    TimeSelectPageComponent,
+    SingleOrderPageComponent
   ],
   imports: [
     BrowserModule,

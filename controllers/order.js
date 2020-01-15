@@ -17,8 +17,8 @@ module.exports.getAll = async function(req, res) {
 
 module.exports.getById = async function(req, res) {
   try {
-    const orders = await Order
-      .findById({vpr: req.params.id})
+    const order = await Order
+      .findById({_id: req.params.id})
     res.status(200).json(order)
 
   } catch (e) {

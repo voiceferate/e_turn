@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, OnDestroy} fro
 import { RegionsServise } from '../shared/servises/regions.servise';
 import { Region } from '../shared/interfaces';
 import { Observable } from 'rxjs';
-import { MaterialServise, MaterialInstance } from '../shared/classes/material.servise';
 
 @Component({
   selector: 'app-regions-page',

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { OrderServise } from 'src/app/shared/servises/order.servise';
 import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -50,7 +51,8 @@ export class OrderPageComponent implements OnInit, OnChanges {
   constructor(private regionServise: RegionsServise,
               private vprServise: VprsServise,
               private holidaysServise: HolidaysServise,
-              private orderServise: OrderServise
+              private orderServise: OrderServise,
+              private router: Router
               ) { }
 
   ngOnInit() {
@@ -293,7 +295,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
           console.log('Order', order)
           this.form.reset()
           this.form.enable()
-          // this.router.navigate(['/regions'])
+          this.router.navigate([`/order/${order._id}`])
         })
     
     console.log(this.form.value)

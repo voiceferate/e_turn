@@ -1,0 +1,40 @@
+<div class="page-title">
+    <h4>Інформація щодо запису в електронній черзі</h4>
+    <button
+      class="waves-effect waves-light light-blue darken-4 btn z-depth-3"
+      routerLink="/order"
+    >
+    До реєстрації
+    </button>
+  </div>
+  
+  <div 
+    class="row"
+    *ngIf="order$ | async as order; else loader"
+    >
+    <div class="col s12">
+        <ul class="collection">
+
+            <li class="collection-item">Код ЄДРПОУ {{order.customer_id_code}}</li>
+            <li class="collection-item">Назва клієнта {{order.customer_name}}</li>
+            <li class="collection-item">Дата візиту {{order.date}}</li>
+            <li class="collection-item">Час візиту {{order.time_period_number}}</li>
+
+        </ul>
+                 
+        
+        
+        
+        
+    </div>
+  </div>
+  
+  
+  
+  
+  <ng-template #loader>
+    <app-loader></app-loader>
+  </ng-template>
+  
+  
+  
