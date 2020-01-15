@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@angular-devkit/build-angular": "~0.803.19",
     "materialize-css": "^1.0.0-rc.2",
     "rxjs": "~6.4.0",
     "typescript": "~3.5.3",
@@ -28,7 +29,6 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.803.19",
 
     "@angular/language-service": "~8.2.14",
     "@types/node": "~8.9.4",
