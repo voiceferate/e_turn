@@ -15,6 +15,10 @@ export class OrderServise {
     return this.http.get<Order[]>(`api/order/${vprId}`)
   }
 
+  getById(id: string): Observable<Order> {
+    return this.http.get<Order>(`/api/order/${id}`)
+  }
+
   getBusyDaysByVprId(id: string): Observable<any> {
     return this.http.get<any>(`/api/order/vpr-free-date/${id}`)
   }
@@ -26,12 +30,20 @@ export class OrderServise {
     return this.http.post<any>(`/api/order//vpr/time`, formData)
   }
 
-  // create(region: string, name: string, address: string): Observable<Vpr> {
+
+  create(region: string, vpr, date, name, customer_id_code, time_period_number: number): Observable<Order> {
   
-  //   const formData = {'region': region, 'name': name, 'address': address}
+    const formData = {
+      'region': region,
+      'vpr': vpr,
+      'date': date,
+      'name' : name,
+      'customer_id_code': customer_id_code,
+      'time_period_number': time_period_number
+    }
     
-  //   return this.http.post<Vpr>('/api/vpr/', formData)
-  // }
+    return this.http.post<Order>('/api/order/', formData)
+  }
 
   // update(id: string, region: string, name: string, address: string): Observable<Vpr> {
     

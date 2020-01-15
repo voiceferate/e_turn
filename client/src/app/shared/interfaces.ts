@@ -27,6 +27,7 @@ export interface Order {
   region: string,
   vpr: string,
   date: Date,
+  customer_name: string,
   customer_id_code: number,
   time_period_number: number,
   _id?: string

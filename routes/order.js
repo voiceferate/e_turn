@@ -5,11 +5,12 @@ const router = express.Router()
 
 
 router.get('/', controller.getAll)
+router.get('/:id', controller.getById)
 router.get('/:vprId', controller.getAllByVprId)
 router.get('/vpr-free-date/:id', controller.getBusyDaysByVprId)
 router.post('/vpr/time', controller.getBusyPeriodsByVprId)
 
-router.post('/', passport.authenticate('jwt', {session: false}), controller.create)
+router.post('/', controller.create)
 
 
 module.exports = router

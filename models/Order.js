@@ -14,6 +14,10 @@ const orderSchema = new Schema({
     type: Date,
     required: true
   },
+  customer_name: {
+    type: String,
+    required: true
+  },
   customer_id_code: {
     type: Number,
     required: true

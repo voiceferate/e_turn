@@ -20,7 +20,7 @@
             *ngFor="let order of orders"  
           >
             <td>{{order.date | date:'mediumDate'}}</td>
-            <td>Назва риба</td>
+            <td>{{order.customer_name}}</td>
             <td>{{order.customer_id_code}}</td>
             <td>{{order.time_period_number}}</td>
           </tr>

@@ -58,7 +58,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
       region: new FormControl(null, [Validators.required]),
       vpr: new FormControl(null, [Validators.required]),
       name: new FormControl('', [Validators.required]),
-      idCode: new FormControl('', [Validators.required]),
+      customer_id_code: new FormControl('', [Validators.required]),
       date: new FormControl('', [Validators.required]),
       time: new FormControl('', [Validators.required]),
     })
@@ -85,7 +85,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
   onSelectVpr() {
     if (this.regionId !== '') {
-      this.form.controls.region.disable()
+      // this.form.controls.region.disable()
       this.vprRefVisible = false
 
       this.vprLoading = true
@@ -104,7 +104,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
       const busyDaysArr = []
 
-      this.form.controls.vpr.disable()
+      // this.form.controls.vpr.disable()
 
       this.holidaysServise.fetch().subscribe(
         (holidays) => {
@@ -173,7 +173,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
           let offset = date.getTimezoneOffset()
           date = date.setMinutes(date.getMinutes() - offset)
   
-          this.form.controls['date'].setValue(formatDate(date, 'dd MMMM yyyy', 'en-US', '+0000'))
+          this.form.controls['date'].setValue(date)
           MaterialServise.updateTextInputs()
         },
         disableDayFn: disableDays,
@@ -259,16 +259,43 @@ export class OrderPageComponent implements OnInit, OnChanges {
   }
 
   onRunCustom() {
-    console.log(this.onSelect)
+    console.log(this.form.value)
+    console.log(this.timePeriodNumber)
+
+    this.timePeriodNumber
   }
 
   onSelectTimePer(timeObj) {
-
-
     this.timePeriodNumber = timeObj.periodNumber
     this.form.controls.time.patchValue(timeObj.periodName)
     MaterialServise.updateTextInputs()
     this.modal.destroy()
     this.orderTimeRefVisible = true
+  }
+
+
+  onSubmit() {
+    console.log('є')
+
+    this.form.disable()
+
+      this.orderServise.create(
+        this.form.value.region,
+        this.form.value.vpr,
+        this.form.value.date,
+        this.form.value.name,
+        this.form.value.customer_id_code,
+        this.timePeriodNumber,
+        )
+        
+      .subscribe((order) => {
+          // MaterialServise.toast(`Область ${region.name}: додано успішно`)
+          console.log('Order', order)
+          this.form.reset()
+          this.form.enable()
+          // this.router.navigate(['/regions'])
+        })
+    
+    console.log(this.form.value)
   }
 }

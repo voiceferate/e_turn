@@ -1,6 +1,7 @@
   <form 
   class="card"
   [formGroup]="form"
+  (ngSubmit)="onSubmit()"
   >
   <div class="card-content">
     <span class="card-title">Реєстрація в електронній черзі</span>
@@ -83,20 +84,20 @@
       <div class="input-field">
         <input 
           ng-model
-          id="idCode"
+          id="customer_id_code"
           type="text"
-          formControlName="idCode"
+          formControlName="customer_id_code"
           maxlength="10"
           minlength="8"
-          [ngClass]="{'invalid': form.get('idCode').invalid && form.get('idCode').touched}"
+          [ngClass]="{'invalid': form.get('customer_id_code').invalid && form.get('customer_id_code').touched}"
         >
-        <label for="idCode">Код ЄДРПОУ або РКНОКПП:</label>
+        <label for="customer_id_code">Код ЄДРПОУ або РКНОКПП:</label>
         <span 
           class="helper-text red-text"
-          *ngIf="form.get('idCode').invalid && form.get('idCode').touched"  
+          *ngIf="form.get('customer_id_code').invalid && form.get('customer_id_code').touched"  
         >
-          <span *ngIf="form.get('idCode').errors['required']">Поле idCode не може бути порожнім</span>
-          <span *ngIf="form.get('idCode').errors['minlength']">Поле idCode повинно містити від 8 до 10 цифр</span>
+          <span *ngIf="form.get('customer_id_code').errors['required']">Поле customer_id_code не може бути порожнім</span>
+          <span *ngIf="form.get('customer_id_code').errors['minlength']">Поле customer_id_code повинно містити від 8 до 10 цифр</span>
         </span>
       </div>
     </div>
@@ -148,10 +149,6 @@
             class="modal-content"
             *ngIf="modalInstanse"
             >
-            <!-- <app-time-select-page
-              [vpr]="vprCity"
-              [date]="form.controls.date.value" 
-            >    -->
             <app-time-select-page
               [vprId]="vprId"
               [vpr]="vprCity"
@@ -173,7 +170,7 @@
       </div>
     </div>
 
-
+<!-- 
     <div 
     class="input-field">
       <p
@@ -182,7 +179,7 @@
       >
         Запустити
       </p>
-    </div>
+    </div> -->
     
 
   </div>

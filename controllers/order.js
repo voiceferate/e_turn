@@ -15,6 +15,18 @@ module.exports.getAll = async function(req, res) {
   }
 }
 
+module.exports.getById = async function(req, res) {
+  try {
+    const orders = await Order
+      .findById({vpr: req.params.id})
+    res.status(200).json(order)
+
+  } catch (e) {
+    errorHandler(res, e)
+  }
+}
+
+
 module.exports.getAllByVprId = async function(req, res) {
   try {
     const orders = await Order
@@ -42,6 +54,7 @@ module.exports.create = async function(req, res) {
         region: req.body.region,
         vpr: req.body.vpr,
         date: req.body.date,
+        customer_name: req.body.name,
         customer_id_code: req.body.customer_id_code,
         time_period_number: req.body.time_period_number,
       }).save()
