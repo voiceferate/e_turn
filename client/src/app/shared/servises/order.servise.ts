@@ -16,7 +16,7 @@ export class OrderServise {
   }
 
   getById(id: string): Observable<Order> {
-    return this.http.get<Order>(`/api/order/${id}`)
+    return this.http.get<Order>(`/api/order/single/${id}`)
   }
 
   getBusyDaysByVprId(id: string): Observable<any> {

@@ -9,6 +9,10 @@ select{
 .modal {
   max-height: 85%;
 }
+
+option{
+  min-height: 2.2em
+}
 /* label {
   display: block;
   height: 1em;

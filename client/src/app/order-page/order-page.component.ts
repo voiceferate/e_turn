@@ -67,10 +67,14 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
     this.form.controls.region.valueChanges.subscribe((value) => {
       this.regionId = value
+      // this.onSelectRegion()
+      this.vprRefVisible = true
+
     })
 
     this.form.controls.vpr.valueChanges.subscribe((value) => {
       this.vprId = value
+      this.onSelectVpr()
 
       this.clientInfoRefVisible = false
     })

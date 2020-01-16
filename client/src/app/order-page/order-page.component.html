@@ -166,7 +166,10 @@
           formControlName="time"
           [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
         >
-        <label for="date">Час відвідування</label>
+        <label 
+          for="date"
+          [ngClass]="{'hide': !orderTimeRefVisible}"
+        >Час відвідування</label>
       </div>
     </div>
 
@@ -188,7 +191,7 @@
       type="submit"
       [disabled]="form.invalid || form.disabled"
       class="modal-action btn light-blue darken-4 waves-effect"
-    >Ввійти</button>
+    >Зареєструватися</button>
   </div>
 </form>
 
