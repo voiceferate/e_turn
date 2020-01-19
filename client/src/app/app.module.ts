@@ -25,9 +25,9 @@ import { DashboardVprListComponent } from './dashboard-page/dashboard-vpr-list/d
 import { DashboardOrdersPageComponent } from './dashboard-page/dashboard-orders-page/dashboard-orders-page.component';
 import { HolidaysFormComponent } from './holidays-page/holidays-form/holidays-form.component';
 import { OrderPageComponent } from './order-page/order-page.component';
-import { RegionComponent } from './order-page/region/region.component';
 import { TimeSelectPageComponent } from './order-page/time-select-page/time-select-page.component';
 import { SingleOrderPageComponent } from './order-page/single-order-page/single-order-page.component';
+import { RegionMapComponent } from './order-page/region-map/region-map.component';
 
 
 
@@ -53,9 +53,9 @@ import { SingleOrderPageComponent } from './order-page/single-order-page/single-
     DashboardOrdersPageComponent,
     HolidaysFormComponent,
     OrderPageComponent,
-    RegionComponent,
     TimeSelectPageComponent,
-    SingleOrderPageComponent
+    SingleOrderPageComponent,
+    RegionMapComponent
   ],
   imports: [
     BrowserModule,

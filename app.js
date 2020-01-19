@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // if (process.env.NODE_ENV === 'development') {
-//   app.use(express.static('client/dist/client'))
+//   app.use(express.static('client/dist/client/ass'))
 
 //   app.get('*', (req, res) => {
 //     res.sendFile(

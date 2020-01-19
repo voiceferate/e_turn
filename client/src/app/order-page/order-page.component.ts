@@ -7,7 +7,6 @@ import { Region, Vpr } from '../shared/interfaces';
 import { MaterialInstance, MaterialServise } from '../shared/classes/material.servise';
 import { VprsServise } from '../shared/servises/vprs.servise';
 import { HolidaysServise } from '../shared/servises/holidays.servise';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-order-page',
@@ -21,6 +20,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
   }
 
   @Input('onSelect') onSelect: string;
+  // @Input('onSelectRegionFromMap') onSelectRegionFromMap: any;
 
   @ViewChild('regionRef', {static: false} ) regionRef: ElementRef
   @ViewChild('vprRef', {static: false} ) vprRef: ElementRef
@@ -69,7 +69,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
       this.regionId = value
       // this.onSelectRegion()
       this.vprRefVisible = true
-
+      this.regionRef.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     })
 
     this.form.controls.vpr.valueChanges.subscribe((value) => {
@@ -87,6 +87,24 @@ export class OrderPageComponent implements OnInit, OnChanges {
       this.regions = regions
       this.regionLoading = false
     })
+  }
+
+//######################  по ресайзу
+// https://stackblitz.com/edit/resize-screen
+
+  onSelectRegionFromMap(event) {
+    this.form.controls.region.setValue(event.region)
+    this.regionId = event.region
+    this.regionRefVisible = false
+    this.regions = event.regions
+    
+    
+
+    // this.regionLoading = true
+    // this.regionServise.getAllActive().subscribe((regions) => {
+    //   this.regions = regions
+    //   this.regionLoading = false
+    // })
   }
 
   onSelectVpr() {
@@ -264,11 +282,9 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
   }
 
-  onRunCustom() {
-    console.log(this.form.value)
-    console.log(this.timePeriodNumber)
-
-    this.timePeriodNumber
+  onRunCustom(ev) {
+    console.log(this.onSelectRegionFromMap)
+    console.log(ev)
   }
 
   onSelectTimePer(timeObj) {
@@ -304,4 +320,8 @@ export class OrderPageComponent implements OnInit, OnChanges {
     
     console.log(this.form.value)
   }
+
+
+  
+
 }

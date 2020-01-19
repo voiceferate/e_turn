@@ -32,3 +32,9 @@ export interface Order {
   time_period_number: number,
   _id?: string
 }
+
+export interface RegionTooltip {
+  name: string,
+  top: Number,
+  left: Number,
+}

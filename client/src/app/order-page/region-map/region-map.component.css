@@ -1,0 +1,34 @@
+svg path:hover{ 
+    fill: #82b1ff;
+  }
+
+svg path{
+    fill: #0d47a1;
+    stroke: #e3f2fd;
+    stroke-width: 0.998598px;
+}
+
+svg path.disabled{
+  fill: #3a3a3a;
+  stroke: #e3f2fd;
+  stroke-width: 0.998598px;
+}
+
+.tooltip{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.tooltip-text {
+  display: none;
+  text-align: center;
+  font-size: 0.9em;
+  min-width: 140px;
+  position: absolute;
+  z-index: 1000;
+  padding: 10px; 
+  background: #000;
+  border-radius: 4px; 
+  color: #fff;
+}
