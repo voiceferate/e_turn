@@ -291,7 +291,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
     this.timePeriodNumber = timeObj.periodNumber
     this.form.controls.time.patchValue(timeObj.periodName)
     MaterialServise.updateTextInputs()
-    this.modal.destroy()
+    this.modal.close()
     this.orderTimeRefVisible = true
   }
 
