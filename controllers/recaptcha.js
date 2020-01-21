@@ -1,12 +1,11 @@
 const errorHandler = require('../utils/errorHandler')
 const keys = require('../config/keys')
+const mailSender = require('../utils/mailSender')
 
 const Recaptcha = require('recaptcha-v2').Recaptcha;
 
 module.exports.check = async function(req, res) {
     
-console.log(req.body)
-
     const data = {
 		remoteip:  req.connection.remoteAddress,
 		response:  req.body.resolvedCaptcha,
@@ -15,7 +14,7 @@ console.log(req.body)
 
     const recaptcha = new Recaptcha(keys.recaptchaPublic, keys.recaptchaSecret, data);
 
-    recaptcha.verify(function(success, error_code) {
+    await recaptcha.verify(function(success, error_code) {
         if (success) {
             res.json({message: 'captcha sussess'})
         }
@@ -24,6 +23,8 @@ console.log(req.body)
         }
     });
 }
+
+
 
 
 
