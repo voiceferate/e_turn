@@ -30,6 +30,7 @@ import { TimeSelectPageComponent } from './order-page/time-select-page/time-sele
 import { SingleOrderPageComponent } from './order-page/single-order-page/single-order-page.component';
 import { RegionMapComponent } from './order-page/region-map/region-map.component';
 import { DocumentsListPageComponent } from './order-page/documents-list-page/documents-list-page.component';
+import { OrderFormComponent } from './order-page/order-form/order-form.component';
 
 
 
@@ -58,7 +59,8 @@ import { DocumentsListPageComponent } from './order-page/documents-list-page/doc
     TimeSelectPageComponent,
     SingleOrderPageComponent,
     RegionMapComponent,
-    DocumentsListPageComponent
+    DocumentsListPageComponent,
+    OrderFormComponent
   ],
   imports: [
     BrowserModule,

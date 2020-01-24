@@ -19,6 +19,13 @@ export class OrderServise {
     return this.http.get<Order>(`/api/order/single/${id}`)
   }
 
+  getByClientCode(customer_id_code: number): Observable<Order[]> {
+    const formData = {
+      'customer_id_code': customer_id_code
+    }
+    return this.http.post<Order[]>(`/api/order/client`, formData)
+  }
+
   getBusyDaysByVprId(id: string): Observable<any> {
     return this.http.get<any>(`/api/order/vpr-free-date/${id}`)
   }

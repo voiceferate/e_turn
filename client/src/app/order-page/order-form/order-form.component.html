@@ -1,1 +1,77 @@
-<p>order-form works!</p>
+<form 
+  class="card"
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+>
+  <div class="card-action">
+    <div class="input-field">
+      <input 
+        ng-model
+        id="customer_id_code"
+        type="text"
+        formControlName="customer_id_code"
+        maxlength="10"
+        minlength="8"
+        [ngClass]="{'invalid': form.get('customer_id_code').invalid && form.get('customer_id_code').touched}"
+      >
+      <label for="customer_id_code">Код ЄДРПОУ або РКНОКПП:</label>
+      <span 
+        class="helper-text red-text"
+        *ngIf="form.get('customer_id_code').invalid && form.get('customer_id_code').touched"  
+      >
+        <span *ngIf="form.get('customer_id_code').errors['required']">Поле customer_id_code не може бути порожнім</span>
+        <span *ngIf="form.get('customer_id_code').errors['minlength']">Поле customer_id_code повинно містити від 8 до 10 цифр</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="card-action">
+    <button 
+      type="submit"
+      [disabled]="form.invalid || form.disabled"
+      class="modal-action btn light-blue darken-4 waves-effect"
+    >Знайти дані</button>
+  </div>
+</form>
+
+<div
+  class="hide"
+  #results
+>
+
+  <div
+    *ngIf="orders$ | async as orders; else loader"
+  >
+  <div class="collection" *ngIf="orders.length !== 0; else empty">
+    <ul>
+      <li
+      *ngFor="let order of orders"  
+      >
+        <a 
+          [routerLink]="['/order', order._id]"
+        >{{order.customer_id_code}}
+        </a>
+        {{order._id}}
+        
+      </li>
+    </ul>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+
+<ng-template #empty>
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>

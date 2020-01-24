@@ -26,6 +26,18 @@ module.exports.getById = async function(req, res) {
   }
 }
 
+module.exports.getByClientCode = async function(req, res) {
+  try {
+    console.log('req', req.body)
+    const order = await Order
+      .find({customer_id_code: req.body.customer_id_code})
+    res.status(200).json(order)
+
+  } catch (e) {
+    errorHandler(res, e)
+  }
+}
+
 
 module.exports.getAllByVprId = async function(req, res) {
   try {

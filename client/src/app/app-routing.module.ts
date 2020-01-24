@@ -1,3 +1,4 @@
+import { OrderFormComponent } from './order-page/order-form/order-form.component';
 import { SingleOrderPageComponent } from './order-page/single-order-page/single-order-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,6 +24,7 @@ const routes: Routes = [
   {
     path: '', component: ClientLayoutComponent, children: [
       {path: 'order', component: OrderPageComponent},
+      {path: 'order/client', component: OrderFormComponent},
       {path: 'order/:id', component: SingleOrderPageComponent},
       {path: '', redirectTo: 'order', pathMatch: 'full'}
     ]
