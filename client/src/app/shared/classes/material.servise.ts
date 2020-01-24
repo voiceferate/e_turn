@@ -31,4 +31,8 @@ export class MaterialServise {
     return M.updateTextFields()
   }
 
+  static initCollapsible(ref: ElementRef, options: object): MaterialInstance {
+    return M.Collapsible.init(ref.nativeElement, options);
+  }
+  
 } 

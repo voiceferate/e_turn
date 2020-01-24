@@ -4,10 +4,14 @@
 
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li routerLinkActive="active">
-        <a routerLink="/login">Вхід</a>
+        <a routerLink="/login">Перевірка стану запису в черзі</a>
       </li>
       <li routerLinkActive="active">
-        <a routerLink="/register">Реєстрація</a>
+        <a routerLink="/register">Корисна інформація</a>
+      </li>
+      <li>
+        <a (click)=showDocumentsList()>Перелік документів</a>
+        
       </li>
     </ul>
   </div>
@@ -21,5 +25,11 @@
     </div>
   </div>
 </main>
+
+<div #modal class="modal">
+  <app-documents-list-page
+    *ngIf="modalVisible"
+  ></app-documents-list-page>
+</div>
 
 
