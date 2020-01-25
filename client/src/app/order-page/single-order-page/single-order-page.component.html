@@ -17,8 +17,8 @@
 
             <li class="collection-item">Код ЄДРПОУ {{order.customer_id_code}}</li>
             <li class="collection-item">Назва клієнта {{order.customer_name}}</li>
-            <li class="collection-item">Дата візиту {{order.date}}</li>
-            <li class="collection-item">Час візиту {{order.time_period_number}}</li>
+            <li class="collection-item">Дата візиту: {{order.date | date: 'dd.MM.yyyy'}}</li>
+            <li class="collection-item">Час візиту: {{order.time_period_number | timePeriod}}</li>
 
         </ul>
                  
