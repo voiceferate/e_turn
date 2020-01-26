@@ -28,6 +28,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
   @ViewChild('vprCity', {static: false} ) vprCityRef: ElementRef
   @ViewChild('datepicker', {static: false} ) datepickerRef: ElementRef
   @ViewChild('modal', {static: false} ) modalRef: ElementRef
+  @ViewChild('modalPersonalData', {static: false} ) modalPersonalDataRef: ElementRef
 
   regionLoading = false
   vprLoading = false
@@ -43,6 +44,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
   vprs: Vpr[] = []
   datepicker: MaterialInstance
   modal: MaterialInstance
+  modalPersonalData: MaterialInstance
   regionId: string = ''
   vprId: string = ''
   vprCity: string
@@ -79,8 +81,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
       this.onSelectVpr()
       this.clientInfoRefVisible = false
     })
-
-    
   }
 
   onSelectRegion() {
@@ -269,7 +269,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
   }
 
   onSelectTime() {
-
     if (this.form.controls.date.valid) {
       this.modal = MaterialServise.initModal(this.modalRef)
       this.vprCity = this.vprCityRef.nativeElement.text
@@ -278,10 +277,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
     } else {
       MaterialServise.toast('Оберіть дату візиту')
     }
-    // this.orderTimeRefVisible = true
-
-
-
   }
 
   onRunCustom(ev) {
@@ -299,8 +294,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
 
   onSubmit() {
-    console.log('є')
-
     this.form.disable()
 
       this.orderServise.create(
@@ -313,14 +306,11 @@ export class OrderPageComponent implements OnInit, OnChanges {
         )
         
       .subscribe((order) => {
-          // MaterialServise.toast(`Область ${region.name}: додано успішно`)
-          console.log('Order', order)
+          MaterialServise.toast(`Ви успішно зареєструвалися в системі`)
           this.form.reset()
           this.form.enable()
           this.router.navigate([`/order/${order._id}`])
         })
-    
-    console.log(this.form.value)
   }
 
   resolved(captchaResponse: string) {
@@ -330,6 +320,12 @@ export class OrderPageComponent implements OnInit, OnChanges {
       console.log(resp)
       this.captchaSolved = true
     })
+  }
+
+  showModal() {
+    console.log('init')
+    this.modalPersonalData = MaterialServise.initModal(this.modalPersonalDataRef)
+    this.modalPersonalData.open()
   }
 
 

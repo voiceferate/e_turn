@@ -14,4 +14,12 @@ option{
   min-height: 2.2em
 }
 
+.personal-data{
+  font-size: 0.8rem;
+}
+
+.personal-data a{
+  cursor: pointer;
+}
+
 

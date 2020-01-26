@@ -197,6 +197,28 @@
     
 
   </div>
+
+  <div 
+    *ngIf="!form.invalid || form.disabled"
+    class="card-action personal-data"
+  >
+    <p class="blue-text text-accent-1">Натискаючи кнопку "Зареєструватися" ви надаєте згоду на збір, обробку та використання персональних даних.</p>
+    <a 
+      (click)="showModal()"
+      class="blue-text text-accent-3"
+    >Згода-повідомлення суб'єкта персональних даних на обробку та передачу його персональних даних</a>
+  </div>
+
+  <div #modalPersonalData class="modal">
+    <div 
+      class="modal-content"
+      >
+      <h5>Згода-повідомлення суб'єкта персональних даних на обробку та передачу його персональних даних</h5>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates aliquid sunt possimus? Quo commodi repellat consequuntur dolorem error facilis eius perspiciatis sint voluptatum! Quae magni qui vel? Aliquam, neque molestias?</p>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates aliquid sunt possimus? Quo commodi repellat consequuntur dolorem error facilis eius perspiciatis sint voluptatum! Quae magni qui vel? Aliquam, neque molestias?</p>
+      </div>
+  </div>
+
   <div class="card-action">
     <button 
       type="submit"
