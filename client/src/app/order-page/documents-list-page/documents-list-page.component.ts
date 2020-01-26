@@ -19,12 +19,7 @@ export class DocumentsListPageComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('this.collapsibleRef', this.collapsibleRef)
-    this.collapsible = MaterialServise.initCollapsible(this.collapsibleRef, {
-      onOpenStart: () => {
-        console.log('coll open')
-      }
-    })
+    this.collapsible = MaterialServise.initCollapsible(this.collapsibleRef, {})
   }
 
 }

@@ -32,7 +32,11 @@ export class MaterialServise {
   }
 
   static initCollapsible(ref: ElementRef, options: object): MaterialInstance {
-    return M.Collapsible.init(ref.nativeElement, options);
+    return M.Collapsible.init(ref.nativeElement, options)
+  }
+
+  static initHelperText(ref: ElementRef, options: object): MaterialInstance {
+    return M.TapTarget.init(ref.nativeElement, options)
   }
   
 } 

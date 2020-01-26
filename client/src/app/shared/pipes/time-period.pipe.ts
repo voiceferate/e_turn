@@ -37,6 +37,7 @@ export class TimePeriodPipe implements PipeTransform {
       case 14:
         return '17:00-17:30'
       default:
+        return 'Нетиповий період'
     }
   }
 

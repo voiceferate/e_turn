@@ -6,17 +6,36 @@
       <li routerLinkActive="active">
         <a routerLink="/order/client">Перевірка стану запису в черзі</a>
       </li>
-      <li routerLinkActive="active">
-        <a routerLink="/order/client">Корисна інформація</a>
+      <li 
+        (click)="openHelperText()"
+        routerLinkActive="active"
+      >
+        <a>Корисна інформація</a>
       </li>
       <li>
         <a (click)=showDocumentsList()>Перелік документів</a>
-        
       </li>
     </ul>
   </div>
 </nav>
 
+
+<div class="fixed-action-btn direction-top" style="bottom: 40px; right: 24px;">
+  <a id="menu" class="btn btn-floating btn-large" >
+    <i class="material-icons">menu</i>
+  </a>
+</div>
+
+<div 
+  #tapTarget
+  class="tap-target"
+  data-target="menu"
+>
+  <div class="tap-target-content">
+    <h5>Title</h5>
+    <p>A bunch of text</p>
+  </div>
+</div>
 
 <main class="content">
   <div class="row">

@@ -70,7 +70,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
 
     this.form.controls.region.valueChanges.subscribe((value) => {
       this.regionId = value
-      // this.onSelectRegion()
       this.vprRefVisible = true
       this.regionRef.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     })
@@ -78,7 +77,6 @@ export class OrderPageComponent implements OnInit, OnChanges {
     this.form.controls.vpr.valueChanges.subscribe((value) => {
       this.vprId = value
       this.onSelectVpr()
-
       this.clientInfoRefVisible = false
     })
 
@@ -333,6 +331,8 @@ export class OrderPageComponent implements OnInit, OnChanges {
       this.captchaSolved = true
     })
   }
+
+
 
 
   
