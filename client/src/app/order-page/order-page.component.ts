@@ -85,7 +85,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    throw new Error("Method not implemented.");
+    // throw new Error("Method not implemented.");
   }
 
   onSelectRegion() {
@@ -168,6 +168,10 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
             }, 350)
           }
         )
+
+        this.vprServise.getById(this.vprId).subscribe( (vpr: Vpr) => {
+          console.log(vpr)
+        } )
   
   
         function disableDays (date) {
