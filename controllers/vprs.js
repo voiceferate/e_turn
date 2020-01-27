@@ -17,7 +17,6 @@ module.exports.getByRegionId = async function(req, res) {
 
 module.exports.getById = async function(req, res) {
   try {
-    roleChecker.checkRole(req, res)
     const vpr = await Vpr.findById({
       _id: req.params.id,
     })

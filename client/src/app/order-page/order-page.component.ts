@@ -8,6 +8,7 @@ import { MaterialInstance, MaterialServise } from '../shared/classes/material.se
 import { VprsServise } from '../shared/servises/vprs.servise';
 import { HolidaysServise } from '../shared/servises/holidays.servise';
 import { RecaptchaServise } from '../shared/servises/recaptcha.servise';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-order-page',
@@ -171,6 +172,24 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
 
         this.vprServise.getById(this.vprId).subscribe( (vpr: Vpr) => {
           console.log(vpr)
+
+          if (vpr.vacation.length) {
+            
+            const start = moment(vpr.vacation[0].startDate1)
+            const end = moment(vpr.vacation[0].endDate1)
+
+          for (let m = moment(start); m.isBefore(end); m.add(1, 'days')) {
+              console.log(m.format('YYYY-MM-DD'));
+          }
+
+            
+          }
+          
+          // for (var m = moment(a); m.isBefore(b); m.add(1, 'days')) {
+          //     console.log(m.format('YYYY-MM-DD'));
+          // }
+
+
         } )
   
   

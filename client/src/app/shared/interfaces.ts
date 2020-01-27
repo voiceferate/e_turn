@@ -14,6 +14,7 @@ export interface Vpr {
   name: string,
   address: string,
   region: string,
+  vacation: [{startDate1: Date, endDate1: Date}, {startDate2: Date, endDate2: Date}, {startDate3: Date, endDate3: Date}]
   _id?: string
 }
 

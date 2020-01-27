@@ -4,7 +4,7 @@ const controller = require('../controllers/vprs')
 const router = express.Router()
 
 router.get('/region/:regionId', controller.getByRegionId)
-router.get('/:id', passport.authenticate('jwt', {session: false}), controller.getById)
+router.get('/:id', controller.getById)
 router.post('/', passport.authenticate('jwt', {session: false}), controller.create)
 router.patch('/:id', passport.authenticate('jwt', {session: false}), controller.update)
 router.delete('/:id', passport.authenticate('jwt', {session: false}), controller.remove)
