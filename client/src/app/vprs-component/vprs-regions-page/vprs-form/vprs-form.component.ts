@@ -44,10 +44,10 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
       address: new FormControl(null, [Validators.required]),
       vacation1StartDate: new FormControl(null, [Validators.required]),
       vacation1EndDate: new FormControl(null, [Validators.required]),
-      vacation2StartDate: new FormControl(null, [Validators.required]),
-      vacation2EndDate: new FormControl(null, [Validators.required]),
-      vacation3StartDate: new FormControl(null, [Validators.required]),
-      vacation3EndDate: new FormControl(null, [Validators.required]),
+      vacation2StartDate: new FormControl(null),
+      vacation2EndDate: new FormControl(null),
+      vacation3StartDate: new FormControl(null),
+      vacation3EndDate: new FormControl(null),
 
       _id: new FormControl()
     })
@@ -76,13 +76,39 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
             this.form.patchValue({
               name: vpr.name,
               address: vpr.address,
-              vacation1StartDate: vpr.vacation[0].startDate1,
-              vacation1EndDate: vpr.vacation[0].endDate1,
-              vacation2StartDate: vpr.vacation[1].startDate2,
-              vacation2EndDate: vpr.vacation[1].endDate2,
-              vacation3StartDate: vpr.vacation[2].startDate3,
-              vacation3EndDate: vpr.vacation[2].endDate3,
             })
+            if (vpr.vacation.length) {
+              if (vpr.vacation[0].startDate1) {
+                this.form.patchValue({
+                  vacation1StartDate: vpr.vacation[0].startDate1,
+                  vacation1EndDate: vpr.vacation[0].endDate1,
+                })
+              }
+              if (vpr.vacation[1].startDate2) {
+                this.form.patchValue({
+                  vacation2StartDate: vpr.vacation[1].startDate2,
+                  vacation2EndDate: vpr.vacation[1].endDate2,
+                })
+              }
+              if (vpr.vacation[2].startDate3) {
+                this.form.patchValue({
+                  vacation3StartDate: vpr.vacation[2].startDate3,
+                  vacation3EndDate: vpr.vacation[2].endDate3,
+                })
+              } 
+            }
+
+
+            // this.form.patchValue({
+            //   name: vpr.name,
+            //   address: vpr.address,
+            //   vacation1StartDate: vpr.vacation[0].startDate1,
+            //   vacation1EndDate: vpr.vacation[0].endDate1,
+            //   vacation2StartDate: vpr.vacation[1].startDate2,
+            //   vacation2EndDate: vpr.vacation[1].endDate2,
+            //   vacation3StartDate: vpr.vacation[2].startDate3,
+            //   vacation3EndDate: vpr.vacation[2].endDate3,
+            // })
             this.vpr = vpr
             MaterialServise.updateTextInputs()
           }
@@ -169,7 +195,7 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
           this.router.navigate([`/vprs-regions/${this.regionId}/vprs`])
         })
     } else {
-      this.vprService.update(this.vpr._id, this.regionId, this.form.value.name, this.form.value.address, this.form.value.vacationStartDate, this.form.value.vacationEndDate)
+      this.vprService.update(this.vpr._id, this.regionId, this.form.value.name, this.form.value.address, this.form.value.vacation1StartDate, this.form.value.vacation1EndDate, this.form.value.vacation2StartDate, this.form.value.vacation2EndDate, this.form.value.vacation3StartDate, this.form.value.vacation3EndDate)
       .subscribe((vpr) => {
         MaterialServise.toast(`Пункт ${vpr.name}: змінено успішно`)
         this.form.enable()

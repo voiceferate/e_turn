@@ -27,9 +27,9 @@ export class VprsServise {
     return this.http.post<Vpr>('/api/vpr/', formData)
   }
 
-  update(id: string, region: string, name: string, address: string, startDate: Date, endDate: Date): Observable<Vpr> {
+  update(id: string, region: string, name: string, address: string, startDate1: Date, endDate1: Date, startDate2: Date, endDate2: Date, startDate3: Date, endDate3: Date): Observable<Vpr> {
     
-    const formData = {'id': id, 'region': region, 'name': name, 'address': address, vacation: [{'startDate': startDate, 'endDate': endDate}, {'startDate': startDate, 'endDate': endDate},{'startDate': startDate, 'endDate': endDate}]}
+    const formData = {'id': id, 'region': region, 'name': name, 'address': address, vacation: [{'startDate1': startDate1, 'endDate1': endDate1}, {'startDate2': startDate2, 'endDate2': endDate2},{'startDate3': startDate3, 'endDate3': endDate3}]}
     
     return this.http.patch<Vpr>(`/api/vpr/${id}`, formData)
   }

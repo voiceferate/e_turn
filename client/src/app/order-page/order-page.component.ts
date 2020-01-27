@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { OrderServise } from 'src/app/shared/servises/order.servise';
-import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegionsServise } from '../shared/servises/regions.servise';
 import { Region, Vpr } from '../shared/interfaces';
@@ -14,7 +14,8 @@ import { RecaptchaServise } from '../shared/servises/recaptcha.servise';
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.css']
 })
-export class OrderPageComponent implements OnInit, OnChanges {
+export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
+
 
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     console.log(changes)
@@ -81,6 +82,10 @@ export class OrderPageComponent implements OnInit, OnChanges {
       this.onSelectVpr()
       this.clientInfoRefVisible = false
     })
+  }
+
+  ngAfterViewInit(): void {
+    throw new Error("Method not implemented.");
   }
 
   onSelectRegion() {
@@ -159,7 +164,7 @@ export class OrderPageComponent implements OnInit, OnChanges {
           },
           () => {
             setTimeout(() => {
-              this.datepicker.open()
+              // this.datepicker.open()
             }, 350)
           }
         )
