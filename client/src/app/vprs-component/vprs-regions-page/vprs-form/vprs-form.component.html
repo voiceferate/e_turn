@@ -40,6 +40,132 @@
       </div>
 
     </div>
+
+    <div class="card-content">
+      <div class="row">
+      <h5>Відпустки</h5>
+        <div class="input-field col s6 m6 l6">
+          <div class="input-field">
+            <input 
+              #datePickerStart1
+              class="datepicker" 
+              type="text"
+              formControlName="vacation1StartDate"
+              [ngClass]="{'invalid': form.get('vacation1StartDate').invalid && form.get('vacation1StartDate').touched}"
+            >
+            <label for="vacation1StartDate">Дата початку</label>
+            <span 
+              class="helper-text red-text"
+              *ngIf="form.get('vacation1StartDate').invalid && form.get('vacation1StartDate').touched"  
+            >
+              <span *ngIf="form.get('vacation1StartDate').errors['required']">Потрібно вказати дату початку відпустки</span>
+            </span>
+          </div>
+        </div>
+
+
+        <div class="input-field col s6 m6 l6">
+          <div class="input-field">
+            <input 
+              #datePickerEnd1
+              class="datepicker" 
+              type="text"
+              formControlName="vacation1EndDate"
+              [ngClass]="{'invalid': form.get('vacation1EndDate').invalid && form.get('vacation1EndDate').touched}"
+            >
+            <label for="vacation1EndDate">Дата закінчення</label>
+            <span 
+              class="helper-text red-text"
+              *ngIf="form.get('vacation1EndDate').invalid && form.get('vacation1EndDate').touched"  
+            >
+              <span *ngIf="form.get('vacation1EndDate').errors['required']">Потрібно вказати дату закінчення відпустки</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="input-field col s6 m6 l6">
+          <div class="input-field">
+            <input 
+              #datePickerStart2
+              class="datepicker" 
+              type="text"
+              formControlName="vacation2StartDate"
+              [ngClass]="{'invalid': form.get('vacation2StartDate').invalid && form.get('vacation2StartDate').touched}"
+            >
+            <label for="vacation2StartDate">Дата початку</label>
+            <span 
+              class="helper-text red-text"
+              *ngIf="form.get('vacation2StartDate').invalid && form.get('vacation2StartDate').touched"  
+            >
+              <span *ngIf="form.get('vacation2StartDate').errors['required']">Потрібно вказати дату початку відпустки</span>
+            </span>
+          </div>
+        </div>
+
+
+        <div class="input-field col s6 m6 l6">
+          <div class="input-field">
+            <input 
+              #datePickerEnd2
+              class="datepicker" 
+              type="text"
+              formControlName="vacation2EndDate"
+              [ngClass]="{'invalid': form.get('vacation2EndDate').invalid && form.get('vacation2EndDate').touched}"
+            >
+            <label for="vacation2EndDate">Дата закінчення</label>
+            <span 
+              class="helper-text red-text"
+              *ngIf="form.get('vacation2EndDate').invalid && form.get('vacation2EndDate').touched"  
+            >
+              <span *ngIf="form.get('vacation2EndDate').errors['required']">Потрібно вказати дату закінчення відпустки</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="input-field col s6 m6 l6">
+          <div class="input-field">
+            <input 
+              #datePickerStart3
+              class="datepicker" 
+              type="text"
+              formControlName="vacation3StartDate"
+              [ngClass]="{'invalid': form.get('vacation3StartDate').invalid && form.get('vacation3StartDate').touched}"
+            >
+            <label for="vacation3StartDate">Дата початку</label>
+            <span 
+              class="helper-text red-text"
+              *ngIf="form.get('vacation3StartDate').invalid && form.get('vacation3StartDate').touched"  
+            >
+              <span *ngIf="form.get('vacation3StartDate').errors['required']">Потрібно вказати дату початку відпустки</span>
+            </span>
+          </div>
+        </div>
+
+
+        <div class="input-field col s6 m6 l6">
+          <div class="input-field">
+            <input 
+              #datePickerEnd3
+              class="datepicker" 
+              type="text"
+              formControlName="vacation3EndDate"
+              [ngClass]="{'invalid': form.get('vacation3EndDate').invalid && form.get('vacation3EndDate').touched}"
+            >
+            <label for="vacation3EndDate">Дата закінчення</label>
+            <span 
+              class="helper-text red-text"
+              *ngIf="form.get('vacation3EndDate').invalid && form.get('vacation3EndDate').touched"  
+            >
+              <span *ngIf="form.get('vacation3EndDate').errors['required']">Потрібно вказати дату закінчення відпустки</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
     <div class="card-action">
       <button 
         type="submit"

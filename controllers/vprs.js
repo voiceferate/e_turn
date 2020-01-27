@@ -34,6 +34,7 @@ module.exports.create = async function(req, res) {
       region: req.body.region,
       name: req.body.name,
       address: req.body.address,
+      vacation: req.body.vacation
     }).save()
     res.status(201).json(vpr)
   } catch (e) {

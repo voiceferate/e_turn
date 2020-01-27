@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { MaterialServise } from 'src/app/shared/classes/material.servise';
+import { MaterialServise, MaterialInstance } from 'src/app/shared/classes/material.servise';
 import { VprsServise } from 'src/app/shared/servises/vprs.servise';
 import { Vpr } from 'src/app/shared/interfaces';
 
@@ -12,23 +12,43 @@ import { Vpr } from 'src/app/shared/interfaces';
   templateUrl: './vprs-form.component.html',
   styleUrls: ['./vprs-form.component.css']
 })
-export class VprsFormComponent implements OnInit {
+export class VprsFormComponent implements OnInit, AfterViewInit {
+
+
+  @ViewChild('datePickerStart1', {static: false}) datePickerStart1Ref: ElementRef
+  @ViewChild('datePickerEnd1', {static: false}) datePickerEnd1Ref: ElementRef
+  @ViewChild('datePickerStart2', {static: false}) datePickerStart2Ref: ElementRef
+  @ViewChild('datePickerEnd2', {static: false}) datePickerEnd2Ref: ElementRef
+  @ViewChild('datePickerStart3', {static: false}) datePickerStart3Ref: ElementRef
+  @ViewChild('datePickerEnd3', {static: false}) datePickerEnd3Ref: ElementRef
 
   form: FormGroup
   isNew = true
   vpr: Vpr
   regionId: string
 
+  datePickerStart1: MaterialInstance
+  datePickerEnd1: MaterialInstance
+  datePickerStart2: MaterialInstance
+  datePickerEnd2: MaterialInstance
+  datePickerStart3: MaterialInstance
+  datePickerEnd3: MaterialInstance
 
   constructor(private route: ActivatedRoute,
               private router: Router,
               private vprService: VprsServise) { }
 
   ngOnInit() {
-    
     this.form = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       address: new FormControl(null, [Validators.required]),
+      vacation1StartDate: new FormControl(null, [Validators.required]),
+      vacation1EndDate: new FormControl(null, [Validators.required]),
+      vacation2StartDate: new FormControl(null, [Validators.required]),
+      vacation2EndDate: new FormControl(null, [Validators.required]),
+      vacation3StartDate: new FormControl(null, [Validators.required]),
+      vacation3EndDate: new FormControl(null, [Validators.required]),
+
       _id: new FormControl()
     })
 
@@ -51,9 +71,17 @@ export class VprsFormComponent implements OnInit {
         vpr => {
           if (vpr) {
             // вносимо отримані дані в форму
+            console.log(vpr)
+
             this.form.patchValue({
               name: vpr.name,
-              address: vpr.address
+              address: vpr.address,
+              vacation1StartDate: vpr.vacation[0].startDate1,
+              vacation1EndDate: vpr.vacation[0].endDate1,
+              vacation2StartDate: vpr.vacation[1].startDate2,
+              vacation2EndDate: vpr.vacation[1].endDate2,
+              vacation3StartDate: vpr.vacation[2].startDate3,
+              vacation3EndDate: vpr.vacation[2].endDate3,
             })
             this.vpr = vpr
             MaterialServise.updateTextInputs()
@@ -64,6 +92,58 @@ export class VprsFormComponent implements OnInit {
           MaterialServise.toast(error.error.message)
         }
       )
+  }
+
+  ngAfterViewInit(): void {
+    this.datePickerStart1 = MaterialServise.initDatePicker(this.datePickerStart1Ref, {
+      onSelect: (date) => {
+        let offset = date.getTimezoneOffset()
+        date = date.setMinutes(date.getMinutes() - offset)
+        this.form.controls.vacation1StartDate.setValue(date)
+        this.datePickerStart1Ref.nativeElement.focus()
+      }
+    })
+    this.datePickerEnd1 = MaterialServise.initDatePicker(this.datePickerEnd1Ref, {
+      onSelect: (date) => {
+        let offset = date.getTimezoneOffset()
+        date = date.setMinutes(date.getMinutes() - offset)
+        this.form.controls.vacation1EndDate.setValue(date)
+        this.datePickerEnd1Ref.nativeElement.focus()
+      }
+    })
+    this.datePickerStart2 = MaterialServise.initDatePicker(this.datePickerStart2Ref, {
+      onSelect: (date) => {
+        let offset = date.getTimezoneOffset()
+        date = date.setMinutes(date.getMinutes() - offset)
+        this.form.controls.vacation2StartDate.setValue(date)
+        this.datePickerStart2Ref.nativeElement.focus()
+      }
+    })
+    this.datePickerEnd2 = MaterialServise.initDatePicker(this.datePickerEnd2Ref, {
+      onSelect: (date) => {
+        let offset = date.getTimezoneOffset()
+        date = date.setMinutes(date.getMinutes() - offset)
+        this.form.controls.vacation2EndDate.setValue(date)
+        this.datePickerEnd2Ref.nativeElement.focus()
+      }
+    })
+    this.datePickerStart3 = MaterialServise.initDatePicker(this.datePickerStart3Ref, {
+      onSelect: (date) => {
+        let offset = date.getTimezoneOffset()
+        date = date.setMinutes(date.getMinutes() - offset)
+        this.form.controls.vacation3StartDate.setValue(date)
+        this.datePickerStart3Ref.nativeElement.focus()
+      }
+    })
+    this.datePickerEnd3 = MaterialServise.initDatePicker(this.datePickerEnd3Ref, {
+      onSelect: (date) => {
+        let offset = date.getTimezoneOffset()
+        date = date.setMinutes(date.getMinutes() - offset)
+        this.form.controls.vacation3EndDate.setValue(date)
+        this.datePickerEnd3Ref.nativeElement.focus()
+      }
+    })
+
   }
   
   onDelete(event: Event) {
@@ -81,7 +161,7 @@ export class VprsFormComponent implements OnInit {
     this.form.disable()
 
     if (this.isNew) {
-      this.vprService.create(this.regionId, this.form.value.name, this.form.value.address)
+      this.vprService.create(this.regionId, this.form.value.name, this.form.value.address, this.form.value.vacation1StartDate, this.form.value.vacation1EndDate, this.form.value.vacation2StartDate, this.form.value.vacation2EndDate, this.form.value.vacation3StartDate, this.form.value.vacation3EndDate)
         .subscribe((vpr) => {
           MaterialServise.toast(`Пункт ${vpr.name}: додано успішно`)
           this.form.reset()
@@ -89,12 +169,11 @@ export class VprsFormComponent implements OnInit {
           this.router.navigate([`/vprs-regions/${this.regionId}/vprs`])
         })
     } else {
-      this.vprService.update(this.vpr._id, this.regionId, this.form.value.name, this.form.value.address)
+      this.vprService.update(this.vpr._id, this.regionId, this.form.value.name, this.form.value.address, this.form.value.vacationStartDate, this.form.value.vacationEndDate)
       .subscribe((vpr) => {
         MaterialServise.toast(`Пункт ${vpr.name}: змінено успішно`)
         this.form.enable()
       })
     }
   }
-
 }

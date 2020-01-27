@@ -14,9 +14,9 @@ const vprSchema = new Schema({
     type: String,
     required: true
   },
-  // vacation: {
-
-  // }
+  vacation: {
+    type: Array,
+  }
   
 })
 
