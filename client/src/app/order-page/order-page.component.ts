@@ -83,6 +83,10 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
       this.onSelectVpr()
       this.clientInfoRefVisible = false
     })
+
+    console.log('minDate:', moment().toDate())
+    console.log('maxDate:', moment().add(31, 'days').toISOString())
+    
   }
 
   ngAfterViewInit(): void {
@@ -106,14 +110,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
     this.regionId = event.region
     this.regionRefVisible = false
     this.regions = event.regions
-    
-    
-
-    // this.regionLoading = true
-    // this.regionServise.getAllActive().subscribe((regions) => {
-    //   this.regions = regions
-    //   this.regionLoading = false
-    // })
   }
 
   onSelectVpr() {
@@ -134,7 +130,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
 
   onSelectDate() {
     if (this.vprId !== '') {
-      if(this.captchaSolved) {
+      // if(this.captchaSolved) {
         const busyDaysArr = []
 
         // this.form.controls.vpr.disable()
@@ -144,6 +140,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
             holidays.forEach(function(el) {
               busyDaysArr.push(el.holiday)
             })
+            // console.log('holidaysServise', busyDaysArr)
           },
           (error) => {
             console.error(error)
@@ -159,6 +156,8 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
                 busyDaysArr.push(newDate.toISOString())
               }
             }
+            // console.log('orderServise', busyDaysArr)
+
           },
           (error) => {
             console.error(error)
@@ -171,59 +170,58 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
         )
 
         this.vprServise.getById(this.vprId).subscribe( (vpr: Vpr) => {
-          console.log(vpr)
-
           if (vpr.vacation.length) {
-            
-            const start = moment(vpr.vacation[0].startDate1)
-            const end = moment(vpr.vacation[0].endDate1)
+            if (vpr.vacation[0].endDate1 !== undefined) {
+              const start1 = moment(vpr.vacation[0].startDate1)
+              const end1 = moment(vpr.vacation[0].endDate1)
 
-          for (let m = moment(start); m.isBefore(end); m.add(1, 'days')) {
-              console.log(m.format('YYYY-MM-DD'));
+              for (let m = moment(start1); m.isBefore(end1); m.add(1, 'days')) {
+                busyDaysArr.push(m.utc().toISOString())
+              }
+            }
+
+            if (vpr.vacation[1].endDate2 !== undefined) {
+              const start2 = moment(vpr.vacation[1].startDate2)
+              const end2 = moment(vpr.vacation[1].endDate2)
+
+              for (let m = moment(start2); m.isBefore(end2); m.add(1, 'days')) {
+                busyDaysArr.push(m.utc().toISOString())
+              }
+            }
+
+            if (vpr.vacation[1].endDate2 !== undefined) {
+              const start3 = moment(vpr.vacation[2].startDate3)
+              const end3 = moment(vpr.vacation[2].endDate3)
+
+              for (let m = moment(start3); m.isBefore(end3); m.add(1, 'days')) {
+                busyDaysArr.push(m.utc().toISOString())
+              }
+            }
           }
-
-            
-          }
-          
-          // for (var m = moment(a); m.isBefore(b); m.add(1, 'days')) {
-          //     console.log(m.format('YYYY-MM-DD'));
-          // }
-
-
-        } )
+        })
   
   
         function disableDays (date) {
   
           let offset = date.getTimezoneOffset()
-  
           date = date.setMinutes(date.getMinutes() - offset)
-  
           date = new Date(date)
-  
           let _date = date.toISOString()
-  
               if (busyDaysArr.includes(_date)) {
                 return true
               }else{
                 return false
               }
-        }
-  
-        const minDate = new Date();
+          }
         
-        //####################   доробити це гавно
-        
-        // let maxDate = new Date()
-        // let _maxDate = (maxDate.setMonth(maxDate.getMonth() + 1)).toString()
-  
-        this.datepicker = MaterialServise.initDatePicker(this.datepickerRef, {
+          this.datepicker = MaterialServise.initDatePicker(this.datepickerRef, {
           // autoClose: true,
           defaultDate: new Date(),
           disableWeekends: true,
           firstDay: 1,
+          minDate: moment().toDate(),
+          maxDate: moment().add(31, 'days').toDate(),
           format: 'dd mmmm yyyy',
-          minDate: minDate,
           onSelect: (date) => {
             let offset = date.getTimezoneOffset()
             date = date.setMinutes(date.getMinutes() - offset)
@@ -288,9 +286,9 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
           }
         })
         this.dateRefVisible = true
-      } else {
-        MaterialServise.toast('Необхідно пройти капчу')
-      }
+      // } else {
+      //   MaterialServise.toast('Необхідно пройти капчу')
+      // }
     } else {
       MaterialServise.toast('Оберіть пункт реєстрації')
     }
