@@ -9,6 +9,7 @@ const orderRoutes = require('./routes/order')
 const regionRoutes = require('./routes/region')
 const vprRoutes = require('./routes/vpr')
 const holidayRoutes = require('./routes/holiday')
+const adminRoutes = require('./routes/admin')
 const recaptchaRoute = require('./routes/recaptcha')
 
 const keys = require('./config/keys')
@@ -38,6 +39,7 @@ app.use('/api/order', orderRoutes)
 app.use('/api/region', regionRoutes)
 app.use('/api/vpr', vprRoutes)
 app.use('/api/holiday', holidayRoutes)
+app.use('/api/admin', adminRoutes)
 app.use('/api/recaptcha', recaptchaRoute)
 
 if (process.env.NODE_ENV === 'production') {
