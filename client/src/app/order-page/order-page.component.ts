@@ -28,7 +28,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   // @Input('onSelectRegionFromMap') onSelectRegionFromMap: any;
 
   @ViewChild('regionRef', {static: false} ) regionRef: ElementRef
-  @ViewChild('vprRef', {static: false} ) vprRef: ElementRef
   @ViewChild('vprCity', {static: false} ) vprCityRef: ElementRef
   @ViewChild('datepicker', {static: false} ) datepickerRef: ElementRef
   @ViewChild('modal', {static: false} ) modalRef: ElementRef
@@ -88,6 +87,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
       this.vprId = value
       this.onSelectVpr()
       this.clientInfoRefVisible = false
+      this.form.controls
     })
   }
 
@@ -303,11 +303,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
     }
   }
 
-  onRunCustom(ev) {
-    console.log(this.onSelectRegionFromMap)
-    console.log(ev)
-  }
-
   onSelectTimePer(timeObj) {
     this.timePeriodNumber = timeObj.periodNumber
     this.form.controls.time.patchValue(timeObj.periodName)
@@ -315,7 +310,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
     this.modal.close()
     this.orderTimeRefVisible = true
   }
-
 
   onSubmit() {
     this.form.disable()
