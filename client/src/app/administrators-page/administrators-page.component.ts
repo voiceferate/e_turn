@@ -1,5 +1,9 @@
+import { AdminService } from './../shared/servises/admin.service';
+import { User } from './../shared/interfaces';
 import { Component, OnInit } from '@angular/core';
 import { AuthServise } from '../shared/servises/auth.servise';
+import { Observable } from 'rxjs';
+import { RegionsServise } from '../shared/servises/regions.servise';
 
 @Component({
   selector: 'app-administrators-page',
@@ -8,10 +12,12 @@ import { AuthServise } from '../shared/servises/auth.servise';
 })
 export class AdministratorsPageComponent implements OnInit {
 
-  constructor(private auth: AuthServise) { }
+  users$: Observable<User[]>
+
+  constructor(private adminService: AdminService) { }
 
   ngOnInit() {
-    console.log(this.auth.getRole())
+    this.users$ = this.adminService.fetch()
   }
 
 }

@@ -1,1 +1,52 @@
-<p>administrators-page works!</p>
+<div class="page-title">
+  <h4>Адміністратори</h4>
+  <button
+    class="waves-effect waves-light light-blue darken-4 btn z-depth-3"
+    routerLink="/administrators/new"
+  >
+  Додати адміна
+  </button>
+</div>
+
+<div 
+  class="row"
+  *ngIf="users$ | async as users; else loader"
+  >
+  <div class="col s12">
+    <div class="collection" *ngIf="users.length !== 0; else empty">
+      <a 
+        class="collection-item blue-text text-darken-2"
+        *ngFor="let user of users"  
+        [routerLink]="['/administrators', user.email]"
+      >
+        {{user.email}}
+        {{user.password}}
+        <span
+          *ngIf="!user.status"
+          class="disabled"
+        >disabled</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- (click)="onSelectRegion(region, $event)" -->
+
+
+
+<ng-template #loader>
+  <app-loader></app-loader>
+</ng-template>
+
+
+<ng-template #empty>
+  <div class="center">
+    <p>Дані відсутні</p>
+  </div>
+</ng-template>
+
+<!-- <div class="modal" #modal>
+  <app-regions-form [outputRegion]="outputRegion"></app-regions-form>
+</div> -->
+
+

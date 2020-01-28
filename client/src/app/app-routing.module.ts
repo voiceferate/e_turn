@@ -1,3 +1,4 @@
+import { AdministratorsFormComponent } from './administrators-page/administrators-form/administrators-form.component';
 import { OrderFormComponent } from './order-page/order-form/order-form.component';
 import { SingleOrderPageComponent } from './order-page/single-order-page/single-order-page.component';
 import { NgModule } from '@angular/core';
@@ -55,6 +56,8 @@ const routes: Routes = [
 
 
       {path: 'administrators', component: AdministratorsPageComponent},
+      {path: 'administrators/new', component: AdministratorsFormComponent},
+      {path: 'administrators/:id', component: AdministratorsFormComponent},
     ]
   },
 

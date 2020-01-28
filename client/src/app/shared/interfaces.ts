@@ -1,7 +1,9 @@
 export interface User {
   email: string,
   password: string,
-  role?: string 
+  role?: string,
+  // todo забрати в статуса опціональність
+  status?: boolean
 }
 
 export interface Region {

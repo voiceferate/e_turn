@@ -32,6 +32,7 @@ import { RegionMapComponent } from './order-page/region-map/region-map.component
 import { DocumentsListPageComponent } from './order-page/documents-list-page/documents-list-page.component';
 import { OrderFormComponent } from './order-page/order-form/order-form.component';
 import { TimePeriodPipe } from './shared/pipes/time-period.pipe';
+import { AdministratorsFormComponent } from './administrators-page/administrators-form/administrators-form.component';
 
 
 
@@ -62,7 +63,8 @@ import { TimePeriodPipe } from './shared/pipes/time-period.pipe';
     RegionMapComponent,
     DocumentsListPageComponent,
     OrderFormComponent,
-    TimePeriodPipe
+    TimePeriodPipe,
+    AdministratorsFormComponent
   ],
   imports: [
     BrowserModule,
