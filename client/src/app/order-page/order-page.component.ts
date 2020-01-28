@@ -1,6 +1,7 @@
+import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { OrderServise } from 'src/app/shared/servises/order.servise';
-import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegionsServise } from '../shared/servises/regions.servise';
 import { Region, Vpr } from '../shared/interfaces';
@@ -15,7 +16,8 @@ import * as moment from 'moment';
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.css']
 })
-export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
+export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+
 
 
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
@@ -53,6 +55,10 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
   timePeriodNumber: number
   private captchaSolved = false
 
+  vSub: Subscription
+  valueChangesVprSub: Subscription
+  valueChangesRegionSub: Subscription
+
 
   constructor(private regionServise: RegionsServise,
               private vprServise: VprsServise,
@@ -72,21 +78,25 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
       time: new FormControl('', [Validators.required]),
     })
 
-    this.form.controls.region.valueChanges.subscribe((value) => {
+    this.valueChangesRegionSub = this.form.controls.region.valueChanges.subscribe((value) => {
       this.regionId = value
       this.vprRefVisible = true
       this.regionRef.nativeElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
     })
 
-    this.form.controls.vpr.valueChanges.subscribe((value) => {
+    this.valueChangesVprSub = this.form.controls.vpr.valueChanges.subscribe((value) => {
       this.vprId = value
       this.onSelectVpr()
       this.clientInfoRefVisible = false
     })
+  }
 
-    console.log('minDate:', moment().toDate())
-    console.log('maxDate:', moment().add(31, 'days').toISOString())
-    
+  ngOnDestroy(): void {
+    this.vSub.unsubscribe()
+    this.valueChangesRegionSub.unsubscribe()
+
+
+    // todo відписатися від усього
   }
 
   ngAfterViewInit(): void {
@@ -119,7 +129,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
 
       this.vprLoading = true
 
-      this.vprServise.fetch(this.regionId).subscribe((vprs) => {
+      this.vSub = this.vprServise.fetch(this.regionId).subscribe((vprs) => {
         this.vprs = vprs
         this.vprLoading = false
       })
@@ -130,17 +140,17 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
 
   onSelectDate() {
     if (this.vprId !== '') {
-      // if(this.captchaSolved) {
-        const busyDaysArr = []
+      if(this.captchaSolved) {
 
-        // this.form.controls.vpr.disable()
+        this.valueChangesVprSub.unsubscribe()
+
+        const busyDaysArr = []
   
         this.holidaysServise.fetch().subscribe(
           (holidays) => {
             holidays.forEach(function(el) {
               busyDaysArr.push(el.holiday)
             })
-            // console.log('holidaysServise', busyDaysArr)
           },
           (error) => {
             console.error(error)
@@ -156,16 +166,9 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
                 busyDaysArr.push(newDate.toISOString())
               }
             }
-            // console.log('orderServise', busyDaysArr)
-
           },
           (error) => {
             console.error(error)
-          },
-          () => {
-            setTimeout(() => {
-              // this.datepicker.open()
-            }, 350)
           }
         )
 
@@ -199,20 +202,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
             }
           }
         })
-  
-  
-        function disableDays (date) {
-  
-          let offset = date.getTimezoneOffset()
-          date = date.setMinutes(date.getMinutes() - offset)
-          date = new Date(date)
-          let _date = date.toISOString()
-              if (busyDaysArr.includes(_date)) {
-                return true
-              }else{
-                return false
-              }
-          }
         
           this.datepicker = MaterialServise.initDatePicker(this.datepickerRef, {
           // autoClose: true,
@@ -225,11 +214,20 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
           onSelect: (date) => {
             let offset = date.getTimezoneOffset()
             date = date.setMinutes(date.getMinutes() - offset)
-    
             this.form.controls['date'].setValue(date)
             MaterialServise.updateTextInputs()
           },
-          disableDayFn: disableDays,
+          disableDayFn: (date) => {
+            let offset = date.getTimezoneOffset()
+            date = date.setMinutes(date.getMinutes() - offset)
+            date = new Date(date)
+            let _date = date.toISOString()
+                if (busyDaysArr.includes(_date)) {
+                  return true
+                }else{
+                  return false
+                }
+            },
           i18n: {
             cancel:	'Відмінити',
             clear:	'Очистити',
@@ -286,9 +284,9 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
           }
         })
         this.dateRefVisible = true
-      // } else {
-      //   MaterialServise.toast('Необхідно пройти капчу')
-      // }
+      } else {
+        MaterialServise.toast('Необхідно пройти капчу')
+      }
     } else {
       MaterialServise.toast('Оберіть пункт реєстрації')
     }
@@ -340,7 +338,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit {
   }
 
   resolved(captchaResponse: string) {
-    console.log(`Resolved captcha with response: ${captchaResponse}`);
+    // console.log(`Resolved captcha with response: ${captchaResponse}`);
 
     this.recaptchaServise.check(captchaResponse).subscribe((resp) => {
       console.log(resp)
