@@ -14,6 +14,10 @@ const userSchema = new Schema({
   role: {
     type: String,
     default: 'ra_admin'
+  },
+  status: {
+    type: Boolean,
+    default: false
   }
 })
 

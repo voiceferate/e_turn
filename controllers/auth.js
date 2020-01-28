@@ -10,26 +10,35 @@ module.exports.login = async function(req, res) {
   const candidate = await User.findOne({email: req.body.email})
 
   if (candidate) {
-    // Проверка пароля, пользователь существует
-    const passwordResult = bcrypt.compareSync(req.body.password, candidate.password)
-    if (passwordResult) {
-      // Генерация токена, пароли совпали
-      const token = jwt.sign({
-        email: candidate.email,
-        userId: candidate._id,
-        role: candidate.role
-      }, keys.jwt, {expiresIn: 60 * 60})
 
-      res.status(200).json({
-        token: `Bearer ${token}`,
-        role: candidate.role
-      })
+    if(candidate.status) {
+      // Проверка пароля, пользователь существует
+      const passwordResult = bcrypt.compareSync(req.body.password, candidate.password)
+      if (passwordResult) {
+
+        // Генерация токена, пароли совпали
+        const token = jwt.sign({
+          email: candidate.email,
+          userId: candidate._id,
+          role: candidate.role
+        }, keys.jwt, {expiresIn: 60 * 60})
+
+        res.status(200).json({
+          token: `Bearer ${token}`,
+          role: candidate.role
+        })
+      } else {
+        // Пароли не совпали
+        res.status(401).json({
+          message: 'Невірний пароль. Спробуйте знову'
+        })
+      }
     } else {
-      // Пароли не совпали
-      res.status(401).json({
-        message: 'Невірний пароль. Спробуйте знову'
+      res.status(451).json({
+        message: 'У доступі відмовлено, зверніться до адміністратора'
       })
     }
+
   } else {
     // Пользователя нет, ошибка
     res.status(404).json({
