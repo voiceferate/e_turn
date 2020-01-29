@@ -92,8 +92,14 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   }
 
   ngOnDestroy(): void {
-    this.vSub.unsubscribe()
-    this.valueChangesRegionSub.unsubscribe()
+    if (this.vSub) {
+      this.vSub.unsubscribe()
+    }
+    if (this.valueChangesRegionSub) {
+      this.valueChangesRegionSub.unsubscribe()
+    }
+
+
 
 
     // todo відписатися від усього
