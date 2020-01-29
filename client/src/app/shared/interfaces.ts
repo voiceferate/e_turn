@@ -1,9 +1,12 @@
 export interface User {
+  _id?: string
   email: string,
   password: string,
   role?: string,
-  // todo забрати в статуса опціональність
-  status?: boolean
+  status: boolean,
+  name: string,
+  vpr: string,
+  secure_id: number
 }
 
 export interface Region {

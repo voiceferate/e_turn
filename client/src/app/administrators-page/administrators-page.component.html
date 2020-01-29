@@ -1,11 +1,5 @@
 <div class="page-title">
   <h4>Адміністратори</h4>
-  <button
-    class="waves-effect waves-light light-blue darken-4 btn z-depth-3"
-    routerLink="/administrators/new"
-  >
-  Додати адміна
-  </button>
 </div>
 
 <div 
@@ -17,10 +11,10 @@
       <a 
         class="collection-item blue-text text-darken-2"
         *ngFor="let user of users"  
-        [routerLink]="['/administrators', user.email]"
+        [routerLink]="['/administrators', user._id]"
       >
         {{user.email}}
-        {{user.password}}
+        {{user.role}}
         <span
           *ngIf="!user.status"
           class="disabled"

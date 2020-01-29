@@ -54,7 +54,6 @@ module.exports.register = async function(req, res) {
   const candidate = await User.findOne({email: req.body.email})
 
   if (candidate) {
-    // Пользователь существует, нужно отправить ошибку
     res.status(409).json({
       message: 'Такий email уже зайняти. Спробуйте інший.'
     })
@@ -65,6 +64,9 @@ module.exports.register = async function(req, res) {
     const user = new User({
       email: req.body.email,
       password: bcrypt.hashSync(password, salt),
+      name: req.body.name,
+      vpr: req.body.vpr,
+      secure_id: req.body.secure_id,
     })
 
     try {

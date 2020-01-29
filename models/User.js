@@ -18,6 +18,18 @@ const userSchema = new Schema({
   status: {
     type: Boolean,
     default: false
+  },
+  name: {
+    type: String,
+    required: true
+  },
+  vpr: {
+    type: String,
+    required: true
+  },
+  secure_id: {
+    type: Number,
+    required: true
   }
 })
 

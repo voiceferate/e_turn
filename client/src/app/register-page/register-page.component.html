@@ -40,6 +40,65 @@
         </span>
       </span>
     </div>
+
+    <div class="input-field">
+      <input 
+        id="vpr"
+        type="text"
+        formControlName="vpr"
+        [ngClass]="{'invalid': form.get('vpr').invalid && form.get('vpr').touched}"
+      >
+      <label for="vpr">Назва ВПРу</label>
+      <span 
+        class="helper-text red-text"
+        *ngIf="form.get('vpr').invalid && form.get('vpr').touched"  
+      >
+        <span *ngIf="form.get('vpr').errors['required']">ВПР не може бути порожнім</span>
+        <span *ngIf="form.get('vpr').errors['minlength'] && form.get('vpr').errors['minlength']['requiredLength']">
+          Поле повиненно бути довше {{form.get('vpr').errors['minlength']['requiredLength']}} символів.
+        </span>
+      </span>
+    </div>
+
+    <div class="input-field">
+      <input 
+        id="secure_id"
+        type="number"
+        formControlName="secure_id"
+        [ngClass]="{'invalid': form.get('secure_id').invalid && form.get('secure_id').touched}"
+      >
+      <label for="secure_id">Серійний номер Кристалу/Алмазу:</label>
+      <span 
+        class="helper-text red-text"
+        *ngIf="form.get('secure_id').invalid && form.get('secure_id').touched"  
+      >
+        <span *ngIf="form.get('secure_id').errors['required']">Серійний номер не може бути порожнім</span>
+        <span *ngIf="form.get('secure_id').errors['pattern']">Поле повинно містити тільки цифри</span>
+        <span *ngIf="form.get('secure_id').errors['minlength'] && form.get('secure_id').errors['minlength']['requiredLength']">
+          Поле повиненно бути довше {{form.get('secure_id').errors['minlength']['requiredLength']}} символів.
+        </span>
+      </span>
+    </div>
+
+    <div class="input-field">
+      <input 
+        id="name"
+        type="text"
+        formControlName="name"
+        [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+      >
+      <label for="name">Прізвище, ім'я:</label>
+      <span 
+        class="helper-text red-text"
+        *ngIf="form.get('name').invalid && form.get('name').touched"  
+      >
+        <span *ngIf="form.get('name').errors['required']">Поле для імені не може бути порожнім</span>
+        <span *ngIf="form.get('name').errors['minlength'] && form.get('name').errors['minlength']['requiredLength']">
+          Поле повиненно бути довше {{form.get('name').errors['minlength']['requiredLength']}} символів.
+        </span>
+      </span>
+    </div>
+    
   </div>
   <div class="card-action">
     <button 

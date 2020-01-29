@@ -17,26 +17,14 @@ module.exports.getAll = async function(req, res) {
   }
 }
 
-module.exports.getAllActive = async function(req, res) {
-  roleChecker.checkRole(req, res)
-
-  try {
-    const regions = await Region
-      .find({active: true})
-      .sort({ name: 1 })
-    res.status(200).json(regions)
-  } catch (e) {
-    errorHandler(res, e)
-  }
-}
 
 module.exports.getById = async function(req, res) {
   try {
     // перевірка права доступу
     roleChecker.checkRole(req, res)
 
-    const region = await Region.findById(req.params.id)
-    res.status(200).json(region)
+    const user = await User.findById(req.params.id)
+    res.status(200).json(user)
   } catch (e) {
     errorHandler(res, e)
   }
@@ -47,49 +35,31 @@ module.exports.remove = async function(req, res) {
     // перевірка права доступу
     roleChecker.checkRole(req, res)
 
-    await Region.findByIdAndRemove({_id: req.params.id})
+    await User.findByIdAndRemove({_id: req.params.id})
     res.status(200).json({
-      message: 'Область видалена.'
+      message: 'Адміністратор видалений.'
     })
   } catch (e) {
     errorHandler(res, e)
   }
 }
 
-module.exports.create = async function(req, res) {
-
-  const region = new Region({
-    name: req.body.name,
-    active: req.body.active,
-  })
-
-  try {
-    // перевірка права доступу
-    roleChecker.checkRole(req, res)
-
-    await region.save()
-    res.status(201).json(region)
-  } catch (e) {
-    errorHandler(res, e)
-  }
-}
 
 module.exports.update = async function(req, res) {
   const updated = {
-    name: req.body.name,
-    active: req.body.active
+    status: req.body.status
   }
 
   try {
     // перевірка права доступу
     roleChecker.checkRole(req, res)
 
-    const region = await Region.findOneAndUpdate(
+    const user = await User.findOneAndUpdate(
       {_id: req.params.id},
       {$set: updated},
       {new: true}
     )
-    res.status(200).json(region)
+    res.status(200).json(user)
   } catch (e) {
     errorHandler(res, e)
   }

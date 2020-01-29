@@ -16,29 +16,17 @@ export class AdminService {
     return this.http.get<User[]>('/api/admin/')
   }
 
-  // getAllActive(): Observable<Region[]> {
-  //   return this.http.get<Region[]>('/api/region/active')
-  // }
+  getById(id: string): Observable<User> {
+    return this.http.get<User>(`/api/admin/${id}`)
+  }
 
-  // getById(id: string): Observable<Region> {
-  //   return this.http.get<Region>(`/api/region/${id}`)
-  // }
-
-  // create(name: string, active: string): Observable<Region> {
-  
-  //   const formData = {'name': name, 'active': active}
+  update(id: string, status: string): Observable<User> {
     
-  //   return this.http.post<Region>('/api/region/', formData)
-  // }
+    const formData = {'id': id, 'status': status}
+    return this.http.patch<User>(`/api/admin/${id}`, formData)
+  }
 
-  // update(id: string, name: string, active: string): Observable<Region> {
-    
-  //   const formData = {'id': id, 'name': name, 'active': active}
-    
-  //   return this.http.patch<Region>(`/api/region/${id}`, formData)
-  // }
-
-  // delete(id: string): Observable<any> {
-  //   return this.http.delete<any>(`/api/region/${id}`)
-  // }
+  delete(id: string): Observable<any> {
+    return this.http.delete<any>(`/api/admin/${id}`)
+  }
 }

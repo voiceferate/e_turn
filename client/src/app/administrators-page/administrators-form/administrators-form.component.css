@@ -1,0 +1,8 @@
+.card-action {
+  display: flex;
+  justify-content: space-between;
+}
+
+.disabled {
+  color: #ef9a9a;
+}
