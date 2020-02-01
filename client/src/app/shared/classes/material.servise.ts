@@ -20,6 +20,10 @@ export class MaterialServise {
     return M.Modal.init(ref.nativeElement)
   }
 
+  static initSidenav(ref: ElementRef,options: object): MaterialInstance {
+    return M.Sidenav.init(ref.nativeElement, options)
+  }
+
   static initDatePicker(ref: ElementRef, options: object): MaterialInstance {
     return M.Datepicker.init(ref.nativeElement, options)
   }

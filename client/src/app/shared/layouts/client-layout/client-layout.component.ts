@@ -11,8 +11,10 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
 
 
   @ViewChild('modal', {static: false} ) modalRef: ElementRef
+  @ViewChild('sidenav', {static: false} ) sidenavRef: ElementRef
   
   modal: MaterialInstance
+  sidenav: MaterialInstance
   modalVisible = false
 
   constructor() { }
@@ -29,6 +31,10 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
     this.modal = MaterialServise.initModal(this.modalRef)
     this.modal.open()
     this.modalVisible = true
+  }
+
+  initSidenav() {
+    this.sidenav = MaterialServise.initSidenav(this.sidenavRef, {})
   }
 
 

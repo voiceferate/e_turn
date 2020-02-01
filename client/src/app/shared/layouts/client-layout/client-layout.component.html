@@ -1,18 +1,44 @@
 <nav>
   <div class="nav-wrapper light-blue lighten-1">
     <a routerLink="/" class="brand-logo">КНЕДП АЦСК ІДД</a>
-
+    <a (click)=initSidenav() data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li>
-        <a href="https://acskidd.gov.ua/">Сайт КНЕДП</a>
+        <a href="https://acskidd.gov.ua/">
+          <i class="material-icons left">account_balance</i>Сайт КНЕДП
+        </a>
       </li>
       <li routerLinkActive="active">
         <!-- <i class="material-icons medium">add</i> -->
-        <a routerLink="/order/client">Перевірка запису в черзі</a>
+        <a routerLink="/order/client">
+          <i class="material-icons left">subtitles</i>Перевірка запису в черзі
+        </a>
       </li>
 
       <li>
-        <a (click)=showDocumentsList()>Перелік документів</a>
+        <a (click)=showDocumentsList()>
+          <i class="material-icons left">dvr</i>Перелік документів
+        </a>
+      </li>
+    </ul>
+
+    <ul #sidenav class="sidenav" id="mobile-demo">
+      <li>
+        <a href="https://acskidd.gov.ua/">
+          <i class="material-icons left">account_balance</i>Сайт КНЕДП
+        </a>
+      </li>
+      <li routerLinkActive="active">
+        <!-- <i class="material-icons medium">add</i> -->
+        <a routerLink="/order/client">
+          <i class="material-icons left">subtitles</i>Перевірка запису в черзі
+        </a>
+      </li>
+
+      <li>
+        <a (click)=showDocumentsList()>
+          <i class="material-icons left">dvr</i>Перелік документів
+        </a>
       </li>
     </ul>
   </div>
