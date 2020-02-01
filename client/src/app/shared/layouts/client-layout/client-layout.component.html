@@ -3,15 +3,14 @@
     <a routerLink="/" class="brand-logo">КНЕДП АЦСК ІДД</a>
 
     <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <a href="https://acskidd.gov.ua/">Сайт КНЕДП</a>
+      </li>
       <li routerLinkActive="active">
         <!-- <i class="material-icons medium">add</i> -->
         <a routerLink="/order/client">Перевірка запису в черзі</a>
       </li>
-      <li 
-        routerLinkActive="active"
-      >
-        <a>Корисна інформація</a>
-      </li>
+
       <li>
         <a (click)=showDocumentsList()>Перелік документів</a>
       </li>

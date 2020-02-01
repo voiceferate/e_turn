@@ -38,9 +38,10 @@ span.card-title{
   margin-bottom: 0px !important;
 }
 
-p.card-panel{
+.card-panel{
   font-weight: 100;
   font-size: 1.1rem;
+  position: relative;
 }
 
 .card-content{
@@ -53,7 +54,15 @@ p.card-panel{
 
 .help-button{
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0px;
+  right: 0px;
+}
+
+.tap-target p{
+  font-size: 0.8rem;
+}
+
+.material-icons.tiny {
+  opacity: .7;
 }
 

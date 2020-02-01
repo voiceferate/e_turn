@@ -161,6 +161,10 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   }
 
   onSelectDate() {
+    this.form.controls.name.markAsTouched()
+    this.form.controls.customer_id_code.markAsTouched()
+    this.form.controls.name.updateValueAndValidity({onlySelf: true})
+    this.form.controls.customer_id_code.updateValueAndValidity({onlySelf: true})
     if (this.vprId !== '') {
       if(this.captchaSolved) {
 

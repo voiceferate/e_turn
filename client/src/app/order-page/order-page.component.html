@@ -51,49 +51,49 @@
           class="help-button"
         >
           <i 
-            data-title="Title"  
-            data-text="text-text"  
-            class="material-icons small"
-          >live_help</i>
+            data-title="Вибір області"  
+            data-text="Оберіть область в якій знаходиться пункт, до якого ви хочете з'явитися. Якщо потрібної області немає в списку значить в даний момент там нема пунктів які обслуговують клієнтів"  
+            class="material-icons tiny"
+          >info</i>
         </div>
       </div>
         
-            <div class="input-field">
-              <p
-                class="card-panel hoverable center-align"
-                [ngClass]="{hidden: !vprRefVisible}"
-                (click)=(onSelectVpr())
-              >
-                Обрати доступний пункт реєстрації
-              </p>
-              <div *ngIf="!vprLoading; else loader">
-                <label [ngClass]="{hidden: vprRefVisible}">Оберіть ВПР зі списку</label>
-                <select 
-                  [ngClass]="{hidden: vprRefVisible}"
-                  formControlName="vpr"
-                  *ngIf="vprs.length !== 0 || vprRefVisible === true; else empty"
-        
-                >
-                  <option 
-                    *ngFor="let vpr of vprs"
-                    [value]="vpr._id"
-                    #vprCity
-                  >
-                  {{vpr.name}}
-                  </option>
-                </select>
-              </div>
-              <div 
-                (click)="openHelperText($event)"
-                class="help-button"
-              >
-                <i 
-                  data-title="other Title"  
-                  data-text="other text-text"  
-                  class="material-icons small"
-                >live_help</i>
-              </div>
-            </div>
+      <div class="input-field">
+        <p
+          class="card-panel hoverable center-align"
+          [ngClass]="{hidden: !vprRefVisible}"
+          (click)=(onSelectVpr())
+        >
+          Обрати доступний пункт реєстрації
+        </p>
+        <div *ngIf="!vprLoading; else loader">
+          <label [ngClass]="{hidden: vprRefVisible}">Оберіть ВПР зі списку</label>
+          <select 
+            [ngClass]="{hidden: vprRefVisible}"
+            formControlName="vpr"
+            *ngIf="vprs.length !== 0 || vprRefVisible === true; else empty"
+  
+          >
+            <option 
+              *ngFor="let vpr of vprs"
+              [value]="vpr._id"
+              #vprCity
+            >
+            {{vpr.name}}
+            </option>
+          </select>
+        </div>
+        <div 
+          (click)="openHelperText($event)"
+          class="help-button"
+        >
+          <i 
+            data-title="Вибір пункту реєстрації"  
+            data-text="Оберіть пункт в який вам зручніше всього завітати. Якщо потрібного пункту реєстрації немає в списку це означає що з певних причин він не працюватиме довгий період часу"  
+            class="material-icons tiny"
+          >info</i>
+        </div>
+      </div>
         
             <div 
               class="clientInfo"
@@ -139,13 +139,23 @@
         
             <re-captcha (resolved)="resolved($event)" siteKey="6LePG9EUAAAAAI1etO6bfExjQdPcORcRiX98x0At"></re-captcha>`
         
-            <p
+            <div
               class="card-panel hoverable center-align"
               [ngClass]="{'hide': dateRefVisible}"
               (click)=(onSelectDate())
             >
               Обрати дату візиту
-            </p>
+              <div 
+                (click)="openHelperText($event)"
+                class="help-button"
+              >
+                <i 
+                  data-title="Вибір дати візиту"  
+                  data-text="В календарі показано доступні для візиту дні. Якщо немає дат, які можна обрати це значить що на 30 днів від сьогодні всі записи зайняті. Якщо в пункті працює більше одного працівника ви можете з'явитися не записуючись в чергу. В такому випадку вам, можливо прийдеться зачекати."  
+                  class="material-icons tiny"
+                >info</i>
+              </div>
+            </div>
         
             <div 
               class="input-field" 
@@ -166,17 +176,28 @@
               >
                 <span *ngIf="form.get('date').errors['required']">Поле date не може бути порожнім</span>
               </span>
+
             </div>
             
             <div 
             class="input-field">
-              <p
+              <div
                 class="card-panel hoverable center-align"
                 [ngClass]="{'hide': orderTimeRefVisible}"
                 (click)=(onSelectTime())
               >
                 Обрати час візиту
-              </p>
+                <div 
+                  (click)="openHelperText($event)"
+                  class="help-button"
+                >
+                  <i 
+                    data-title="Вибір часу візиту"  
+                    data-text="В даному блоці показані доступні періоди часу доступні для запису. Оберіть зручніший для вас"  
+                    class="material-icons tiny"
+                  >info</i>
+                </div>
+              </div>
         
               <div 
                 class="input-field" 
@@ -207,6 +228,7 @@
                   for="date"
                   [ngClass]="{'hide': !orderTimeRefVisible}"
                 >Час відвідування</label>
+                
               </div>
             </div>
         
@@ -264,7 +286,7 @@
   data-target="menu"
 >
   <div class="tap-target-content">
-    <h6>{{helperTextMarkup.title}}</h6>
-    <p>{{helperTextMarkup.text}}</p>
+    <h6 class="right-align">{{helperTextMarkup.title}}</h6>
+    <p class="right-align">{{helperTextMarkup.text}}</p>
   </div>
 </div>
