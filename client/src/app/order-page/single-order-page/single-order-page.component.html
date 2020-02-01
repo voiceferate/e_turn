@@ -13,12 +13,29 @@
     *ngIf="order$ | async as order; else loader"
     >
     <div class="col s12">
-        <ul class="collection">
+        <ul class="collection with-header">
+            <li class="collection-header valign-wrapper">
+              
+              <h5><i class="material-icons ">subtitles</i>Дані про візит</h5>
+            </li>
 
-            <li class="collection-item">Код ЄДРПОУ {{order.customer_id_code}}</li>
-            <li class="collection-item">Назва клієнта {{order.customer_name}}</li>
-            <li class="collection-item">Дата візиту: {{order.date | date: 'dd.MM.yyyy'}}</li>
-            <li class="collection-item">Час візиту: {{order.time_period_number | timePeriod}}</li>
+            <li class="collection-item">
+              <span class="lefted">Код ЄДРПОУ:</span>
+              <strong>{{order.customer_id_code}}</strong>
+            </li>
+            <li class="collection-item">
+              <span class="lefted">Найменування клієнта:</span>
+              <strong>{{order.customer_name}}</strong>
+            </li>
+            <li class="collection-item">
+              <span class="lefted">Дата візиту:</span>
+              <strong>{{order.date | date: 'dd.MM.yyyy'}}</strong>
+            </li>
+            <li class="collection-item">
+              <span class="lefted">Час візиту:</span>
+              <strong>{{order.time_period_number | timePeriod}}</strong>
+            </li>
+            <!-- <strong>{{order}}</strong> -->
 
         </ul>
                  

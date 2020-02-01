@@ -20,6 +20,7 @@ export class DocumentsListPageComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.collapsible = MaterialServise.initCollapsible(this.collapsibleRef, {})
+    this.collapsible.close(0)
   }
 
 }

@@ -6,7 +6,7 @@ export interface MaterialInstance {
   date?: Date
   setDate?(arg0: Date)
   open?(): void,
-  close?(): void,
+  close?(number?): void,
   destroy?(): void
   el: any
 }

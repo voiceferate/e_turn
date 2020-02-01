@@ -1,3 +1,12 @@
 button {
     width: 25%;
 }
+
+i {
+    margin-right: 10px;
+}
+
+.lefted{
+    width: 40%;
+    display: inline-block;
+}
