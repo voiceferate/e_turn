@@ -44,3 +44,8 @@ export interface RegionTooltip {
   top: Number,
   left: Number,
 }
+
+export interface HelperTextMarkup {
+  title: string,
+  text: string,
+}

@@ -20,34 +20,43 @@
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
   >
-          <div class="card-content">
-            <!-- <span class="card-title">Card Title</span> -->
-            <div 
-              class="input-field"
-              #regionRef
-              >
-              <p
-                class="card-panel hoverable center-align"
-                [ngClass]="{hidden: !regionRefVisible}"
-                (click)=(onSelectRegion())
-              >
-                Обрати область
-              </p>
-              <div *ngIf="!regionLoading; else loader">
-                <label [ngClass]="{hidden: regionRefVisible}">Оберіть область зі списку</label>
-                <select 
-                  [ngClass]="{hidden: regionRefVisible}"
-                  formControlName="region"
-                >
-                  <option 
-                    *ngFor="let region of regions"
-                    [value]="region._id"
-                  >
-                    {{region.name}}
-                  </option>
-                </select>
-              </div>
-            </div>
+    <div class="card-content">
+      <div 
+        class="input-field"
+        #regionRef
+        >
+        <p
+          class="card-panel hoverable center-align"
+          [ngClass]="{hidden: !regionRefVisible}"
+          (click)=(onSelectRegion())
+        >
+          Обрати область
+        </p>
+        <div *ngIf="!regionLoading; else loader">
+          <label [ngClass]="{hidden: regionRefVisible}">Оберіть область зі списку</label>
+          <select 
+            [ngClass]="{hidden: regionRefVisible}"
+            formControlName="region"
+          >
+            <option 
+              *ngFor="let region of regions"
+              [value]="region._id"
+            >
+              {{region.name}}
+            </option>
+          </select>
+        </div>
+        <div 
+          (click)="openHelperText($event)"
+          class="help-button"
+        >
+          <i 
+            data-title="Title"  
+            data-text="text-text"  
+            class="material-icons small"
+          >live_help</i>
+        </div>
+      </div>
         
             <div class="input-field">
               <p
@@ -73,6 +82,16 @@
                   {{vpr.name}}
                   </option>
                 </select>
+              </div>
+              <div 
+                (click)="openHelperText($event)"
+                class="help-button"
+              >
+                <i 
+                  data-title="other Title"  
+                  data-text="other text-text"  
+                  class="material-icons small"
+                >live_help</i>
               </div>
             </div>
         
@@ -223,8 +242,8 @@
 
 
 
-</form>
-</div>
+    </form>
+  </div>
 </div>
 
 
@@ -238,3 +257,14 @@
     <p>Дані відсутні</p>
   </div>
 </ng-template>
+
+<div 
+  #tapTarget
+  class="tap-target blue"
+  data-target="menu"
+>
+  <div class="tap-target-content">
+    <h6>{{helperTextMarkup.title}}</h6>
+    <p>{{helperTextMarkup.text}}</p>
+  </div>
+</div>

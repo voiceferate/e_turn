@@ -11,9 +11,7 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
 
 
   @ViewChild('modal', {static: false} ) modalRef: ElementRef
-  @ViewChild('tapTarget', {static: false} ) tapTargetRef: ElementRef
   
-  helperText: MaterialInstance
   modal: MaterialInstance
   modalVisible = false
 
@@ -23,7 +21,7 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.helperText = MaterialServise.initHelperText(this.tapTargetRef, {})
+    // this.helperText = MaterialServise.initHelperText(this.tapTargetRef, {})
   }
 
   showDocumentsList() {
@@ -33,7 +31,5 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
     this.modalVisible = true
   }
 
-  openHelperText() {
-    this.helperText.open()
-  }
+
 }

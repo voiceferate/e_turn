@@ -5,10 +5,9 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li routerLinkActive="active">
         <!-- <i class="material-icons medium">add</i> -->
-        <a routerLink="/order/client">Перевірка стану запису в черзі</a>
+        <a routerLink="/order/client">Перевірка запису в черзі</a>
       </li>
       <li 
-        (click)="openHelperText()"
         routerLinkActive="active"
       >
         <a>Корисна інформація</a>
@@ -22,21 +21,12 @@
 
 
 <div class="fixed-action-btn direction-top" style="bottom: 40px; right: 24px;">
-  <a id="menu" class="btn btn-floating btn-large" >
+  <a id="menu" class="btn btn-floating btn-large blue darken-2" >
     <i class="material-icons">menu</i>
   </a>
 </div>
 
-<div 
-  #tapTarget
-  class="tap-target"
-  data-target="menu"
->
-  <div class="tap-target-content">
-    <h6>Інформація щодо реєстрації в електронній черзі</h6>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel maxime perferendis nostrum vel maxime nemo expedita iusto quam quidem!</p>
-  </div>
-</div>
+
 
 <main class="content">
   <div class="row">

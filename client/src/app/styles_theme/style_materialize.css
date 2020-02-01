@@ -157,13 +157,13 @@ main,footer {
   display: none!important
 }
 
-.tap-target {
+/* .tap-target {
   background-color: #e0e0e0!important
 }
 
 .btn-floating.tap-target-origin {
   background-color: #bdbdbd!important
-}
+} */
 
 .auth-block {
   display: flex;

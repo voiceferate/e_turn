@@ -1,3 +1,5 @@
+import { HelperTextMarkup } from './../shared/interfaces';
+import { HttpEvent } from '@angular/common/http';
 import { MaterialServise } from './../shared/classes/material.servise';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -35,6 +37,8 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   @ViewChild('datepicker', {static: false} ) datepickerRef: ElementRef
   @ViewChild('modal', {static: false} ) modalRef: ElementRef
   @ViewChild('modalPersonalData', {static: false} ) modalPersonalDataRef: ElementRef
+  @ViewChild('tapTarget', {static: false} ) tapTargetRef: ElementRef
+
 
   regionLoading = false
   vprLoading = false
@@ -51,11 +55,15 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   datepicker: MaterialInstance
   modal: MaterialInstance
   modalPersonalData: MaterialInstance
+  helperText: MaterialInstance
+  helperTextMarkup: HelperTextMarkup = {title: '', text: ''}
+
   regionId: string = ''
   vprId: string = ''
   vprCity: string
   timePeriodNumber: number
   private captchaSolved = false
+
 
   vSub: Subscription
   valueChangesVprSub: Subscription
@@ -92,6 +100,9 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
       this.clientInfoRefVisible = false
       this.form.controls
     })
+
+    console.log(this.helperTextMarkup)
+
   }
 
   ngOnDestroy(): void {
@@ -109,9 +120,9 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   }
 
   ngAfterViewInit(): void {
-    // throw new Error("Method not implemented.");
-
+    this.helperText = MaterialServise.initHelperText(this.tapTargetRef, {})
   }
+
 
   onSelectRegion() {
 
@@ -355,6 +366,15 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
     console.log('init')
     this.modalPersonalData = MaterialServise.initModal(this.modalPersonalDataRef)
     this.modalPersonalData.open()
+  }
+
+  openHelperText(event) {
+    // const target: HTMLElement = event.target
+    console.log(event.srcElement.dataset)
+    this.helperTextMarkup.title = event.srcElement.dataset.title
+    this.helperTextMarkup.text = event.srcElement.dataset.text
+    
+    this.helperText.open()
   }
 
 
