@@ -23,3 +23,25 @@ option{
 }
 
 
+form.card {
+  margin-top: 1.5rem
+}
+
+span.card-title{
+  font-weight: 100;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+  margin-bottom: 21px !important;
+  line-height: 45px !important;
+}
+
+p.card-panel{
+  font-weight: 100;
+  font-size: 1.2rem;
+}
+
+.card-content{
+  background-color: rgba(50, 62, 82, 0.02);
+}
+

@@ -1,4 +1,12 @@
 @import "~materialize-css/dist/css/materialize.min.css";
-@import "./app/styles_theme/style_materialize.css"
+@import "./app/styles_theme/style_materialize.css";
+
+body {
+ background: url(./assets/what-the-hex.png);
+}
+
+.svg-map-wrap{
+  padding: 1rem;
+}
 
 

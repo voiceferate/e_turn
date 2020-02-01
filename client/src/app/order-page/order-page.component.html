@@ -13,6 +13,7 @@
         >
     </div>
 
+
     <div 
       class="input-field"
       #regionRef
@@ -28,7 +29,6 @@
         <label [ngClass]="{hidden: regionRefVisible}">Оберіть область зі списку</label>
         <select 
           [ngClass]="{hidden: regionRefVisible}"
-          
           formControlName="region"
         >
           <option 
@@ -105,6 +105,7 @@
           class="helper-text red-text"
           *ngIf="form.get('customer_id_code').invalid && form.get('customer_id_code').touched"  
         >
+          <span *ngIf="form.get('customer_id_code').errors['pattern']">Поле повинно містити тільки цифри</span>
           <span *ngIf="form.get('customer_id_code').errors['required']">Поле customer_id_code не може бути порожнім</span>
           <span *ngIf="form.get('customer_id_code').errors['minlength']">Поле customer_id_code повинно містити від 8 до 10 цифр</span>
         </span>
@@ -183,19 +184,6 @@
         >Час відвідування</label>
       </div>
     </div>
-
-
-    <!-- <div 
-    class="input-field">
-      <p
-        class="card-panel hoverable center-align"
-        (click)=(onRunCustom())
-      >
-        Запустити
-      </p>
-    </div> -->
-    
-
   </div>
 
   <div 

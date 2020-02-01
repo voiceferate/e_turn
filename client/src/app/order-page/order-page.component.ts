@@ -1,3 +1,4 @@
+import { MaterialServise } from './../shared/classes/material.servise';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { OrderServise } from 'src/app/shared/servises/order.servise';
@@ -5,7 +6,7 @@ import { Component, OnInit, ViewChild, ElementRef, OnChanges, Input, AfterViewIn
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RegionsServise } from '../shared/servises/regions.servise';
 import { Region, Vpr } from '../shared/interfaces';
-import { MaterialInstance, MaterialServise } from '../shared/classes/material.servise';
+import { MaterialInstance } from '../shared/classes/material.servise';
 import { VprsServise } from '../shared/servises/vprs.servise';
 import { HolidaysServise } from '../shared/servises/holidays.servise';
 import { RecaptchaServise } from '../shared/servises/recaptcha.servise';
@@ -27,6 +28,8 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   @Input('onSelect') onSelect: string;
   // @Input('onSelectRegionFromMap') onSelectRegionFromMap: any;
 
+
+  
   @ViewChild('regionRef', {static: false} ) regionRef: ElementRef
   @ViewChild('vprCity', {static: false} ) vprCityRef: ElementRef
   @ViewChild('datepicker', {static: false} ) datepickerRef: ElementRef
@@ -72,7 +75,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
       region: new FormControl(null, [Validators.required]),
       vpr: new FormControl(null, [Validators.required]),
       name: new FormControl('', [Validators.required]),
-      customer_id_code: new FormControl('', [Validators.required]),
+      customer_id_code: new FormControl('', [Validators.required, Validators.pattern('^[0-9]*$')]),
       date: new FormControl('', [Validators.required]),
       time: new FormControl('', [Validators.required]),
     })
@@ -107,9 +110,11 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
 
   ngAfterViewInit(): void {
     // throw new Error("Method not implemented.");
+
   }
 
   onSelectRegion() {
+
     this.regionRefVisible = false
     this.regionLoading = true
     this.regionServise.getAllActive().subscribe((regions) => {
