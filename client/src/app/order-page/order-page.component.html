@@ -1,220 +1,231 @@
-  <form 
-  class="card"
-  [formGroup]="form"
-  (ngSubmit)="onSubmit()"
-  >
+<div class="card">
   <div class="card-content">
     <span class="card-title">Реєстрація в електронній черзі</span>
-    
-    <div class="card svg-map">
-      <app-region-map
-        (onSelectRegionFromMap) = "onSelectRegionFromMap($event)"
-      ></app-region-map
-        >
-    </div>
-
-
-    <div 
-      class="input-field"
-      #regionRef
-      >
-      <p
-        class="card-panel hoverable center-align"
-        [ngClass]="{hidden: !regionRefVisible}"
-        (click)=(onSelectRegion())
-      >
-        Обрати область
-      </p>
-      <div *ngIf="!regionLoading; else loader">
-        <label [ngClass]="{hidden: regionRefVisible}">Оберіть область зі списку</label>
-        <select 
-          [ngClass]="{hidden: regionRefVisible}"
-          formControlName="region"
-        >
-          <option 
-            class="blue-text text-darken-2" 
-            *ngFor="let region of regions"
-            [value]="region._id"
-          >
-            {{region.name}}
-          </option>
-        </select>
-      </div>
-    </div>
-
-    <div class="input-field">
-      <p
-        class="card-panel hoverable center-align"
-        [ngClass]="{hidden: !vprRefVisible}"
-        (click)=(onSelectVpr())
-      >
-        Обрати доступний пункт реєстрації
-      </p>
-      <div *ngIf="!vprLoading; else loader">
-        <label [ngClass]="{hidden: vprRefVisible}">Оберіть ВПР зі списку</label>
-        <select 
-          [ngClass]="{hidden: vprRefVisible}"
-          formControlName="vpr"
-          *ngIf="vprs.length !== 0 || vprRefVisible === true; else empty"
-
-        >
-          <option 
-            class="blue-text text-darken-2" 
-            *ngFor="let vpr of vprs"
-            [value]="vpr._id"
-            #vprCity
-          >
-          {{vpr.name}}
-          </option>
-        </select>
-      </div>
-    </div>
-
-    <div 
-      class="clientInfo"
-      [ngClass]="{hidden: clientInfoRefVisible}"
-    >
-      <div class="input-field">
-        <input 
-          id="name"
-          type="text"
-          formControlName="name"
-          [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
-        >
-        <label for="name">Назва установи чи ПІБ ФОП:</label>
-        <span 
-          class="helper-text red-text"
-          *ngIf="form.get('name').invalid && form.get('name').touched"  
-        >
-          <span *ngIf="form.get('name').errors['required']">Поле name не може бути порожнім</span>
-        </span>
-      </div>
-
-      <div class="input-field">
-        <input 
-          ng-model
-          id="customer_id_code"
-          type="text"
-          formControlName="customer_id_code"
-          maxlength="10"
-          minlength="8"
-          [ngClass]="{'invalid': form.get('customer_id_code').invalid && form.get('customer_id_code').touched}"
-        >
-        <label for="customer_id_code">Код ЄДРПОУ або РКНОКПП:</label>
-        <span 
-          class="helper-text red-text"
-          *ngIf="form.get('customer_id_code').invalid && form.get('customer_id_code').touched"  
-        >
-          <span *ngIf="form.get('customer_id_code').errors['pattern']">Поле повинно містити тільки цифри</span>
-          <span *ngIf="form.get('customer_id_code').errors['required']">Поле customer_id_code не може бути порожнім</span>
-          <span *ngIf="form.get('customer_id_code').errors['minlength']">Поле customer_id_code повинно містити від 8 до 10 цифр</span>
-        </span>
-      </div>
-    </div>
-
-    <re-captcha (resolved)="resolved($event)" siteKey="6LePG9EUAAAAAI1etO6bfExjQdPcORcRiX98x0At"></re-captcha>`
-
-    <p
-      class="card-panel hoverable center-align"
-      [ngClass]="{'hide': dateRefVisible}"
-      (click)=(onSelectDate())
-    >
-      Обрати дату візиту
-    </p>
-
-    <div 
-      class="input-field" 
-      [ngClass]="{'hide': !dateRefVisible}"
-    >
-      <input
-        #datepicker
-        class="datepicker" 
-        id="date"
-        type="text"
-        formControlName="date"
-        [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
-      >
-      <label for="date">Дата</label>
-      <span 
-        class="helper-text red-text"
-        *ngIf="form.get('date').invalid && form.get('date').touched"  
-      >
-        <span *ngIf="form.get('date').errors['required']">Поле date не може бути порожнім</span>
-      </span>
-    </div>
-    
-    <div 
-    class="input-field">
-      <p
-        class="card-panel hoverable center-align"
-        [ngClass]="{'hide': orderTimeRefVisible}"
-        (click)=(onSelectTime())
-      >
-        Обрати час візиту
-      </p>
-
-      <div 
-        class="input-field" 
-      >
-        <div #modal class="modal">
-          <div 
-            class="modal-content"
-            *ngIf="modalInstanse"
-            >
-            <app-time-select-page
-              [vprId]="vprId"
-              [vpr]="vprCity"
-              [date]="form.controls.date.value" 
-              (onSelectTimePeriod)="onSelectTimePer($event)"
-            >
-            </app-time-select-page>
-            </div>
-        </div>
-
-        <input
-          (click)=(onSelectTime())
-          type="text"
-          [ngClass]="{'hide': !orderTimeRefVisible}"
-          formControlName="time"
-          [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
-        >
-        <label 
-          for="date"
-          [ngClass]="{'hide': !orderTimeRefVisible}"
-        >Час відвідування</label>
-      </div>
-    </div>
   </div>
+</div>
 
-  <div 
-    *ngIf="!form.invalid || form.disabled"
-    class="card-action personal-data"
+
+<div class="card sg-map">
+  <app-region-map
+    (onSelectRegionFromMap) = "onSelectRegionFromMap($event)"
+  ></app-region-map
+    >
+</div>
+
+<div class="row">
+  <div class="col s12 m6 offset-m3">
+
+  <form 
+    class="card"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
   >
-    <p class="blue-text text-accent-1">Натискаючи кнопку "Зареєструватися" ви надаєте згоду на збір, обробку та використання персональних даних.</p>
-    <a 
-      (click)="showModal()"
-      class="blue-text text-accent-3"
-    >Згода-повідомлення суб'єкта персональних даних на обробку та передачу його персональних даних</a>
-  </div>
+          <div class="card-content">
+            <!-- <span class="card-title">Card Title</span> -->
+            <div 
+              class="input-field"
+              #regionRef
+              >
+              <p
+                class="card-panel hoverable center-align"
+                [ngClass]="{hidden: !regionRefVisible}"
+                (click)=(onSelectRegion())
+              >
+                Обрати область
+              </p>
+              <div *ngIf="!regionLoading; else loader">
+                <label [ngClass]="{hidden: regionRefVisible}">Оберіть область зі списку</label>
+                <select 
+                  [ngClass]="{hidden: regionRefVisible}"
+                  formControlName="region"
+                >
+                  <option 
+                    *ngFor="let region of regions"
+                    [value]="region._id"
+                  >
+                    {{region.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+        
+            <div class="input-field">
+              <p
+                class="card-panel hoverable center-align"
+                [ngClass]="{hidden: !vprRefVisible}"
+                (click)=(onSelectVpr())
+              >
+                Обрати доступний пункт реєстрації
+              </p>
+              <div *ngIf="!vprLoading; else loader">
+                <label [ngClass]="{hidden: vprRefVisible}">Оберіть ВПР зі списку</label>
+                <select 
+                  [ngClass]="{hidden: vprRefVisible}"
+                  formControlName="vpr"
+                  *ngIf="vprs.length !== 0 || vprRefVisible === true; else empty"
+        
+                >
+                  <option 
+                    *ngFor="let vpr of vprs"
+                    [value]="vpr._id"
+                    #vprCity
+                  >
+                  {{vpr.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+        
+            <div 
+              class="clientInfo"
+              [ngClass]="{hidden: clientInfoRefVisible}"
+            >
+              <div class="input-field">
+                <input 
+                  id="name"
+                  type="text"
+                  formControlName="name"
+                  [ngClass]="{'invalid': form.get('name').invalid && form.get('name').touched}"
+                >
+                <label for="name">Назва установи чи ПІБ ФОП:</label>
+                <span 
+                  class="helper-text red-text"
+                  *ngIf="form.get('name').invalid && form.get('name').touched"  
+                >
+                  <span *ngIf="form.get('name').errors['required']">Поле name не може бути порожнім</span>
+                </span>
+              </div>
+        
+              <div class="input-field">
+                <input 
+                  ng-model
+                  id="customer_id_code"
+                  type="text"
+                  formControlName="customer_id_code"
+                  maxlength="10"
+                  minlength="8"
+                  [ngClass]="{'invalid': form.get('customer_id_code').invalid && form.get('customer_id_code').touched}"
+                >
+                <label for="customer_id_code">Код ЄДРПОУ або РКНОКПП:</label>
+                <span 
+                  class="helper-text red-text"
+                  *ngIf="form.get('customer_id_code').invalid && form.get('customer_id_code').touched"  
+                >
+                  <span *ngIf="form.get('customer_id_code').errors['pattern']">Поле повинно містити тільки цифри</span>
+                  <span *ngIf="form.get('customer_id_code').errors['required']">Поле customer_id_code не може бути порожнім</span>
+                  <span *ngIf="form.get('customer_id_code').errors['minlength']">Поле customer_id_code повинно містити від 8 до 10 цифр</span>
+                </span>
+              </div>
+            </div>
+        
+            <re-captcha (resolved)="resolved($event)" siteKey="6LePG9EUAAAAAI1etO6bfExjQdPcORcRiX98x0At"></re-captcha>`
+        
+            <p
+              class="card-panel hoverable center-align"
+              [ngClass]="{'hide': dateRefVisible}"
+              (click)=(onSelectDate())
+            >
+              Обрати дату візиту
+            </p>
+        
+            <div 
+              class="input-field" 
+              [ngClass]="{'hide': !dateRefVisible}"
+            >
+              <input
+                #datepicker
+                class="datepicker" 
+                id="date"
+                type="text"
+                formControlName="date"
+                [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
+              >
+              <label for="date">Дата</label>
+              <span 
+                class="helper-text red-text"
+                *ngIf="form.get('date').invalid && form.get('date').touched"  
+              >
+                <span *ngIf="form.get('date').errors['required']">Поле date не може бути порожнім</span>
+              </span>
+            </div>
+            
+            <div 
+            class="input-field">
+              <p
+                class="card-panel hoverable center-align"
+                [ngClass]="{'hide': orderTimeRefVisible}"
+                (click)=(onSelectTime())
+              >
+                Обрати час візиту
+              </p>
+        
+              <div 
+                class="input-field" 
+              >
+                <div #modal class="modal">
+                  <div 
+                    class="modal-content"
+                    *ngIf="modalInstanse"
+                    >
+                    <app-time-select-page
+                      [vprId]="vprId"
+                      [vpr]="vprCity"
+                      [date]="form.controls.date.value" 
+                      (onSelectTimePeriod)="onSelectTimePer($event)"
+                    >
+                    </app-time-select-page>
+                    </div>
+                </div>
+        
+                <input
+                  (click)=(onSelectTime())
+                  type="text"
+                  [ngClass]="{'hide': !orderTimeRefVisible}"
+                  formControlName="time"
+                  [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
+                >
+                <label 
+                  for="date"
+                  [ngClass]="{'hide': !orderTimeRefVisible}"
+                >Час відвідування</label>
+              </div>
+            </div>
+        
+          <div 
+            *ngIf="!form.invalid || form.disabled"
+            class="card-action personal-data"
+          >
+            <p class="blue-text text-accent-1">Натискаючи кнопку "Зареєструватися" ви надаєте згоду на збір, обробку та використання персональних даних.</p>
+            <a 
+              (click)="showModal()"
+              class="blue-text text-accent-3"
+            >Згода-повідомлення суб'єкта персональних даних на обробку та передачу його персональних даних</a>
+          </div>
+        
+          <div #modalPersonalData class="modal">
+            <div 
+              class="modal-content"
+              >
+              <h5>Згода-повідомлення суб'єкта персональних даних на обробку та передачу його персональних даних</h5>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates aliquid sunt possimus? Quo commodi repellat consequuntur dolorem error facilis eius perspiciatis sint voluptatum! Quae magni qui vel? Aliquam, neque molestias?</p>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates aliquid sunt possimus? Quo commodi repellat consequuntur dolorem error facilis eius perspiciatis sint voluptatum! Quae magni qui vel? Aliquam, neque molestias?</p>
+              </div>
+          </div>
+        
+          <div class="card-action center-align">
+            <button 
+              type="submit"
+              [disabled]="form.invalid || form.disabled"
+              class="modal-action btn light-blue darken-4 waves-effect"
+            >Зареєструватися</button>
+          </div>
+          </div>
 
-  <div #modalPersonalData class="modal">
-    <div 
-      class="modal-content"
-      >
-      <h5>Згода-повідомлення суб'єкта персональних даних на обробку та передачу його персональних даних</h5>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates aliquid sunt possimus? Quo commodi repellat consequuntur dolorem error facilis eius perspiciatis sint voluptatum! Quae magni qui vel? Aliquam, neque molestias?</p>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates aliquid sunt possimus? Quo commodi repellat consequuntur dolorem error facilis eius perspiciatis sint voluptatum! Quae magni qui vel? Aliquam, neque molestias?</p>
-      </div>
-  </div>
 
-  <div class="card-action">
-    <button 
-      type="submit"
-      [disabled]="form.invalid || form.disabled"
-      class="modal-action btn light-blue darken-4 waves-effect"
-    >Зареєструватися</button>
-  </div>
+
 </form>
+</div>
+</div>
 
 
 <ng-template #loader>

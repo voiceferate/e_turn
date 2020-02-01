@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  min-height: calc(100vh - 200px);
+  justify-content: center;
+  align-items: center;
+  min-width: 500px;
+}
+
+form{
+  width: 100%;
+}

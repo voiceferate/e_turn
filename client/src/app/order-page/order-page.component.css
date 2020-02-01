@@ -22,26 +22,32 @@ option{
   cursor: pointer;
 }
 
+:host>.card{
+  margin-top: 1.5rem;
+}
 
 form.card {
-  margin-top: 1.5rem
+  margin-top: 1.5rem;
+  background-color: rgba(0,0,0, .05);
 }
 
 span.card-title{
   font-weight: 100;
   text-align: center;
   text-transform: uppercase;
-  font-size: 2.2rem;
-  margin-bottom: 21px !important;
-  line-height: 45px !important;
+  margin-bottom: 0px !important;
 }
 
 p.card-panel{
   font-weight: 100;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .card-content{
-  background-color: rgba(50, 62, 82, 0.02);
+  background-color: rgba(262, 262, 262, 0.7);
+}
+
+.input-field{
+  cursor: pointer;
 }
 
