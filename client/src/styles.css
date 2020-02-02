@@ -9,10 +9,41 @@ body {
   padding: 1rem;
 }
 
+.sidenav{
+  width: 280px !important;
+}
+.sidenav li>a{
+  padding: 0 15px;
+}
+
 /* main.content{
   min-height: calc(100vh-50px);
   display: flex;
   justify-content: center;
   align-items: center;
 } */
+
+@media only screen and (max-width: 600px) {
+  .row .col{
+    padding: 0 .5rem;
+  }
+
+  .card .card-content{
+    padding: 0 .5rem;
+  }
+
+  nav .brand-logo{
+    font-size: 1.3rem;  
+  }
+
+  .card .card-title{
+    font-size: 1.2rem;
+    min-height: 4rem;
+    line-height: 4rem !important;
+  }
+
+  .collection .collection-item{
+    padding-bottom: 5px;
+  }
+}
 

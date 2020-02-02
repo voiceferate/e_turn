@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router, RouterEvent, NavigationEnd } from '@angular/router';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MaterialInstance, MaterialServise } from '../../classes/material.servise';
 
@@ -17,9 +18,18 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
   sidenav: MaterialInstance
   modalVisible = false
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute,
+              private router: Router           
+    ) { }
 
   ngOnInit() {
+    this.router.events.subscribe( (val: RouterEvent) => {
+      if (val instanceof NavigationEnd) {
+        if (this.sidenav) {
+          this.sidenav.destroy()
+        }
+      }
+    } )
   }
 
   ngAfterViewInit(): void {

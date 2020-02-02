@@ -14,3 +14,10 @@
 .row {
     margin-bottom: 0px;
 }
+
+@media only screen and (max-width: 600px) {
+    .card-action{
+        height: auto;
+    }
+  }
+  

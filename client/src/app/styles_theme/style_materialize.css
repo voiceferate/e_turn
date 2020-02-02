@@ -175,10 +175,10 @@ main,footer {
 .auth-block .card {
   width: 400px
 }
-
+/* 
 .nav-wrapper {
   padding-left: 20px
-}
+} */
 
 .collection-item-icon {
   display: flex!important;
@@ -209,4 +209,11 @@ main,footer {
 
 .pb3 {
   padding-bottom: 30px
+}
+
+
+@media only screen and (max-width: 600px) {
+  .content {
+    padding: 0 0
+  }
 }

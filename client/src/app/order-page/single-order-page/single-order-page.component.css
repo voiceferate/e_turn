@@ -10,3 +10,13 @@ i {
     width: 40%;
     display: inline-block;
 }
+
+@media only screen and (max-width: 600px) {
+    .page-title{
+        flex-direction: column-reverse;
+    }
+    button {
+        width: 50%;
+    }
+
+}

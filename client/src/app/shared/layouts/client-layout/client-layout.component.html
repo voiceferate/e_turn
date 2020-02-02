@@ -23,13 +23,20 @@
     </ul>
 
     <ul #sidenav class="sidenav" id="mobile-demo">
+
+      <li routerLinkActive="active">
+        <a routerLink="/">
+          <i class="material-icons left">home</i>Головна
+        </a>
+      </li>
+      
       <li>
         <a href="https://acskidd.gov.ua/">
           <i class="material-icons left">account_balance</i>Сайт КНЕДП
         </a>
       </li>
+
       <li routerLinkActive="active">
-        <!-- <i class="material-icons medium">add</i> -->
         <a routerLink="/order/client">
           <i class="material-icons left">subtitles</i>Перевірка запису в черзі
         </a>
@@ -40,6 +47,7 @@
           <i class="material-icons left">dvr</i>Перелік документів
         </a>
       </li>
+
     </ul>
   </div>
 </nav>
