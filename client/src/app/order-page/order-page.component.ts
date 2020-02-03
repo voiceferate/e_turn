@@ -28,7 +28,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   }
 
   @Input('onSelect') onSelect: string;
-  // @Input('onSelectRegionFromMap') onSelectRegionFromMap: any;
 
 
   
@@ -321,7 +320,12 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   onSelectTime() {
     if (this.form.controls.date.valid) {
       this.modal = MaterialServise.initModal(this.modalRef)
-      this.vprCity = this.vprCityRef.nativeElement.text
+      this.vprs.forEach(element => {
+        if (element._id === this.vprId) {
+          this.vprCity = element.name
+        }
+      });
+
       this.modalInstanse = true
       this.modal.open()
     } else {
@@ -379,6 +383,12 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
     this.helperTextMarkup.text = event.srcElement.dataset.text
     
     this.helperText.open()
+  }
+
+  runC() {
+    // this.vprs.find(this.form.controls.vpr.value)
+    console.log(this.vprs)
+
   }
 
 
