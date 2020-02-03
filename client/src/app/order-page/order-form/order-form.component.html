@@ -42,17 +42,22 @@
   <div
     *ngIf="orders$ | async as orders; else loader"
   >
-  <div class="collection" *ngIf="orders.length !== 0; else empty">
+  <div class="collection blue-grey lighten-5" *ngIf="orders.length !== 0; else empty">
     <ul>
+      <li class="collection-header center-align"><h5>Перелік записів в черзі</h5></li>
+
       <li
-      *ngFor="let order of orders"  
+        *ngFor="let order of orders"  
       >
         <a 
+          class="collection-item blue-grey-text text-darken-4"
           [routerLink]="['/order', order._id]"
-        >{{order.customer_id_code}}
+        >
+          <span class="f_col">{{order.date | date: "dd.MM.yyyy"}} | </span>  
+          <span class="f_col">{{order.time_period_number | timePeriod}} | </span>  
+          <span class="t_col">{{order.customer_id_code}} | </span>
+          <span class="t_col">{{order.customer_name}}</span>
         </a>
-        {{order.customer_name}}
-        
       </li>
     </ul>
   </div>
