@@ -1,5 +1,4 @@
 import { HelperTextMarkup } from './../shared/interfaces';
-import { HttpEvent } from '@angular/common/http';
 import { MaterialServise } from './../shared/classes/material.servise';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -26,9 +25,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
     console.log(changes)
   }
-
-  @Input('onSelect') onSelect: string;
-
 
   
   @ViewChild('regionRef', {static: false} ) regionRef: ElementRef
@@ -99,9 +95,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
       this.clientInfoRefVisible = false
       this.form.controls
     })
-
-    console.log(this.helperTextMarkup)
-
   }
 
   ngOnDestroy(): void {
@@ -145,7 +138,6 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
 
   onSelectVpr() {
     if (this.regionId !== '') {
-      // this.form.controls.region.disable()
       this.vprRefVisible = false
 
       this.vprLoading = true
@@ -324,8 +316,7 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
         if (element._id === this.vprId) {
           this.vprCity = element.name
         }
-      });
-
+      })
       this.modalInstanse = true
       this.modal.open()
     } else {
@@ -365,23 +356,18 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
     // console.log(`Resolved captcha with response: ${captchaResponse}`);
 
     this.recaptchaServise.check(captchaResponse).subscribe((resp) => {
-      console.log(resp)
       this.captchaSolved = true
     })
   }
 
   showModal() {
-    console.log('init')
     this.modalPersonalData = MaterialServise.initModal(this.modalPersonalDataRef)
     this.modalPersonalData.open()
   }
 
   openHelperText(event) {
-    // const target: HTMLElement = event.target
-    console.log(event.srcElement.dataset)
     this.helperTextMarkup.title = event.srcElement.dataset.title
     this.helperTextMarkup.text = event.srcElement.dataset.text
-    
     this.helperText.open()
   }
 
