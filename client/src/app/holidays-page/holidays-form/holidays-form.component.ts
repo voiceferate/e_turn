@@ -32,13 +32,6 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
 ) { }
 
 
-  // ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-  //   console.log('change', changes)
-
-  //   // this.datepickerRef.nativeElement.trigger('input')
-  //   // MaterialServise.updateTextInputs()
-  // }
-
   ngAfterViewInit() {
     this.datepicker = MaterialServise.initDatePicker(this.datepickerRef, {
       // autoClose: true,
@@ -131,7 +124,6 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
       .subscribe(
         holiday => {
           if (holiday) {
-            console.log(holiday)
             this.form.patchValue({
               holiday_name: holiday.holiday_name,
               holiday: holiday.holiday
@@ -151,7 +143,6 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
     event.preventDefault()
     this.holidaysServise.delete(this.holiday._id)
       .subscribe((res) => {
-        console.log(res)
         MaterialServise.toast(res.message)
         
         this.form.enable()
@@ -162,7 +153,6 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
 
 
   onSubmit() {
-    console.log(this.isNew)
     this.form.disable()
 
     if (this.isNew) {
@@ -174,8 +164,6 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
           this.router.navigate(['/holidays'])
         })
     } else {
-      console.log('updated')
-      console.log(this.holiday._id, this.form.value.holiday, this.form.value.holiday_name)
       this.holidaysServise.update(this.holiday._id, this.form.value.holiday, this.form.value.holiday_name)
       .subscribe((holiday) => {
         MaterialServise.toast(`Дату ${holiday.holiday}: змінено успішно`)
@@ -183,9 +171,4 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
       })
     }
   }
-
-  // onFocus() {
-  //   console.log()
-  //   // this.datepicker.open()
-  // }
 }

@@ -20,7 +20,6 @@ export class DashboardPageComponent implements OnInit {
   }
 
   selectRegion(regionId) {
-    console.log('select', regionId)
     this.selectedRegion = regionId
   }
 

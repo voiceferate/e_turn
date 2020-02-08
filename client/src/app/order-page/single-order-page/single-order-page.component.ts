@@ -18,7 +18,6 @@ export class SingleOrderPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe( (params) => {
-      console.log('id', params)
 
       this.order$ = this.orderServise.getById(params.id)
 

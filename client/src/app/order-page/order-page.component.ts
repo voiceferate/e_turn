@@ -18,13 +18,7 @@ import * as moment from 'moment';
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.css']
 })
-export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-
-
-
-  ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-    console.log(changes)
-  }
+export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   
   @ViewChild('regionRef', {static: false} ) regionRef: ElementRef
@@ -370,16 +364,5 @@ export class OrderPageComponent implements OnInit, OnChanges, AfterViewInit, OnD
     this.helperTextMarkup.text = event.srcElement.dataset.text
     this.helperText.open()
   }
-
-  runC() {
-    // this.vprs.find(this.form.controls.vpr.value)
-    console.log(this.vprs)
-
-  }
-
-
-
-
-  
 
 }

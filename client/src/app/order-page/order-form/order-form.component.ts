@@ -27,16 +27,9 @@ export class OrderFormComponent implements OnInit {
     })
   }
 
-  // ngAfterViewInit(): void {
-  //   console.log(this.resultsRef.classList.value)
-  // }
-
   onSubmit() {
     this.orders$ = this.orderServise.getByClientCode(this.form.value.customer_id_code)
-    
-    console.log('this.resultsRef.classList.value', this.resultsRef.nativeElement.classList.value)
     this.resultsRef.nativeElement.classList.remove('hide')
-    // this.resultsRef.classList.remove('hide')
   }
 
 }

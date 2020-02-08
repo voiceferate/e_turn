@@ -170,8 +170,7 @@ export class RegionMapComponent implements OnInit {
       this.onSelectRegionFromMap.emit({ 
         region: el.attributes.getNamedItem('_id').value,
         regions: this.regions
-    })
-      console.log('emited')
+      })
     }
 
   }
@@ -181,7 +180,6 @@ export class RegionMapComponent implements OnInit {
     this.fuuuu.nativeElement.style.top = `${event.clientY-40}px`
     this.fuuuu.nativeElement.style.left = `${event.clientX+10}px`
     this.region.name = event.target.id
-    // console.log(event)
   }
 
   hideTooltip() {

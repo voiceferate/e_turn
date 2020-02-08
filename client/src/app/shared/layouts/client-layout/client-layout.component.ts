@@ -37,7 +37,6 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
   }
 
   showDocumentsList() {
-    console.log('docs')
     this.modal = MaterialServise.initModal(this.modalRef)
     this.modal.open()
     this.modalVisible = true

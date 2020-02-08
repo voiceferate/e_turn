@@ -27,10 +27,6 @@ export class DashboardOrdersPageComponent implements OnInit {
       error => {
         MaterialServise.toast(error.error.message)
       }
-
-    this.orders$.subscribe((orders) => {
-      console.log('orders$', orders)
-    })
   }
 
 }

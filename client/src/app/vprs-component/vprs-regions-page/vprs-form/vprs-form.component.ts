@@ -71,7 +71,6 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
         vpr => {
           if (vpr) {
             // вносимо отримані дані в форму
-            console.log(vpr)
 
             this.form.patchValue({
               name: vpr.name,

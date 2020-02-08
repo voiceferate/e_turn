@@ -1,12 +1,12 @@
 import { OrderServise } from 'src/app/shared/servises/order.servise';
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-time-select-page',
   templateUrl: './time-select-page.component.html',
   styleUrls: ['./time-select-page.component.css']
 })
-export class TimeSelectPageComponent implements OnInit, AfterViewInit {
+export class TimeSelectPageComponent implements OnInit {
 
   @Input('vpr') vpr
   @Input('vprId') vprId
@@ -60,18 +60,11 @@ export class TimeSelectPageComponent implements OnInit, AfterViewInit {
       },
       () => {
         this.timeTableTempate = timeTableObj
-        console.log('this.timeTableTempate', this.timeTableTempate)
       }
     )
   }
 
-  ngAfterViewInit() {
-    console.log('vprId', this.vprId)
-
-  }
-
   onClick(periodNumber, periodName){
-    console.log(periodName)
     const outputTime = {
       periodNumber: periodNumber,
       periodName: periodName

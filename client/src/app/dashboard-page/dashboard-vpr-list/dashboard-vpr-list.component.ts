@@ -12,7 +12,6 @@ export class DashboardVprListComponent implements OnInit,OnChanges {
   
   
   ngOnChanges(changes: import("@angular/core").SimpleChanges): void {
-    console.log('regionId:', this.regionId)
     this.vprs$ = this.vprServise.fetch(this.regionId)
   }
 

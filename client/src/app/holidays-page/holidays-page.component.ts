@@ -16,10 +16,6 @@ export class HolidaysPageComponent implements OnInit {
 
   ngOnInit() {
     this.holidays$ = this.holidaysServise.fetch()
-
-    this.holidays$.subscribe( (holidays) => {
-      console.log(holidays)
-    })
   }
 
 

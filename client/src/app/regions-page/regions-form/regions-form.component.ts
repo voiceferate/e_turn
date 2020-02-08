@@ -51,7 +51,6 @@ export class RegionsFormComponent implements OnInit {
       .subscribe(
         region => {
           if (region) {
-            console.log(region)
             this.form.patchValue({
               name: region.name,
               active: region.active
@@ -73,9 +72,7 @@ export class RegionsFormComponent implements OnInit {
     event.preventDefault()
     this.regionsServise.delete(this.region._id)
       .subscribe((res) => {
-        console.log(res)
         MaterialServise.toast(res.message)
-        
         
         this.form.enable()
         this.router.navigate(['/regions'])
@@ -85,7 +82,6 @@ export class RegionsFormComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.isNew)
     this.form.disable()
 
     if (this.isNew) {
@@ -97,14 +93,11 @@ export class RegionsFormComponent implements OnInit {
           this.router.navigate(['/regions'])
         })
     } else {
-      console.log('updated')
       this.regionsServise.update(this.region._id, this.form.value.name, this.form.value.active)
       .subscribe((region) => {
         MaterialServise.toast(`Область ${region.name}: змінено успішно`)
         this.form.enable()
       })
     }
-    
-    console.log(this.form.value.name, this.form.value.active)
   }
 }
