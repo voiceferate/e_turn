@@ -8,6 +8,7 @@
         class="collection-item blue-text text-darken-2"
         *ngFor="let vpr of vprs"  
         [routerLink]="['/dashboard', vpr._id]"
+        [queryParams]="{vpr_name: vpr.name}"
       >
         {{vpr.name}}
       </a>

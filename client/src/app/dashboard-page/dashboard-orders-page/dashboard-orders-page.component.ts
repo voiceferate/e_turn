@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from 'src/app/shared/interfaces';
 import { OrderServise } from 'src/app/shared/servises/order.servise';
@@ -13,7 +13,7 @@ import { MaterialServise } from 'src/app/shared/classes/material.servise';
 export class DashboardOrdersPageComponent implements OnInit {
 
   orders$: Observable<Order[]>
-
+  vprName: string
 
   constructor(private orderServise: OrderServise,
               private route: ActivatedRoute) { }
@@ -27,6 +27,11 @@ export class DashboardOrdersPageComponent implements OnInit {
       error => {
         MaterialServise.toast(error.error.message)
       }
+
+      this.route.queryParams.subscribe((params)=>{
+        this.vprName = params.vpr_name
+      })
   }
+
 
 }

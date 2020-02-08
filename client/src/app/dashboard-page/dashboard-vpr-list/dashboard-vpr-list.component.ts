@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Vpr } from 'src/app/shared/interfaces';
 import { VprsServise } from 'src/app/shared/servises/vprs.servise';
