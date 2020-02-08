@@ -1,5 +1,6 @@
 const Order = require('../models/Order')
 const errorHandler = require('../utils/errorHandler')
+const moment = require('moment')
 
 
 module.exports.getAll = async function(req, res) {
@@ -28,7 +29,6 @@ module.exports.getById = async function(req, res) {
 
 module.exports.getByClientCode = async function(req, res) {
   try {
-    console.log('req', req.body)
     const order = await Order
       .find({customer_id_code: req.body.customer_id_code})
     res.status(200).json(order)
@@ -38,11 +38,17 @@ module.exports.getByClientCode = async function(req, res) {
   }
 }
 
-
+//service fetch()
 module.exports.getAllByVprId = async function(req, res) {
   try {
+    let start = moment()
+    let end = moment().add(31, 'days')
+
     const orders = await Order
-      .find({vpr: req.params.vprId})
+      .find({
+        vpr: req.params.vprId,
+        "date": {"$gte": start, "$lt": end}
+      })
       .sort({date: 1})
 
     res.status(200).json(orders)
