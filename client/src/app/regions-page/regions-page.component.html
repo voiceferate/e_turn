@@ -9,23 +9,20 @@
 </div>
 
 <div 
-  class="row"
   *ngIf="regions$ | async as regions; else loader"
   >
-  <div class="col s12">
-    <div class="collection" *ngIf="regions.length !== 0; else empty">
-      <a 
-        class="collection-item blue-text text-darken-2"
-        *ngFor="let region of regions"  
-        [routerLink]="['/regions', region._id]"
-      >
-        {{region.name}}
-        <span
-          *ngIf="!region.active"
-          class="disabled"
-        >disabled</span>
-      </a>
-    </div>
+  <div class="collection" *ngIf="regions.length !== 0; else empty">
+    <a 
+      class="collection-item blue-text text-darken-2"
+      *ngFor="let region of regions"  
+      [routerLink]="['/regions', region._id]"
+    >
+      {{region.name}}
+      <span
+        *ngIf="!region.active"
+        class="disabled"
+      >disabled</span>
+    </a>
   </div>
 </div>
 

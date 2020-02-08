@@ -3,24 +3,21 @@
 </div>
 
 <div 
-  class="row"
   *ngIf="users$ | async as users; else loader"
   >
-  <div class="col s12">
-    <div class="collection" *ngIf="users.length !== 0; else empty">
-      <a 
-        class="collection-item blue-text text-darken-2"
-        *ngFor="let user of users"  
-        [routerLink]="['/administrators', user._id]"
-      >
-        {{user.email}}
-        {{user.role}}
-        <span
-          *ngIf="!user.status"
-          class="disabled"
-        >disabled</span>
-      </a>
-    </div>
+  <div class="collection" *ngIf="users.length !== 0; else empty">
+    <a 
+      class="collection-item blue-text text-darken-2"
+      *ngFor="let user of users"  
+      [routerLink]="['/administrators', user._id]"
+    >
+      {{user.email}}
+      {{user.role}}
+      <span
+        *ngIf="!user.status"
+        class="disabled"
+      >disabled</span>
+    </a>
   </div>
 </div>
 

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { MaterialInstance, MaterialServise } from './../../classes/material.servise';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AuthServise } from '../../servises/auth.servise';
 import { Router } from '@angular/router';
 
@@ -7,9 +8,13 @@ import { Router } from '@angular/router';
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.css']
 })
-export class AdminLayoutComponent implements OnInit {
+export class AdminLayoutComponent implements OnInit, AfterViewInit {
+
+
+  @ViewChild('sidenav', {static: false}) sidenavRef: ElementRef
 
   role: boolean = null
+  sidenav: MaterialInstance
 
 
   links = [
@@ -27,10 +32,23 @@ export class AdminLayoutComponent implements OnInit {
     this.role = this.auth.isSuAdmin(localStorage.getItem('role'))
   }
 
+  ngAfterViewInit(): void {
+    console.log(this.sidenavRef)
+    this.sidenav = MaterialServise.initSidenav(this.sidenavRef, {})
+
+
+  }
+
   logout(event: Event) {
     event.preventDefault()
     this.auth.logout()
     this.router.navigate(['/login'])
+  }
+  
+  runCustom() {
+    console.log(this.sidenavRef)
+
+    this.sidenav.open()
   }
 
 }

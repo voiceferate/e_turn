@@ -4,3 +4,13 @@ h4 {
 .sidenav li.active {
   background-color: #29b6f6;
 }
+
+.user-view{
+  min-height: 150px;
+}
+
+.sidenav-trigger {
+  position: fixed;
+  top: 14px;
+  right: 15px;
+}
