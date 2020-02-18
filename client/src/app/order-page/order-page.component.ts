@@ -1,3 +1,4 @@
+import { Config } from './../shared/i18n_for_mtc';
 import { HelperTextMarkup } from './../shared/interfaces';
 import { MaterialServise } from './../shared/classes/material.servise';
 import { Subscription } from 'rxjs';
@@ -64,7 +65,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
               private holidaysServise: HolidaysServise,
               private orderServise: OrderServise,
               private recaptchaServise: RecaptchaServise,
-              private router: Router
+              private router: Router,
+              public config: Config
               ) { }
 
   ngOnInit() {
@@ -155,7 +157,66 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
         this.valueChangesVprSub.unsubscribe()
 
-        const busyDaysArr = []
+        
+        this.dateRefVisible = true
+      } else {
+        MaterialServise.toast('Необхідно пройти капчу')
+      }
+    } else {
+      MaterialServise.toast('Оберіть пункт реєстрації')
+    }
+  }
+
+  onSelectTime() {
+    if (this.form.controls.date.valid) {
+      this.modal = MaterialServise.initModal(this.modalRef)
+      this.vprs.forEach(element => {
+        if (element._id === this.vprId) {
+          this.vprCity = element.name
+        }
+      })
+      this.modalInstanse = true
+      this.modal.open()
+    } else {
+      MaterialServise.toast('Оберіть дату візиту')
+    }
+  }
+
+  onSelectTimePer(timeObj) {
+    this.timePeriodNumber = timeObj.periodNumber
+    this.form.controls.time.patchValue(timeObj.periodName)
+    MaterialServise.updateTextInputs()
+    this.modal.close()
+    this.orderTimeRefVisible = true
+  }
+
+  onSubmit() {
+    this.form.disable()
+
+      this.orderServise.create(
+        this.form.value.region,
+        this.form.value.vpr,
+        this.form.value.date,
+        this.form.value.name,
+        this.form.value.customer_id_code,
+        this.timePeriodNumber,
+        )
+        
+      .subscribe((order) => {
+          MaterialServise.toast(`Ви успішно зареєструвалися в системі`)
+          this.form.reset()
+          this.form.enable()
+          this.router.navigate([`/order/${order._id}`])
+        })
+  }
+
+  resolved(captchaResponse: string) {
+    // console.log(`Resolved captcha with response: ${captchaResponse}`);
+
+    this.recaptchaServise.check(captchaResponse).subscribe((resp) => {
+      this.captchaSolved = true
+
+      const busyDaysArr = []
   
         this.holidaysServise.fetch().subscribe(
           (holidays) => {
@@ -228,6 +289,9 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
             this.form.controls['date'].setValue(date)
             MaterialServise.updateTextInputs()
           },
+          onClose: (date) => {
+            this.form.controls['date'].setValue(date)
+          },
           disableDayFn: (date) => {
             let offset = date.getTimezoneOffset()
             date = date.setMinutes(date.getMinutes() - offset)
@@ -239,118 +303,8 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
                   return false
                 }
             },
-          i18n: {
-            cancel:	'Відмінити',
-            clear:	'Очистити',
-            done:	'Ok',
-            previousMonth:	'‹',
-            nextMonth:	'›',
-            months: [
-              'Січень',
-              'Лютий',
-              'Березень',
-              'Квітень',
-              'Травень',
-              'Червень',
-              'Липень',
-              'Серпень',
-              'Вересень',
-              'Жовтень',
-              'Листопад',
-              'Грудень'
-            ],
-            monthsShort: [
-              'Січ',
-              'Лют',
-              'Бер',
-              'Кві',
-              'Тра',
-              'Чер',
-              'Лип',
-              'Сер',
-              'Вер',
-              'Жов',
-              'Лис',
-              'Гру'
-            ],
-            weekdays: [
-              'Неділя',
-              'Понеділок',
-              'Вівторок',
-              'Середа',
-              'Четвер',
-              'П\'ятниця',
-              'Субота'
-            ],
-            weekdaysShort: [
-              'Нед',
-              'Пон',
-              'Вів',
-              'Сер',
-              'Чет',
-              'Пт',
-              'Суб'
-            ],
-            weekdaysAbbrev:	['Нд','Пн','Вт','Ср','Чт','Пт','Сб']
-          }
+          i18n: this.config.i18n
         })
-        this.dateRefVisible = true
-      } else {
-        MaterialServise.toast('Необхідно пройти капчу')
-      }
-    } else {
-      MaterialServise.toast('Оберіть пункт реєстрації')
-    }
-  }
-
-  onSelectTime() {
-    if (this.form.controls.date.valid) {
-      this.modal = MaterialServise.initModal(this.modalRef)
-      this.vprs.forEach(element => {
-        if (element._id === this.vprId) {
-          this.vprCity = element.name
-        }
-      })
-      this.modalInstanse = true
-      this.modal.open()
-    } else {
-      MaterialServise.toast('Оберіть дату візиту')
-    }
-  }
-
-  onSelectTimePer(timeObj) {
-    this.timePeriodNumber = timeObj.periodNumber
-    this.form.controls.time.patchValue(timeObj.periodName)
-    MaterialServise.updateTextInputs()
-    this.modal.close()
-    this.orderTimeRefVisible = true
-  }
-
-  onSubmit() {
-    this.form.disable()
-
-      this.orderServise.create(
-        this.form.value.region,
-        this.form.value.vpr,
-        this.form.value.date,
-        this.form.value.name,
-        this.form.value.customer_id_code,
-        this.timePeriodNumber,
-        )
-        
-      .subscribe((order) => {
-          MaterialServise.toast(`Ви успішно зареєструвалися в системі`)
-          this.form.reset()
-          this.form.enable()
-          this.router.navigate([`/order/${order._id}`])
-        })
-  }
-
-  resolved(captchaResponse: string) {
-    // console.log(`Resolved captcha with response: ${captchaResponse}`);
-
-    this.recaptchaServise.check(captchaResponse).subscribe((resp) => {
-      this.captchaSolved = true
     })
   }
 
