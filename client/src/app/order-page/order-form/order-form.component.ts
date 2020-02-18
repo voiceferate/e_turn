@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 export class OrderFormComponent implements OnInit {
 
 
-  @ViewChild('results', {'static': false}) resultsRef: ElementRef
+  @ViewChild('results') resultsRef: ElementRef
 
   form: FormGroup
   orders$: Observable<Order[]>

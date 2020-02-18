@@ -11,8 +11,8 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
 
 
 
-  @ViewChild('modal', {static: false} ) modalRef: ElementRef
-  @ViewChild('sidenav', {static: false} ) sidenavRef: ElementRef
+  @ViewChild('modal') modalRef: ElementRef
+  @ViewChild('sidenav') sidenavRef: ElementRef
   
   modal: MaterialInstance
   sidenav: MaterialInstance

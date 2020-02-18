@@ -8,7 +8,7 @@ import { MaterialInstance, MaterialServise } from '../../shared/classes/material
 })
 export class DocumentsListPageComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('collapsible', {static: false} ) collapsibleRef: ElementRef
+  @ViewChild('collapsible') collapsibleRef: ElementRef
 
   collapsible: MaterialInstance
 

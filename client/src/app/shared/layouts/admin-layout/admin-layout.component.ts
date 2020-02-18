@@ -11,7 +11,7 @@ import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 export class AdminLayoutComponent implements OnInit, AfterViewInit {
 
 
-  @ViewChild('sidenav', {static: false}) sidenavRef: ElementRef
+  @ViewChild('sidenav') sidenavRef: ElementRef
 
   role: boolean = null
   sidenav: MaterialInstance

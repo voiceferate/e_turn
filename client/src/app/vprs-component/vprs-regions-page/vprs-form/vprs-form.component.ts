@@ -17,12 +17,12 @@ import { formatDate } from '@angular/common';
 export class VprsFormComponent implements OnInit, AfterViewInit {
 
 
-  @ViewChild('datePickerStart1', {static: false}) datePickerStart1Ref: ElementRef
-  @ViewChild('datePickerEnd1', {static: false}) datePickerEnd1Ref: ElementRef
-  @ViewChild('datePickerStart2', {static: false}) datePickerStart2Ref: ElementRef
-  @ViewChild('datePickerEnd2', {static: false}) datePickerEnd2Ref: ElementRef
-  @ViewChild('datePickerStart3', {static: false}) datePickerStart3Ref: ElementRef
-  @ViewChild('datePickerEnd3', {static: false}) datePickerEnd3Ref: ElementRef
+  @ViewChild('datePickerStart1') datePickerStart1Ref: ElementRef
+  @ViewChild('datePickerEnd1') datePickerEnd1Ref: ElementRef
+  @ViewChild('datePickerStart2') datePickerStart2Ref: ElementRef
+  @ViewChild('datePickerEnd2') datePickerEnd2Ref: ElementRef
+  @ViewChild('datePickerStart3') datePickerStart3Ref: ElementRef
+  @ViewChild('datePickerEnd3') datePickerEnd3Ref: ElementRef
 
   form: FormGroup
   isNew = true

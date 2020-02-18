@@ -12,7 +12,7 @@ export class RegionMapComponent implements OnInit {
 
   @Output() onSelectRegionFromMap = new EventEmitter<any>();
   
-  @ViewChild('fuuuu', {static: false}) fuuuu: ElementRef
+  @ViewChild('fuuuu') fuuuu: ElementRef
   
   regions$: Observable<Region[]>
 

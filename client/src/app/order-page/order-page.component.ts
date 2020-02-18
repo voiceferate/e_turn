@@ -22,12 +22,12 @@ import * as moment from 'moment';
 export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   
-  @ViewChild('regionRef', {static: false} ) regionRef: ElementRef
-  @ViewChild('vprCity', {static: false} ) vprCityRef: ElementRef
-  @ViewChild('datepicker', {static: false} ) datepickerRef: ElementRef
-  @ViewChild('modal', {static: false} ) modalRef: ElementRef
-  @ViewChild('modalPersonalData', {static: false} ) modalPersonalDataRef: ElementRef
-  @ViewChild('tapTarget', {static: false} ) tapTargetRef: ElementRef
+  @ViewChild('regionRef') regionRef: ElementRef
+  @ViewChild('vprCity') vprCityRef: ElementRef
+  @ViewChild('datepicker') datepickerRef: ElementRef
+  @ViewChild('modal') modalRef: ElementRef
+  @ViewChild('modalPersonalData') modalPersonalDataRef: ElementRef
+  @ViewChild('tapTarget') tapTargetRef: ElementRef
 
 
   regionLoading = false
@@ -290,7 +290,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
             MaterialServise.updateTextInputs()
           },
           onClose: (date) => {
-            this.form.controls['date'].setValue(date)
+            // this.form.controls['date'].setValue(date)
           },
           disableDayFn: (date) => {
             let offset = date.getTimezoneOffset()

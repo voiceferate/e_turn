@@ -17,7 +17,7 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
   
 
 
-  @ViewChild("datepicker", {static: false}) datepickerRef: ElementRef
+  @ViewChild("datepicker") datepickerRef: ElementRef
 
   form: FormGroup
   isNew = true
