@@ -1,3 +1,4 @@
+import { Config } from './../../../shared/i18n_for_mtc';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
@@ -6,6 +7,7 @@ import { of } from 'rxjs';
 import { MaterialServise, MaterialInstance } from 'src/app/shared/classes/material.servise';
 import { VprsServise } from 'src/app/shared/servises/vprs.servise';
 import { Vpr } from 'src/app/shared/interfaces';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-vprs-form',
@@ -36,7 +38,8 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private vprService: VprsServise) { }
+              private vprService: VprsServise,
+              public config: Config) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -71,7 +74,7 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
         vpr => {
           if (vpr) {
             // вносимо отримані дані в форму
-
+            
             this.form.patchValue({
               name: vpr.name,
               address: vpr.address,
@@ -79,20 +82,20 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
             if (vpr.vacation.length) {
               if (vpr.vacation[0].startDate1) {
                 this.form.patchValue({
-                  vacation1StartDate: vpr.vacation[0].startDate1,
-                  vacation1EndDate: vpr.vacation[0].endDate1,
+                  vacation1StartDate: formatDate(vpr.vacation[0].startDate1, 'dd MMMM yyyy', 'en-US'),
+                  vacation1EndDate: formatDate(vpr.vacation[0].endDate1, 'dd MMMM yyyy', 'en-US'),
                 })
               }
               if (vpr.vacation[1].startDate2) {
                 this.form.patchValue({
-                  vacation2StartDate: vpr.vacation[1].startDate2,
-                  vacation2EndDate: vpr.vacation[1].endDate2,
+                  vacation2StartDate: formatDate(vpr.vacation[1].startDate2, 'dd MMMM yyyy', 'en-US'),
+                  vacation2EndDate: formatDate(vpr.vacation[1].endDate2, 'dd MMMM yyyy', 'en-US'),
                 })
               }
               if (vpr.vacation[2].startDate3) {
                 this.form.patchValue({
-                  vacation3StartDate: vpr.vacation[2].startDate3,
-                  vacation3EndDate: vpr.vacation[2].endDate3,
+                  vacation3StartDate: formatDate(vpr.vacation[2].startDate3, 'dd MMMM yyyy', 'en-US'),
+                  vacation3EndDate: formatDate(vpr.vacation[2].endDate3, 'dd MMMM yyyy', 'en-US'),
                 })
               } 
             }
@@ -134,7 +137,8 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
         date = date.setMinutes(date.getMinutes() - offset)
         this.form.controls.vacation1EndDate.setValue(date)
         this.datePickerEnd1Ref.nativeElement.focus()
-      }
+      },
+      i18n: this.config.i18n
     })
     this.datePickerStart2 = MaterialServise.initDatePicker(this.datePickerStart2Ref, {
       onSelect: (date) => {
@@ -142,7 +146,8 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
         date = date.setMinutes(date.getMinutes() - offset)
         this.form.controls.vacation2StartDate.setValue(date)
         this.datePickerStart2Ref.nativeElement.focus()
-      }
+      },
+      i18n: this.config.i18n
     })
     this.datePickerEnd2 = MaterialServise.initDatePicker(this.datePickerEnd2Ref, {
       onSelect: (date) => {
@@ -158,7 +163,8 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
         date = date.setMinutes(date.getMinutes() - offset)
         this.form.controls.vacation3StartDate.setValue(date)
         this.datePickerStart3Ref.nativeElement.focus()
-      }
+      },
+      i18n: this.config.i18n
     })
     this.datePickerEnd3 = MaterialServise.initDatePicker(this.datePickerEnd3Ref, {
       onSelect: (date) => {
@@ -166,7 +172,8 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
         date = date.setMinutes(date.getMinutes() - offset)
         this.form.controls.vacation3EndDate.setValue(date)
         this.datePickerEnd3Ref.nativeElement.focus()
-      }
+      },
+      i18n: this.config.i18n
     })
 
   }
