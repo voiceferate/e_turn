@@ -70,6 +70,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
               ) { }
 
   ngOnInit() {
+    console.log('orderTimeRefVisible', this.orderTimeRefVisible)
     this.form = new FormGroup({
       region: new FormControl(null, [Validators.required]),
       vpr: new FormControl(null, [Validators.required]),
