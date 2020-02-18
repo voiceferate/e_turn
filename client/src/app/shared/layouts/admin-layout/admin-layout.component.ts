@@ -1,7 +1,7 @@
 import { MaterialInstance, MaterialServise } from './../../classes/material.servise';
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AuthServise } from '../../servises/auth.servise';
-import { Router } from '@angular/router';
+import { Router, RouterEvent, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-admin-layout',
@@ -30,13 +30,19 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.role = this.auth.isSuAdmin(localStorage.getItem('role'))
+
+    this.router.events.subscribe( (val: RouterEvent) => {
+      if (val instanceof NavigationEnd) {
+        if (this.sidenav) {
+          this.sidenav.destroy()
+        }
+      }
+    } )
+    
   }
 
   ngAfterViewInit(): void {
-    console.log(this.sidenavRef)
     this.sidenav = MaterialServise.initSidenav(this.sidenavRef, {})
-
-
   }
 
   logout(event: Event) {

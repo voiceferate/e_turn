@@ -45,5 +45,13 @@ body {
   .collection .collection-item{
     padding-bottom: 5px;
   }
+
+  .page-title{
+    flex-direction: column;
+  }
+
+  .page-title h4{
+    margin-bottom: 1rem;
+  }
 }
 
