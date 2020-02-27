@@ -54,8 +54,12 @@ span.card-title{
 
 .help-button{
   position: absolute;
-  top: 0px;
-  right: 0px;
+  top: 4px;
+  right: 5px;
+}
+
+.help-button i{
+  font-size: 1.4rem;
 }
 
 .tap-target p{

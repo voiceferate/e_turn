@@ -16,6 +16,10 @@ body {
   padding: 0 15px;
 }
 
+.brand-logo {
+  margin: 0px 36px;
+}
+
 /* main.content{
   min-height: calc(100vh-50px);
   display: flex;
@@ -33,6 +37,7 @@ body {
   }
 
   nav .brand-logo{
+    
     font-size: 1.3rem;  
   }
 
