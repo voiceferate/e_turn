@@ -1,9 +1,13 @@
 const express = require('express')
 const path = require('path')
+const fs = require('fs')
 
 const mongoose = require('mongoose')
 const passport = require('passport')
 const bodyParser = require('body-parser')
+const morgan = require('morgan')
+const rfs = require('rotating-file-stream')
+
 const authRoutes = require('./routes/auth')
 const orderRoutes = require('./routes/order')
 const regionRoutes = require('./routes/region')
@@ -14,6 +18,7 @@ const recaptchaRoute = require('./routes/recaptcha')
 
 const keys = require('./config/keys')
 const app = express()
+
 
 mongoose.connect(keys.mongoURI, { 
   useUnifiedTopology: true,
@@ -28,7 +33,32 @@ mongoose.set('useCreateIndex', true);
 app.use(passport.initialize())
 require('./middleware/passport')(passport)
 
-app.use(require('morgan')('dev'))
+
+const logDirectory = path.join(__dirname, 'log')
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory)
+
+const accessLogStream = rfs.createStream("file.log", {
+  size: "10M", // rotate every 10 MegaBytes written
+  interval: "1d", // rotate daily
+  compress: "gzip", // compress rotated files
+  path: logDirectory
+});
+
+const errorLogStream = rfs.createStream("errors.log", {
+  size: "10M", // rotate every 10 MegaBytes written
+  // interval: "3d", // rotate daily
+  compress: "gzip", // compress rotated files
+  path: logDirectory
+});
+
+app.use(morgan('combined', {
+  stream: errorLogStream,
+  skip: function (req, res) { return res.statusCode < 400 }
+}))
+
+app.use(morgan('short', { stream: accessLogStream }))
+
+app.use(morgan('dev'))
 // app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
@@ -53,6 +83,9 @@ if (process.env.NODE_ENV === 'production') {
     )
   })
 }
+
+
+
 
 // if (process.env.NODE_ENV === 'development') {
 //   app.use(express.static('client/dist/client/ass'))

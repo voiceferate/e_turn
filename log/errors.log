@@ -1,0 +1,4 @@
+[0mGET /api/region/ [31m500 [0m128.121 ms - 48[0m
+::ffff:127.0.0.1 - - [27/Feb/2020:19:40:07 +0000] "GET /api/region/ HTTP/1.1" 500 48 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:45:45 +0000] "GET /api/region/ HTTP/1.1" 500 48 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:50:49 +0000] "GET /api/region/ HTTP/1.1" 500 48 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"

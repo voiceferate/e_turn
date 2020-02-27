@@ -1,0 +1,25 @@
+::ffff:127.0.0.1 - - [27/Feb/2020:19:15:01 +0000] "GET /api/region/ HTTP/1.1" 500 48 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:15:03 +0000] "GET /api/region/active HTTP/1.1" 304 - "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:33:27 +0000] "GET /api/region/ HTTP/1.1" 500 48 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:34:18 +0000] "GET /api/region/ HTTP/1.1" 200 1139 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:34:21 +0000] "GET /api/vpr/region/5dfe2093fb326e30dc3a748c HTTP/1.1" 304 - "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:34:22 +0000] "GET /api/vpr/region/5dfe2093fb326e30dc3a748c HTTP/1.1" 304 - "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:35:12 +0000] "POST /api/recaptcha/check HTTP/1.1" 200 29 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:35:12 +0000] "GET /api/holiday HTTP/1.1" 304 - "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:35:12 +0000] "GET /api/vpr/5e0df13dbb607c341c930d04 HTTP/1.1" 200 303 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:35:12 +0000] "GET /api/order/vpr-free-date/5e0df13dbb607c341c930d04 HTTP/1.1" 200 787 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:35:17 +0000] "POST /api/order/vpr/time HTTP/1.1" 200 235 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:35:21 +0000] "POST /api/order/ HTTP/1.1" 201 222 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:35:21 +0000] "GET /api/order/single/5e5819f865bc971e9ead0708 HTTP/1.1" 200 222 "http://localhost:4200/order/5e5819f865bc971e9ead0708" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:38:12 +0000] "GET /api/region/ HTTP/1.1" 304 - "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:38:17 +0000] "POST /api/order/client HTTP/1.1" 200 5661 "http://localhost:4200/order/client" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:38:18 +0000] "GET /api/order/single/5e1f66c601f2d51eef5da36b HTTP/1.1" 200 226 "http://localhost:4200/order/5e1f66c601f2d51eef5da36b" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:39:06 +0000] "GET /api/region/ HTTP/1.1" 500 48 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:40:07 +0000] "GET /api/region/ HTTP/1.1" 500 48 "http://localhost:4200/order" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - - [27/Feb/2020:19:41:53 +0000] "POST /api/order/client HTTP/1.1" 200 5661 "http://localhost:4200/order/client" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36"
+::ffff:127.0.0.1 - POST /api/order/client HTTP/1.1 200 5661 - 99.353 ms
+::ffff:127.0.0.1 - POST /api/order/client HTTP/1.1 200 5661 - 56.818 ms
+::ffff:127.0.0.1 - POST /api/order/client HTTP/1.1 200 5661 - 51.710 ms
+::ffff:127.0.0.1 - POST /api/order/client HTTP/1.1 200 5661 - 52.895 ms
+::ffff:127.0.0.1 - GET /api/region/ HTTP/1.1 500 48 - 47.533 ms
+::ffff:127.0.0.1 - GET /api/region/ HTTP/1.1 500 48 - 86.315 ms
