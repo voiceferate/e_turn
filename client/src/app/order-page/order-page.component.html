@@ -217,17 +217,16 @@
                     </div>
                 </div>
         
-                <!-- <input
+                <input
                   (click)=(onSelectTime())
                   type="text"
-                  [ngClass]="{'hide': !orderTimeRefVisible}"
                   formControlName="time"
-                  [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched}"
+                  [ngClass]="{'invalid': form.get('date').invalid && form.get('date').touched, 'hide': !orderTimeRefVisible}"
                 >
                 <label 
                   for="date"
                   [ngClass]="{'hide': !orderTimeRefVisible}"
-                >Час відвідування</label> -->
+                >Час відвідування</label>
                 
               </div>
             </div>

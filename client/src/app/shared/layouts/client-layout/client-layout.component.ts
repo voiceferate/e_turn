@@ -26,7 +26,7 @@ export class ClientLayoutComponent implements OnInit, AfterViewInit{
     this.router.events.subscribe( (val: RouterEvent) => {
       if (val instanceof NavigationEnd) {
         if (this.sidenav) {
-          this.sidenav.destroy()
+          this.sidenav.close()
         }
       }
     } )

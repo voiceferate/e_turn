@@ -11,3 +11,6 @@ main,footer {
   left: 0;
 
 }
+.fixed-action-btn.direction-top{
+  opacity: 0;
+}
