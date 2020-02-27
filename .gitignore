@@ -2,6 +2,8 @@
 # Ignore any file named foo.txt.
 # foo.txt
 node_modules
+log
+logDirectory
 
 # Ignore (generated) html files,
 # *.html

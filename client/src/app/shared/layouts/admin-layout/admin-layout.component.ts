@@ -30,6 +30,10 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.role = this.auth.isSuAdmin(localStorage.getItem('role'))
+  }
+
+  ngAfterViewInit(): void {
+    this.sidenav = MaterialServise.initSidenav(this.sidenavRef, {})
 
     this.router.events.subscribe( (val: RouterEvent) => {
       if (val instanceof NavigationEnd) {
@@ -38,11 +42,6 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
         }
       }
     } )
-    
-  }
-
-  ngAfterViewInit(): void {
-    this.sidenav = MaterialServise.initSidenav(this.sidenavRef, {})
   }
 
   logout(event: Event) {

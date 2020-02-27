@@ -27,6 +27,19 @@
               <span class="lefted">Найменування клієнта:</span>
               <strong>{{order.customer_name}}</strong>
             </li>
+            <div 
+              class="vpr"
+              *ngIf="vpr$ | async as vpr; else loader"
+            >
+              <li class="collection-item">
+                <span class="lefted">Назва пункту реєстрації:</span>
+                <strong>{{vpr.name}}</strong>
+              </li>
+              <li class="collection-item">
+                <span class="lefted">Адреса пункту реєстрації:</span>
+                <strong>{{vpr.address}}</strong>
+              </li>
+            </div>
             <li class="collection-item">
               <span class="lefted">Дата візиту:</span>
               <strong>{{order.date | date: 'dd.MM.yyyy'}}</strong>
