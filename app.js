@@ -7,6 +7,7 @@ const passport = require('passport')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const rfs = require('rotating-file-stream')
+const expressValidator = require('express-validator')
 
 const authRoutes = require('./routes/auth')
 const orderRoutes = require('./routes/order')
@@ -63,6 +64,7 @@ app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(require('cors')())
+
 
 app.use('/api/auth', authRoutes)
 app.use('/api/order', orderRoutes)

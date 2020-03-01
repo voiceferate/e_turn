@@ -3,10 +3,19 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 const keys = require('../config/keys')
 const errorHandler = require('../utils/errorHandler')
-const roleChecker = require('../utils/roleChecker')
+const { check, validationResult } = require('express-validator')
+
+
 
 
 module.exports.login = async function(req, res) {
+
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ message: errors.array()[0].msg });
+  }
+
   const candidate = await User.findOne({email: req.body.email})
 
   if (candidate) {
@@ -49,8 +58,13 @@ module.exports.login = async function(req, res) {
 
 
 module.exports.register = async function(req, res) {
-  // email password
-  console.log(req.body)
+
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ message: errors.array()[0].msg });
+  }
+
   const candidate = await User.findOne({email: req.body.email})
 
   if (candidate) {
@@ -76,5 +90,49 @@ module.exports.register = async function(req, res) {
       errorHandler(res, e)
     }
 
+  }
+}
+
+
+exports.validate = (method) => {
+  switch (method) {
+    case 'createUser': {
+     return [ 
+      check('email')
+        .exists()  
+        .isEmail()
+        .withMessage('Не вірний формат електрононї пошти'),
+      check('password')
+        .exists() 
+        .isLength({ min: 6 })
+        .withMessage('Пароль занадто короткий'),
+      check('name')
+        .exists()
+        .withMessage('Поле не може бути порожнім')
+        .isAlphanumeric()
+        .withMessage('Очікуються буквенні чи числові значення'),
+      check('vpr')
+        .exists()
+        .withMessage('Поле не може бути порожнім')
+        .isAlphanumeric()
+        .withMessage('Очікуються буквенні чи числові значення'),
+      check('secure_id')
+        .exists() 
+        .isNumeric()
+        .withMessage('Поле повинно складатися тільки з цифр')
+       ]   
+    }
+    case 'login': {
+      return [ 
+       check('email')
+         .exists()  
+         .isEmail()
+         .withMessage('Не вірний формат електрононї пошти'),
+       check('password')
+         .exists() 
+         .isLength({ min: 6 })
+         .withMessage('Пароль занадто короткий')
+        ]   
+     }
   }
 }
