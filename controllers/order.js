@@ -101,9 +101,16 @@ module.exports.create = async function(req, res) {
 }
 
 module.exports.getBusyDaysByVprId = async function(req, res) {
+
+  let start = moment()
+  let end = moment().add(31, 'days')
+
   try {
     const dates = await Order
-      .find({vpr: req.params.id})
+      .find({
+        vpr: req.params.id,
+        "date": {"$gte": start, "$lt": end}
+      })
       .sort({date: -1})
 
     let freeDatesObj = {}

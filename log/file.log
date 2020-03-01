@@ -306,3 +306,7 @@
 ::ffff:127.0.0.1 - GET /api/holiday HTTP/1.1 304 - - 42.722 ms
 ::ffff:127.0.0.1 - GET /api/vpr/5dfe30fcbcab9d2848dde45c HTTP/1.1 304 - - 102.367 ms
 ::ffff:127.0.0.1 - GET /api/order/vpr-free-date/5dfe30fcbcab9d2848dde45c HTTP/1.1 304 - - 341.515 ms
+::ffff:127.0.0.1 - POST /api/recaptcha/check HTTP/1.1 200 29 - 226.869 ms
+::ffff:127.0.0.1 - GET /api/holiday HTTP/1.1 304 - - 84.270 ms
+::ffff:127.0.0.1 - GET /api/order/vpr-free-date/5dfe30fcbcab9d2848dde45c HTTP/1.1 200 219 - 307.665 ms
+::ffff:127.0.0.1 - GET /api/vpr/5dfe30fcbcab9d2848dde45c HTTP/1.1 304 - - 303.669 ms
