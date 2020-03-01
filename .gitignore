@@ -4,6 +4,7 @@
 node_modules
 log
 logDirectory
+*.log
 
 # Ignore (generated) html files,
 # *.html

@@ -23,12 +23,13 @@
         <span *ngIf="form.get('customer_id_code').errors['minlength']">Поле customer_id_code повинно містити від 8 до 10 цифр</span>
       </span>
     </div>
+    <re-captcha (resolved)="resolved($event)" siteKey="6LePG9EUAAAAAI1etO6bfExjQdPcORcRiX98x0At"></re-captcha>
   </div>
 
   <div class="card-action">
     <button 
       type="submit"
-      [disabled]="form.invalid || form.disabled"
+      [disabled]="form.invalid || form.disabled || !captchaSolved"
       class="modal-action btn light-blue darken-4 waves-effect"
     >Знайти дані</button>
   </div>
