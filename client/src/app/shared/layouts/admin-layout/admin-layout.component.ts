@@ -2,12 +2,14 @@ import { MaterialInstance, MaterialServise } from './../../classes/material.serv
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { AuthServise } from '../../servises/auth.servise';
 import { Router, RouterEvent, NavigationEnd } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-layout',
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.css']
 })
+
 export class AdminLayoutComponent implements OnInit, AfterViewInit {
 
 
@@ -25,10 +27,13 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
   ]
 
   constructor(private auth: AuthServise,
-              private router: Router) {
+              private router: Router,
+              private titleService: Title) {
 }
 
   ngOnInit() {
+    this.titleService.setTitle('Панель адміністратора')
+
     this.role = this.auth.isSuAdmin(localStorage.getItem('role'))
   }
 

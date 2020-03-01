@@ -13,6 +13,7 @@ import { VprsServise } from '../shared/servises/vprs.servise';
 import { HolidaysServise } from '../shared/servises/holidays.servise';
 import { RecaptchaServise } from '../shared/servises/recaptcha.servise';
 import * as moment from 'moment';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-order-page',
@@ -66,11 +67,13 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
               private orderServise: OrderServise,
               private recaptchaServise: RecaptchaServise,
               private router: Router,
-              public config: Config
+              public config: Config,
+              private titleService: Title
               ) { }
 
   ngOnInit() {
-    console.log('orderTimeRefVisible', this.orderTimeRefVisible)
+    this.titleService.setTitle('Реєстрація в електронній черзі - КНЕДП ІДД')
+
     this.form = new FormGroup({
       region: new FormControl(null, [Validators.required]),
       vpr: new FormControl(null, [Validators.required]),

@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RecaptchaServise } from 'src/app/shared/servises/recaptcha.servise';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-order-form',
@@ -22,10 +23,12 @@ export class OrderFormComponent implements OnInit {
   captchaSolved = false
 
   constructor(private orderServise: OrderServise,
-              private recaptchaServise: RecaptchaServise
+              private recaptchaServise: RecaptchaServise,
+              private titleService: Title
               ) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Пошук запису - КНЕДП ІДД')
     this.form = new FormGroup({
       customer_id_code: new FormControl(null, [Validators.required]),
     })

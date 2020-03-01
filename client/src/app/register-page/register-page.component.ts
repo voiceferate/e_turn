@@ -4,6 +4,7 @@ import { AuthServise } from '../shared/servises/auth.servise';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MaterialServise } from '../shared/classes/material.servise';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -17,9 +18,11 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   aSub: Subscription
 
   constructor(private auth: AuthServise,
-              private router: Router) { }
+              private router: Router,
+              private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle('Реєстрація в системі')
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),

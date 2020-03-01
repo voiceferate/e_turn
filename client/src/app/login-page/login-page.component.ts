@@ -4,6 +4,7 @@ import { AuthServise } from '../shared/servises/auth.servise'
 import { Subscription } from 'rxjs'
 import { Router, ActivatedRoute, Params } from '@angular/router'
 import { MaterialServise } from '../shared/classes/material.servise'
+import { Title } from '@angular/platform-browser'
 
 @Component({
   selector: 'app-login-page',
@@ -17,10 +18,14 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   constructor(private auth: AuthServise,
               private router: Router,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private titleService: Title) {
   }
 
   ngOnInit() {
+    this.titleService.setTitle('Вхід до системи')
+
+
     this.form = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)])
