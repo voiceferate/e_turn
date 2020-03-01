@@ -1,6 +1,7 @@
 const Order = require('../models/Order')
 const errorHandler = require('../utils/errorHandler')
 const moment = require('moment')
+const { check, validationResult } = require('express-validator')
 
 
 module.exports.getAll = async function(req, res) {
@@ -28,6 +29,13 @@ module.exports.getById = async function(req, res) {
 }
 
 module.exports.getByClientCode = async function(req, res) {
+
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ message: errors.array()[0].msg });
+  }
+
   try {
     const order = await Order
       .find({customer_id_code: req.body.customer_id_code})
@@ -59,6 +67,14 @@ module.exports.getAllByVprId = async function(req, res) {
 }
 
 module.exports.create = async function(req, res) {
+
+
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ message: errors.array()[0].msg });
+  }
+
   try {
 
     const candidateOrder = await Order.find({vpr: req.body.vpr, date: req.body.date, time_period_number: req.body.time_period_number})
@@ -120,6 +136,14 @@ module.exports.getBusyDaysByVprId = async function(req, res) {
 }
 
 module.exports.getBusyPeriodsByVprId = async function(req, res) {
+
+
+  const errors = validationResult(req);
+  
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ message: errors.array()[0].msg });
+  }
+
   try {
     
     const periods = await Order
@@ -135,3 +159,65 @@ module.exports.getBusyPeriodsByVprId = async function(req, res) {
     errorHandler(res, e)
   }
 }
+
+exports.validate = (method) => {
+  switch (method) {
+    case 'getByClientCode': {
+     return [ 
+      check('customer_id_code')
+        .exists() 
+        .isNumeric()
+        .withMessage('Поле повинно складатися тільки з цифр')
+       ]   
+    }
+    case 'getBusyPeriodsByVprId': {
+      return [ 
+       check('vpr')
+         .exists()  
+         .isMongoId()
+         .withMessage('Не вірний формат VPR'),
+       check('date')
+         .exists() 
+         .custom(val => {   
+            const date = moment(val).isValid()
+            if (date) return true
+            return false
+          })
+         .withMessage('Невірний формат дати')
+        ]   
+     }
+     case 'create': {
+      return [ 
+      check('region')
+        .exists()  
+        .isMongoId()
+        .withMessage('Не вірний формат region'),
+      check('vpr')
+        .exists()  
+        .isMongoId()
+        .withMessage('Не вірний формат vpr'),
+      check('date')
+        .exists() 
+        .custom(val => {   
+          const date = moment(val).isValid()
+          if (date) return true
+          return false
+        })
+        .withMessage('Невірний формат дати'),
+      check('customer_name')
+        .exists() 
+        .isAlphanumeric()
+        .withMessage('Невірний формат customer_name'),
+      check('customer_id_code')
+        .exists() 
+        .isNumeric()
+        .withMessage('Поле повинно складатися тільки з цифр'),
+      check('time_period_number')
+        .exists() 
+        .isNumeric()
+        .withMessage('Невірний формат period')
+      ]   
+     }
+  }
+}
+

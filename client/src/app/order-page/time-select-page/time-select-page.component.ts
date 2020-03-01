@@ -1,5 +1,6 @@
 import { OrderServise } from 'src/app/shared/servises/order.servise';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MaterialServise } from 'src/app/shared/classes/material.servise';
 
 @Component({
   selector: 'app-time-select-page',
@@ -57,6 +58,7 @@ export class TimeSelectPageComponent implements OnInit {
       },
       error => {
         console.error(error)
+        MaterialServise.toast(error.error.message)
       },
       () => {
         this.timeTableTempate = timeTableObj
