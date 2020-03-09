@@ -42,6 +42,12 @@ export class OrderFormComponent implements OnInit {
 
   resolved(captchaResponse: string) {
     this.recaptchaServise.check(captchaResponse).subscribe((resp) => {
+
+      if(resp.message === "captcha unsussess") {
+        this.captchaSolved = false
+        return
+      }
+
       this.captchaSolved = true
     })
   }

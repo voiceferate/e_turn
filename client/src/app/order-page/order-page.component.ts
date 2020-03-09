@@ -53,7 +53,7 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
   vprId: string = ''
   vprCity: string
   timePeriodNumber: number
-  private captchaSolved = false
+  public captchaSolved = false
 
 
   vSub: Subscription
@@ -218,6 +218,14 @@ export class OrderPageComponent implements OnInit, AfterViewInit, OnDestroy {
     // console.log(`Resolved captcha with response: ${captchaResponse}`);
 
     this.recaptchaServise.check(captchaResponse).subscribe((resp) => {
+
+
+
+      if(resp.message === "captcha unsussess") {
+        this.captchaSolved = false
+        return
+      }
+
       this.captchaSolved = true
 
       const busyDaysArr = []
