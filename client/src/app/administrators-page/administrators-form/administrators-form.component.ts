@@ -74,6 +74,14 @@ export class AdministratorsFormComponent implements OnInit {
 
   onDelete(event: Event) {
     event.preventDefault()
+
+    const result = confirm('Ви впевнені що хочете видалити дату вихідного дня?')
+
+    if (!result) {
+      return
+    }
+
+
     this.adminServise.delete(this.userId)
       .subscribe((res) => {
         MaterialServise.toast(res.message)

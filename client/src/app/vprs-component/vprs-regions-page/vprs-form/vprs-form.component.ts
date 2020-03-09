@@ -180,6 +180,13 @@ export class VprsFormComponent implements OnInit, AfterViewInit {
   
   onDelete(event: Event) {
     event.preventDefault()
+
+    const result = confirm('Ви впевнені що хочете видалити VPR?')
+
+    if (!result) {
+      return
+    }
+
     this.vprService.delete(this.vpr._id)
       .subscribe((res) => {
         MaterialServise.toast(res.message)

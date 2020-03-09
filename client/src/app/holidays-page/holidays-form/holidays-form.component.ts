@@ -6,6 +6,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MaterialServise, MaterialInstance } from 'src/app/shared/classes/material.servise';
+import { Config } from 'src/app/shared/i18n_for_mtc';
 
 @Component({
   selector: 'app-holidays-form',
@@ -28,7 +29,8 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
 
   constructor(private route: ActivatedRoute,
     private router: Router,
-    private holidaysServise: HolidaysServise
+    private holidaysServise: HolidaysServise,
+    public config: Config
 ) { }
 
 
@@ -44,60 +46,7 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
 
         this.form.controls.holiday.setValue(date)
       },
-      i18n: {
-        cancel:	'Відмінити',
-        clear:	'Очистити',
-        done:	'Ok',
-        previousMonth:	'‹',
-        nextMonth:	'›',
-        months: [
-          'Січень',
-          'Лютий',
-          'Березень',
-          'Квітень',
-          'Травень',
-          'Червень',
-          'Липень',
-          'Серпень',
-          'Вересень',
-          'Жовтень',
-          'Листопад',
-          'Грудень'
-        ],
-        monthsShort: [
-          'Січ',
-          'Лют',
-          'Бер',
-          'Кві',
-          'Тра',
-          'Чер',
-          'Лип',
-          'Сер',
-          'Вер',
-          'Жов',
-          'Лис',
-          'Гру'
-        ],
-        weekdays: [
-          'Неділя',
-          'Понеділок',
-          'Вівторок',
-          'Середа',
-          'Четвер',
-          'П\'ятниця',
-          'Субота'
-        ],
-        weekdaysShort: [
-          'Нед',
-          'Пон',
-          'Вів',
-          'Сер',
-          'Чет',
-          'Пт',
-          'Суб'
-        ],
-        weekdaysAbbrev:	['Нд','Пн','Вт','Ср','Чт','Пт','Сб']
-      }
+      i18n: this.config.i18n
 
     })
   }
@@ -141,6 +90,13 @@ export class HolidaysFormComponent implements OnInit, AfterViewInit {
   
   onDelete(event: Event) {
     event.preventDefault()
+
+    const result = confirm('Ви впевнені що хочете видалити дату вихідного дня?')
+
+    if (!result) {
+      return
+    }
+
     this.holidaysServise.delete(this.holiday._id)
       .subscribe((res) => {
         MaterialServise.toast(res.message)

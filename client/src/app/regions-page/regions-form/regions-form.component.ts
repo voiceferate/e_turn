@@ -70,6 +70,13 @@ export class RegionsFormComponent implements OnInit {
   
   onDelete(event: Event) {
     event.preventDefault()
+
+    const result = confirm('Ви впевнені що хочете видалити область?')
+
+    if (!result) {
+      return
+    }
+
     this.regionsServise.delete(this.region._id)
       .subscribe((res) => {
         MaterialServise.toast(res.message)

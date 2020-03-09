@@ -4,7 +4,7 @@
   *ngIf="orders$ | async as orders; else loader"
   >
   <div class="col s12">
-    <div class="collection" *ngIf="orders.length !== 0; else empty">
+    <div class="collection white" *ngIf="orders.length !== 0; else empty">
       <table class="striped">
         <thead>
           <tr>
