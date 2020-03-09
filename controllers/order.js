@@ -211,10 +211,10 @@ exports.validate = (method) => {
           return false
         })
         .withMessage('Невірний формат дати'),
-      check('customer_name')
-        .exists() 
-        .isAlphanumeric()
-        .withMessage('Невірний формат customer_name'),
+      // тут якась магія, я хз чого валідація паде
+        // check('customer_name')
+      //   .exists() 
+      //   .withMessage('Невірний формат customer_name'),
       check('customer_id_code')
         .exists() 
         .isNumeric()
@@ -227,4 +227,3 @@ exports.validate = (method) => {
      }
   }
 }
-

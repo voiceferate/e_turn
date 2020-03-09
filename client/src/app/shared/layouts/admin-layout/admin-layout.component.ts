@@ -43,10 +43,18 @@ export class AdminLayoutComponent implements OnInit, AfterViewInit {
     this.router.events.subscribe( (val: RouterEvent) => {
       if (val instanceof NavigationEnd) {
         if (this.sidenav) {
-          this.sidenav.destroy()
+          console.log(this.sidenav.isOpen)
+          if(window.innerWidth <= 992) {
+            this.sidenav.close()
+          }
         }
       }
     } )
+
+
+
+
+
   }
 
   logout(event: Event) {

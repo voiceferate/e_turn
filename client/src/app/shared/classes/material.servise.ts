@@ -8,7 +8,8 @@ export interface MaterialInstance {
   open?(): void,
   close?(number?): void,
   destroy?(): void
-  el: any
+  el: any,
+  isOpen: boolean
 }
 
 export class MaterialServise {
